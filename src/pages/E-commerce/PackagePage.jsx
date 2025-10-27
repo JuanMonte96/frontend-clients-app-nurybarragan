@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import PackageCard from "../components/PackageCard";
-import PurchaseModal from "../components/PurchaseModal";
+import PackageCard from "../../components/PackageCard";
+import PurchaseModal from "../../components/PurchaseModal";
 
-const API_PACKAGES= import.meta.env.VITE_API_GET_PACKAGES;
-const API_PAYMENT = import.meta.env.VITE_API_POST_PAYMENT
+const API_PACKAGES = import.meta.env.VITE_API_GET_PACKAGES;
+const API_PAYMENT = import.meta.env.VITE_API_POST_PAYMENT;
 
 export default function PackagePage() {
-  
-    const [packages, setPackages] = useState([]);
+
+  const [packages, setPackages] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -62,7 +62,7 @@ export default function PackagePage() {
         payload
       );
 
-      const  payment_url  = response.data.url; // tu backend debería devolver algo así
+      const payment_url = response.data.url; // tu backend debería devolver algo así
       console.log(response.data.url)
       if (payment_url) {
         window.location.href = payment_url; // redirige a Stripe

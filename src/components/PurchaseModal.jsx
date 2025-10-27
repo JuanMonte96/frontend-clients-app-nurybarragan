@@ -9,10 +9,15 @@ export default function PurchaseModal({ isOpen, onClose, pkg, onConfirm }) {
   return (
     <div className="fixed inset-0 bg-[#333333] bg-opacity-70 flex items-center justify-center z-50">
       <div className="bg-[#fff8e1] rounded-lg shadow-lg w-full max-w-md p-6 relative">
-        <h2 className="text-xl font-bold mb-4 text-[#333333] text-center">
+        <h2 className="text-xl font-bold mb-4 text-[var(--color-text)] text-center">
           Comprar {pkg.name_package}
         </h2>
-
+        <h3 className="text-center text-xl font-semibold text-[var(--color-text)] mb-2">
+          Descripcion: {pkg.description_package}
+        </h3>
+        <h3 className="mb-4 text-center text-xl font-semibold text-[var(--color-text )]">
+          Precio: <span className="text-[var(--color-primary)]">{pkg.price_package} EUR</span>
+        </h3>
         <form
           onSubmit={(e) => {
             e.preventDefault();

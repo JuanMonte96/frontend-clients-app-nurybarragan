@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import logo from '../assets/logo_menu_nury_barragan.png';
+import logo from '../../assets/logo_menu_nury_barragan.png';
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -100,7 +100,7 @@ export default function LoginPage() {
                 disabled={loading}
                 className="w-full text-[#333333] bg-primary-600 hover:bg-[#ffb300] focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-[#fff8e1] dark:hover:bg-[#ffb300] dark:focus:ring-[#ffb300]"
               >
-                {loading ? "Ingresando..." : "Iniciar sesión"}
+                {loading ? "Ingresando..." : "INICIAR SESIÓN"}
               </button>
             </form>
           </div>

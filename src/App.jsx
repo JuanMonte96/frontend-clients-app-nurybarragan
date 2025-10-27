@@ -1,11 +1,13 @@
 import Header from './components/Header';
 import logo from './assets/logo_menu_nury_barragan.png';
 import HeroSection from './components/HeroSection';
-import PackagePage from './pages/PackagePage';
+import PackagePage from './pages/E-commerce/PackagePage';
 import Footer from './components/Footer';
-import LoginPage from './pages/LoginPage';
+import LoginPage from './pages/Login/LoginPage';
 import { Route, Routes } from 'react-router-dom';
-import  {UserPage}  from './pages/UserPage';
+import { UserSideBar } from './pages/Users/UserSideBar';
+import AboutUs from './components/AboutUs';
+import { ContactUS } from './components/ContactUs';
 
 function App() {
 
@@ -18,18 +20,21 @@ function App() {
 
   return (
     <>
-      <main > 
+      <main >
         <div>
           <Routes>
             <Route path="/" element={
               <>
                 <Header logo={logo} links={links} />
                 <HeroSection />
+                <AboutUs />
                 <PackagePage />
+                <ContactUS />
                 <Footer />
-              </>} />
+              </>
+            } />
             <Route path="/login" element={<LoginPage />} />
-            <Route path='/user' element={<UserPage />} />
+            <Route path='/user' element={<UserSideBar />} />
           </Routes>
 
         </div>

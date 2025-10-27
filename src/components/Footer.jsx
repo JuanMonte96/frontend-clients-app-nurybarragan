@@ -1,4 +1,3 @@
-import React from "react";
 import logo from '../assets/logo_menu_nury_barragan.png'
 
 export default function Footer() {
@@ -26,11 +25,6 @@ export default function Footer() {
                                 Recursos
                             </h2>
                             <ul className="text-[#fff8e1]">
-                                <li className="mb-4">
-                                    <a href="#" className="hover:text-[#ffb300] transition-colors">
-                                        Documentación
-                                    </a>
-                                </li>
                                 <li>
                                     <a href="#" className="hover:text-[#ffb300] transition-colors">
                                         Soporte
