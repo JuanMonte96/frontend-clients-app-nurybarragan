@@ -8,6 +8,7 @@ import { Route, Routes } from 'react-router-dom';
 import { UserSideBar } from './pages/Users/UserSideBar';
 import AboutUs from './components/AboutUs';
 import { ContactUS } from './components/ContactUs';
+import { ChangePassword } from './pages/Login/ChangePassword';
 
 function App() {
 
@@ -35,6 +36,7 @@ function App() {
             } />
             <Route path="/login" element={<LoginPage />} />
             <Route path='/user' element={<UserSideBar />} />
+            <Route path='/changePassword' element={<ChangePassword />} />
           </Routes>
 
         </div>

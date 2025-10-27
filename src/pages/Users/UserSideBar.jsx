@@ -4,9 +4,9 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 
 const menuItems = [
-  { label: "Inicio", path: "/app/dashboard", icon: "🏠" },
-  { label: "Mis Clases", path: "/app/classes", icon: "🕺" },
+  { label: "Inicio", path: "/", icon: "🏠" },
   { label: "Perfil", path: "/app/profile", icon: "👤" },
+  { label: "Mis Clases", path: "/app/classes", icon: "🕺" },
 ];
 
 export const UserSideBar = () => {
@@ -30,7 +30,7 @@ export const UserSideBar = () => {
       >
         <div className="p-5 border-b border-gray-200 dark:border-gray-700">
           <h2 className="text-xl font-bold text-gray-800 dark:text-white">
-            Mi Panel
+            Panel de Usuario
           </h2>
         </div>
 

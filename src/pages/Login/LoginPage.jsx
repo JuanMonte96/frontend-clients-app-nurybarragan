@@ -1,7 +1,7 @@
 import { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import logo from '../../assets/logo_menu_nury_barragan.png';
+import { loginService, getprofile } from "../../services/authServices";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -10,26 +10,23 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-
-  
-  const API_LOGIN = import.meta.env.VITE_API_POST_LOGIN
   
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
     try {
-      const { data } = await axios.post(API_LOGIN, {
-        email,
-        password,
-      });
-
-      console.log(data.token);
-      // guarda token o session
-      localStorage.setItem("token", data.token);
+      const data = await loginService(email, password);
+      console.log(data);
+      await getprofile(data.user.id);
       navigate("/user"); // redirige a inicio o panel del usuario
     } catch (err) {
-      setError(err.response?.data?.message || "Error al iniciar sesión");
+      console.log(err);
+      if (err.response.data.must_change_pass) {
+        navigate("/changePassword");
+      } else {
+        setError(err.response?.data?.message || "Error al iniciar sesión");
+      }
     } finally {
       setLoading(false);
     }
@@ -98,7 +95,7 @@ export default function LoginPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full text-[#333333] bg-primary-600 hover:bg-[#ffb300] focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-[#fff8e1] dark:hover:bg-[#ffb300] dark:focus:ring-[#ffb300]"
+                className="w-full text-[var(--color-text)] bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] focus:ring-4 focus:outline-none focus:ring-[var(--color-primary)] font-semibold rounded-2xl text-sm px-5 py-2.5 "
               >
                 {loading ? "Ingresando..." : "INICIAR SESIÓN"}
               </button>
