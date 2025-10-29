@@ -5,11 +5,11 @@ import PackagePage from './pages/E-commerce/PackagePage';
 import Footer from './components/Footer';
 import LoginPage from './pages/Login/LoginPage';
 import { Route, Routes } from 'react-router-dom';
-import { UserSideBar } from './pages/Users/UserSideBar';
 import AboutUs from './components/AboutUs';
 import { ContactUS } from './components/ContactUs';
 import { ChangePassword } from './pages/Login/ChangePassword';
-
+import UserLayout from './pages/Users/UserLayout';
+import { ProfileUser } from './pages/Users/ProfileUser';
 function App() {
 
   const links = [
@@ -35,8 +35,14 @@ function App() {
               </>
             } />
             <Route path="/login" element={<LoginPage />} />
-            <Route path='/user' element={<UserSideBar />} />
             <Route path='/changePassword' element={<ChangePassword />} />
+
+            {/* Privado */}
+            <Route path="/user" element={<UserLayout />}>
+              <Route index element={<ProfileUser />} />         {/* /user */}
+              <Route path="profile" element={<ProfileUser />} />{/* /user/profile */}
+            </Route>
+
           </Routes>
 
         </div>

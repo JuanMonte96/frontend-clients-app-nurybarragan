@@ -1,7 +1,7 @@
 import { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import logo from '../../assets/logo_menu_nury_barragan.png';
+import api from "../../services/api";
 
 export const ChangePassword = () => {
     const navigate = useNavigate();
@@ -27,12 +27,10 @@ export const ChangePassword = () => {
             return; 
         }
 
-        const API_CHANGE_PASSWORD = import.meta.env.VITE_API_PUT_CHANGE_PASSWORD
-
         try {
             const token = localStorage.getItem("token");
-            const res = await axios.put(
-                `${API_CHANGE_PASSWORD}`,
+            const res = await api.put(
+                "/api/users/changePassword",
                 {
                     currentPassword: form.currentPassword,
                     newPassword: form.newPassword,

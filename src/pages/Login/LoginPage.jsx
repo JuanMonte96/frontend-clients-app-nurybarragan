@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from '../../assets/logo_menu_nury_barragan.png';
-import { loginService, getprofile } from "../../services/authServices";
+import { loginService } from "../../services/authServices";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -10,23 +10,20 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
+
     try {
       const data = await loginService(email, password);
-      console.log(data);
-      await getprofile(data.user.id);
-      navigate("/user"); // redirige a inicio o panel del usuario
+      console.log("Login exitoso:", data);
+      alert("Voy a navergar ahora...");
+      navigate("/user");
     } catch (err) {
       console.log(err);
-      if (err.response.data.must_change_pass) {
-        navigate("/changePassword");
-      } else {
-        setError(err.response?.data?.message || "Error al iniciar sesión");
-      }
+      setError(err.message || "Error al iniciar sesión");
     } finally {
       setLoading(false);
     }

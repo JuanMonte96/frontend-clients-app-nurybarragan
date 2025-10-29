@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import PackageCard from "../../components/PackageCard";
 import PurchaseModal from "../../components/PurchaseModal";
-
-const API_PACKAGES = import.meta.env.VITE_API_GET_PACKAGES;
-const API_PAYMENT = import.meta.env.VITE_API_POST_PAYMENT;
+import api from "../../services/api";
 
 export default function PackagePage() {
 
@@ -20,7 +17,7 @@ export default function PackagePage() {
 
     const fetchPackages = async () => {
       try {
-        const { data } = await axios.get(API_PACKAGES, {
+        const { data } = await api.get("/api/packages/all", {
           signal: controller.signal,
         });
         console.log(data)
@@ -57,8 +54,8 @@ export default function PackagePage() {
 
       console.log("📦 Enviando datos a backend:", payload);
 
-      const response = await axios.post(
-        API_PAYMENT,
+      const response = await api.post(
+        "/api/payments/start-payment",
         payload
       );
 
@@ -77,7 +74,7 @@ export default function PackagePage() {
     }
   };
 
-  if (loading) return <div className="p-10 text-center">Cargando...</div>;
+  if (loading) return <div className="p-10 text-center">Cargando...</div>; // Cambiar cuando ya se vaya a producción crear un componente Loading
   if (error) return <div className="p-10 text-center text-red-600">Error: {error}</div>;
 
   return (

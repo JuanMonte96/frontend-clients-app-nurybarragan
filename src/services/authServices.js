@@ -1,27 +1,28 @@
-import axios from "axios";
+import api from "./api";
 
 export const loginService = async (email, password) => {
-  const API_LOGIN = import.meta.env.VITE_API_POST_LOGIN;
   try {
-    const { data } = await axios.post(API_LOGIN, {
-      email,
-      password,
-    });
-    // guarda token o session
-    localStorage.setItem("token", data.token);
+    const { data } = await api.post("/api/users/login", { email, password });
+
+    if (data.token) {
+      localStorage.setItem("token", data.token);
+    }
+
+    if(data?.user.id){
+      localStorage.setItem("id_user", data.user.id)
+    }
+
     return data;
   } catch (error) {
-    throw new Error(error.response?.data?.message || "Error al iniciar sesión con el usuario correspondiente");
+    throw {
+      response: error.response,
+      message: error.response?.data?.message || "Error al iniciar sesión",
+    };
   }
 };
 
-export const getprofile = async (id_user) => {
-  const API_PROFILE = import.meta.env.VITE_API_GET_PROFILE;
-  const token = localStorage.getItem("token");
-  const { data } = await axios.get(`${API_PROFILE}/${id_user}`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+export const getProfile = async (id_user) => {
+  const { data } = await api.get(`/api/users/profile/${id_user}`)
+  console.log(data);
   return data;
 }
