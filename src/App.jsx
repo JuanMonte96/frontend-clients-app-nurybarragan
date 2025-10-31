@@ -38,7 +38,9 @@ function App() {
             <Route path='/changePassword' element={<ChangePassword />} />
 
             {/* Privado */}
-            <Route path="/user" element={<UserLayout />}>
+            <Route path="/user" element={
+              <UserLayout />
+            }>
               <Route index element={<ProfileUser />} />         {/* /user */}
               <Route path="profile" element={<ProfileUser />} />{/* /user/profile */}
             </Route>

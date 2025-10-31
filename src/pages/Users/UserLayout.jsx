@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { useAuth } from "../../context/AuthContex";
+import { useAuth } from "../../context/AuthContext";
 import { UserSideBar } from "./UserSideBar";
 import { HeaderUser } from "./HeaderUser";
 
@@ -13,7 +13,7 @@ export default function UserLayout() {
     if (!authLoading && !profile) return <Navigate to="/login" replace />;
 
     return (
-        <div className="flex min-h-screen bg-gray-50 dark:bg-gray-900">
+        <div className="flex min-h-screen bg-[var(--color-bg)]">
             <UserSideBar />
             <div className="flex-1 flex flex-col sm:ml-64">
                 <HeaderUser />

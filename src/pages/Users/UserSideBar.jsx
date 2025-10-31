@@ -1,13 +1,11 @@
-// src/user/UserSidebar.jsx
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import logo from '../../assets/logo_menu_nury_barragan.png';
 
 const menuItems = [
-  { label: "INICIO", path: "/", icon: "🏠" },
-  { label: "PERFIL", path: "/app/profile", icon: "👤" },
-  { label: "MIS CLASES", path: "/app/classes", icon: "🕺" },
+  { label: "PERFIL", path: "/user/profile", icon: "👤" },
+  { label: "CLASES", path: "/user/classes", icon: "🕺" },
 ];
 
 export const UserSideBar = () => {
