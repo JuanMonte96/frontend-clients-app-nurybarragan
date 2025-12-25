@@ -43,11 +43,12 @@ export default function PackagePage() {
   };
 
   // 👉 Se ejecuta cuando el usuario confirma el modal
-  const handleConfirmPurchase = async ({ name, email }) => {
+  const handleConfirmPurchase = async ({ name, email, telephone }) => {
     try {
       const payload = {
         name,
         email,
+        telephone,
         id_package: selectedPackage.id_package,
         stripe_price_id: selectedPackage.stripe_price_id,
       };

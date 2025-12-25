@@ -3,6 +3,7 @@ import React, { useState } from "react";
 export default function PurchaseModal({ isOpen, onClose, pkg, onConfirm }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [telephone, setTelephone] = useState("");
 
   if (!isOpen) return null; // si no está abierto, no renderiza nada
 
@@ -21,7 +22,7 @@ export default function PurchaseModal({ isOpen, onClose, pkg, onConfirm }) {
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            onConfirm({ name, email });
+            onConfirm({ name, email, telephone });
           }}
           className="space-y-4"
         >
@@ -50,6 +51,19 @@ export default function PurchaseModal({ isOpen, onClose, pkg, onConfirm }) {
               className="w-full bg-[#2c2c2c] text-[#fff8e1] border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-[#ffc107]"
             />
           </div>
+           <div>
+            <label className="block text-[#333333] text-sm font-medium mb-1">
+              Telefono
+            </label>
+            <input
+              type="number"
+              value={telephone}
+              onChange={(e) => setTelephone(e.target.value)}
+              required
+              className="w-full bg-[#2c2c2c] text-[#fff8e1] border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-[#ffc107]"
+            />
+          </div>
+
 
           <div className="flex justify-between mt-6">
             <button
