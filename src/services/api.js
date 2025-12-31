@@ -17,12 +17,15 @@ api.interceptors.response.use(
   (error) => {
     const status = error.response?.status;
     const data = error.response?.data;
+    // Evitar redirecciones si ya estamos en /changePassword
+    const isChangePasswordPage = window.location.pathname === "/changePassword";
+    
     if (status === 401) {
       // token inválido o expirado
       localStorage.removeItem("token");
       window.location.href = "/login";
     }
-    if (status === 400 && data?.must_change_pass) {
+    if (status === 400 && data?.must_change_pass && !isChangePasswordPage) {
       window.location.href = "/changePassword";
     }
     return Promise.reject(error);
