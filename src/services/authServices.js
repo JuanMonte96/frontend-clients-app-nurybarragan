@@ -26,9 +26,3 @@ export const getProfile = async (id_user) => {
   console.log(data);
   return data;
 }
-
-export const getAllClasses= async () => {
-  const {data} = await api.get("/api/classes/all");
-  console.log(data);
-  return data; 
-}

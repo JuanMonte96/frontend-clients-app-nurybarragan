@@ -51,7 +51,7 @@ export const ClassesList = () => {
         </div>
     )
     if (classes.length === 0) return (
-        <div className="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded-lg text-center">
+        <div className="bg-[var(--color-bg)] border border-[var(--color-primary)] text-[var(--color-text)] px-4 py-3 rounded-lg text-center">
             No hay Clases para mostrar
         </div>
     )

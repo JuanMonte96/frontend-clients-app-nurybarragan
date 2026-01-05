@@ -6,6 +6,7 @@ import logo from '../../assets/logo_menu_nury_barragan.png';
 const menuItems = [
   { label: "PERFIL", path: "/user/profile", icon: "👤" },
   { label: "CLASES", path: "/user/classes", icon: "🕺" },
+  { label: "MIS INCRIPCIONES", path:"/user/my-enrollments", icon : "📚" },
 ];
 
 export const UserSideBar = () => {
