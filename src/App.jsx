@@ -11,6 +11,7 @@ import { ChangePassword } from './pages/Login/ChangePassword';
 import UserLayout from './pages/Users/UserLayout';
 import { ProfileUser } from './pages/Users/ProfileUser';
 import {ClassesUser} from './pages/Users/ClassesUser';
+import { EnrolmentUser } from './pages/Users/EnrolmentUser';
 function App() {
 
   const links = [
@@ -45,6 +46,7 @@ function App() {
               <Route index element={<ProfileUser />} />         {/* /user */}
               <Route path="profile" element={<ProfileUser />} />{/* /user/profile */}
               <Route path="classes" element={<ClassesUser />} /> {/* /user/classes */}
+              <Route path="enrollments" element={<EnrolmentUser />} />
             </Route>
 
           </Routes>

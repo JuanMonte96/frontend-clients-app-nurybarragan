@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { getAllScheduleByClass } from "../services/scheduleService";
-
+import { enrollClass } from "../services/enrollmentService";
 
 export const ClassCard = ({ classData }) => {
     const { id_class, title_class, level_class, teacher, description_class, is_blocked } = classData;
@@ -31,6 +31,17 @@ export const ClassCard = ({ classData }) => {
         }
         setShowSchedules(true);
     };
+
+    const handleEnroll = async (id_schedule) => {
+        try {
+            const response = await enrollClass(id_schedule);
+            console.log(response)
+            alert ("Inscripción exitosa");
+        } catch (error) {
+            const {response} = error; 
+            alert (`Error during enrollment: ${response?.data?.message || error.message}`);
+        }
+    }
 
     return (
         <article className="bg-[var(--color-bg-secondary)] rounded-xl border border-[var(--color-primary)] shadow-md p-6 hover:shadow-lg transition-all duration-200 hover:scale-105">
@@ -119,18 +130,12 @@ export const ClassCard = ({ classData }) => {
                                     </div>
 
                                     {/* Botones de acción */}
-                                    <div className="grid grid-cols-2 gap-2">
+                                    <div className="grid grid-cols-1 gap-2">
                                         <button
                                             className="py-2 px-3 bg-[var(--color-primary)] text-white rounded-lg hover:bg-opacity-80 transition text-xs font-semibold"
                                             onClick={() => handleEnroll(schedule.id_schedule)}
                                         >
                                             ✓ Enlistarse
-                                        </button>
-                                        <button
-                                            className="py-2 px-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition text-xs font-semibold"
-                                            onClick={() => handleRemoveEnrollment(schedule.id_schedule)}
-                                        >
-                                            ✕ Quitar
                                         </button>
                                     </div>
                                 </div>
