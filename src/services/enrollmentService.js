@@ -7,7 +7,7 @@ export const enrollClass = async (id_schedule) => {
 };
 
 export const updateStateEnrollment = async (id_enrrolment, newStatus) => {
-    const { data } = await api.patch(`/api/enrollments/${id_enrrolment}`, { newStatus })
+    const { data } = await api.patch(`/api/enrollments/change-status/${id_enrrolment}`, { newStatus })
     console.log(`Update Enrollment State response: ${data}`)
     return data;
 }

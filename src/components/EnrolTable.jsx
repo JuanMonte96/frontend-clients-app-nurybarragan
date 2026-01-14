@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { updateStateEnrollment } from "../services/enrollmentService";
-import { CheckCircle, Trash2 } from "lucide-react";
+import { Trash2 } from "lucide-react";
 
 export const EnrolTable = ({ enrollments }) => {
     const [enrollmentsList, setEnrollmentsList] = useState(enrollments);
     const [loadingId, setLoadingId] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
+    const [attendanceToggle, setAttendanceToggle] = useState({});
 
     // Maneja la actualización del estado del enrollment
     const handleStatusChange = async (enrollmentId, newStatus) => {
@@ -30,6 +31,29 @@ export const EnrolTable = ({ enrollments }) => {
         }
     };
 
+    // Maneja el toggle de asistencia
+    const handleAttendanceToggle = async (enrollmentId, currentAttendance) => {
+        const newAttendance = !currentAttendance;
+        const status = newAttendance ? "active" : "removed";
+        
+        setLoadingId(enrollmentId);
+        setErrorMsg(null);
+        try {
+            await updateStateEnrollment(enrollmentId, status);
+            
+            // Actualiza el toggle localmente
+            setAttendanceToggle(prev => ({
+                ...prev,
+                [enrollmentId]: newAttendance
+            }));
+        } catch (error) {
+            setErrorMsg(`Error: ${error.message}`);
+            console.error(`Error updating attendance: ${error}`);
+        } finally {
+            setLoadingId(null);
+        }
+    };
+
     // Maneja la eliminación (cambio a cancelled)
     const handleDelete = (enrollmentId) => {
         handleStatusChange(enrollmentId, "cancelled");
@@ -40,12 +64,10 @@ export const EnrolTable = ({ enrollments }) => {
         switch (status?.toLowerCase()) {
             case "active":
                 return "bg-green-100 text-green-800";
-            case "completed":
-                return "bg-blue-100 text-blue-800";
-            case "cancelled":
+            case "removed":
+                return "bg-gray-100 text-gray-800";
+            case "blocked":
                 return "bg-red-100 text-red-800";
-            case "pending":
-                return "bg-yellow-100 text-yellow-800";
             default:
                 return "bg-gray-100 text-gray-800";
         }
@@ -55,9 +77,8 @@ export const EnrolTable = ({ enrollments }) => {
     const getStatusLabel = (status) => {
         const statusMap = {
             active: "Activa",
-            completed: "Completada",
-            cancelled: "Cancelada",
-            pending: "Pendiente",
+            removed: "Desactivada",
+            Blocked: "Bloqueada",
         };
         return statusMap[status?.toLowerCase()] || status || "Desconocido";
     };
@@ -89,7 +110,10 @@ export const EnrolTable = ({ enrollments }) => {
                             Estado
                         </th>
                         <th className="px-6 py-4 text-center text-sm font-bold text-[var(--color-text)]">
-                            Acciones
+                            Modificar
+                        </th>
+                        <th className="px-6 py-4 text-center text-sm font-bold text-[var(--color-text)]">
+                            Eliminar
                         </th>
                     </tr>
                 </thead>
@@ -144,21 +168,34 @@ export const EnrolTable = ({ enrollments }) => {
                                 </span>
                             </td>
 
+                            {/* Toggle de Asistencia */}
+                            <td className="px-6 py-4">
+                                <div className="flex items-center justify-center gap-3">
+                                    <button
+                                        onClick={() => handleAttendanceToggle(enrollment.id_enrollment, attendanceToggle[enrollment.id_enrollment] ?? true)}
+                                        disabled={loadingId === enrollment.id_enrollment || enrollment.status?.toLowerCase() === "cancelled"}
+                                        className={`relative inline-flex items-center h-8 w-14 rounded-full transition-colors ${
+                                            attendanceToggle[enrollment.id_enrollment] ?? true
+                                                ? "bg-green-500 hover:bg-green-600"
+                                                : "bg-red-500 hover:bg-red-600"
+                                        } disabled:opacity-50 disabled:cursor-not-allowed`}
+                                        title={attendanceToggle[enrollment.id_enrollment] ?? true ? "Puedo asistir - Click para no asistir" : "No puedo asistir - Click para asistir"}
+                                    >
+                                        <span
+                                            className={`inline-block h-6 w-6 transform rounded-full bg-white transition-transform ${
+                                                attendanceToggle[enrollment.id_enrollment] ?? true ? "translate-x-7" : "translate-x-1"
+                                            }`}
+                                        />
+                                    </button>
+                                    <span className="text-xs font-semibold text-[var(--color-text)]">
+                                        {attendanceToggle[enrollment.id_enrollment] ?? true ? "Asistir" : "No asistir"}
+                                    </span>
+                                </div>
+                            </td>
+                            
                             {/* Acciones */}
                             <td className="px-6 py-4">
                                 <div className="flex items-center justify-center gap-3">
-                                    {/* Botón Completar */}
-                                    {enrollment.status?.toLowerCase() === "active" && (
-                                        <button
-                                            onClick={() => handleStatusChange(enrollment.id_enrollment, "completed")}
-                                            disabled={loadingId === enrollment.id_enrollment}
-                                            className="p-2 text-green-600 hover:bg-green-100 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                                            title="Marcar como completada"
-                                        >
-                                            <CheckCircle size={20} />
-                                        </button>
-                                    )}
-
                                     {/* Botón Cancelar */}
                                     <button
                                         onClick={() => handleDelete(enrollment.id_enrollment)}

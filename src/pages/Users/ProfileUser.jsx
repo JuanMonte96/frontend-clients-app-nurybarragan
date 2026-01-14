@@ -1,13 +1,26 @@
+import { useEffect } from "react";
 import { useAuth } from "../../context/AuthContext";
+import { useClasses } from "../../context/ClassesContext";
+import { ClassesRemainingCard } from "../../components/ClassesRemainingCard";
 
 export const ProfileUser = () => {
   const { profile } = useAuth();
+  const { fetchClassesRemaining } = useClasses();
+
+  useEffect(() => {
+    fetchClassesRemaining();
+  }, [fetchClassesRemaining]);
 
   const user = profile?.user;
   const subscriptions = profile?.subscriptionByUser || [];
 
   return (
-    <section className="bg-[var(--color-bg-secondary)] rounded-2xl p-6 shadow-md border border-[var(--color-primary)] max-w-6xl mx-auto">
+    <section className="space-y-6 max-w-6xl mx-auto">
+      {/* Card de clases restantes */}
+      <ClassesRemainingCard />
+
+      {/* Perfil del usuario */}
+      <div className="bg-[var(--color-bg-secondary)] rounded-2xl p-6 shadow-md border border-[var(--color-primary)]">
       {/* Perfil del usuario */}
       <div className="flex flex-col md:flex-row items-center md:items-start md:justify-between mb-6">
         <div>
@@ -96,6 +109,7 @@ export const ProfileUser = () => {
           ))}
         </div>
       )}
+      </div>
     </section>
   );
 };
