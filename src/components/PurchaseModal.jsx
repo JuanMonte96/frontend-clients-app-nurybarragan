@@ -8,15 +8,15 @@ export default function PurchaseModal({ isOpen, onClose, pkg, onConfirm }) {
   if (!isOpen) return null; // si no está abierto, no renderiza nada
 
   return (
-    <div className="fixed inset-0 bg-[#333333] bg-opacity-70 flex items-center justify-center z-50">
-      <div className="bg-[#fff8e1] rounded-lg shadow-lg w-full max-w-md p-6 relative">
-        <h2 className="text-xl font-bold mb-4 text-[var(--color-text)] text-center">
+    <div className="fixed inset-0 bg-[#333333] bg-opacity-70 flex items-center justify-center z-50 p-3 sm:p-4">
+      <div className="bg-[#fff8e1] rounded-lg sm:rounded-xl shadow-lg w-full max-w-md p-4 sm:p-6 relative">
+        <h2 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-[var(--color-text)] text-center">
           Comprar {pkg.name_package}
         </h2>
-        <h3 className="text-center text-xl font-semibold text-[var(--color-text)] mb-2">
-          Descripcion: {pkg.description_package}
+        <h3 className="text-center text-base sm:text-lg font-semibold text-[var(--color-text)] mb-2">
+          Descripción: {pkg.description_package}
         </h3>
-        <h3 className="mb-4 text-center text-xl font-semibold text-[var(--color-text )]">
+        <h3 className="mb-3 sm:mb-4 text-center text-lg sm:text-xl font-semibold text-[var(--color-text )]">
           Precio: <span className="text-[var(--color-primary)]">{pkg.price_package} EUR</span>
         </h3>
         <form
@@ -24,10 +24,10 @@ export default function PurchaseModal({ isOpen, onClose, pkg, onConfirm }) {
             e.preventDefault();
             onConfirm({ name, email, telephone });
           }}
-          className="space-y-4"
+          className="space-y-3 sm:space-y-4"
         >
           <div>
-            <label className="block text-[#333333] text-sm font-medium mb-1">
+            <label className="block text-[#333333] text-xs sm:text-sm font-medium mb-1 sm:mb-2">
               Nombre completo
             </label>
             <input
@@ -35,12 +35,12 @@ export default function PurchaseModal({ isOpen, onClose, pkg, onConfirm }) {
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
-              className="w-full bg-[#2c2c2c] text-[#fff8e1] border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-[#ffc107]"
+              className="w-full bg-[#2c2c2c] text-[#fff8e1] border border-gray-300 rounded-lg p-2 sm:p-2.5 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-[#ffc107]"
             />
           </div>
 
           <div>
-            <label className="block text-[#333333] text-sm font-medium mb-1">
+            <label className="block text-[#333333] text-xs sm:text-sm font-medium mb-1 sm:mb-2">
               Correo electrónico
             </label>
             <input
@@ -48,11 +48,11 @@ export default function PurchaseModal({ isOpen, onClose, pkg, onConfirm }) {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full bg-[#2c2c2c] text-[#fff8e1] border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-[#ffc107]"
+              className="w-full bg-[#2c2c2c] text-[#fff8e1] border border-gray-300 rounded-lg p-2 sm:p-2.5 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-[#ffc107]"
             />
           </div>
            <div>
-            <label className="block text-[#333333] text-sm font-medium mb-1">
+            <label className="block text-[#333333] text-xs sm:text-sm font-medium mb-1 sm:mb-2">
               Telefono
             </label>
             <input
@@ -60,23 +60,23 @@ export default function PurchaseModal({ isOpen, onClose, pkg, onConfirm }) {
               value={telephone}
               onChange={(e) => setTelephone(e.target.value)}
               required
-              className="w-full bg-[#2c2c2c] text-[#fff8e1] border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-[#ffc107]"
+              className="w-full bg-[#2c2c2c] text-[#fff8e1] border border-gray-300 rounded-lg p-2 sm:p-2.5 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-[#ffc107]"
             />
           </div>
 
 
-          <div className="flex justify-between mt-6">
+          <div className="flex flex-col sm:flex-row gap-2 sm:gap-0 sm:justify-between mt-4 sm:mt-6">
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 bg-[#333333] text-[#ffc107] rounded-3xl font-bold hover:bg-gray-400"
+              className="px-3 sm:px-4 py-2 bg-[#333333] text-[#ffc107] rounded-2xl sm:rounded-3xl font-bold hover:bg-gray-400 text-xs sm:text-sm order-2 sm:order-1"
             >
               CANCELAR
             </button>
 
             <button
               type="submit"
-              className="px-4 py-2 bg-[#ffc107] text-[#333333] rounded-3xl hover:bg-[#ffb300] font-bold"
+              className="px-3 sm:px-4 py-2 bg-[#ffc107] text-[#333333] rounded-2xl sm:rounded-3xl hover:bg-[#ffb300] font-bold text-xs sm:text-sm order-1 sm:order-2"
             >
               COMPRAR
             </button>

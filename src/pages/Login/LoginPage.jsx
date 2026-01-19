@@ -18,7 +18,7 @@ export default function LoginPage() {
     e.preventDefault();
     setLoading(true);
     setError(null);
-
+    
     try {
       const data = await loginService(email, password);
       console.log("Login exitoso:", data);
@@ -34,25 +34,25 @@ export default function LoginPage() {
   };
 
   return (
-    <section className="bg-[var(--color-header)] min-h-screen flex items-center">
-      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto w-full">
-        <a href="/" className="flex items-center mb-6 text-2xl font-semibold text-[var(--color-text)]">
+    <section className="bg-[var(--color-header)] min-h-screen flex items-center justify-center px-4 py-8">
+      <div className="flex flex-col items-center justify-center max-w-md mx-auto w-full">
+        <a href="/" className="flex items-center mb-6 text-xl sm:text-2xl font-semibold text-[var(--color-text)]">
           <img
-            className="w-auto h-20 mr-2"
+            className="w-auto h-14 sm:h-16 md:h-20 mr-2"
             src={logo}
             alt="logo"
           />
         </a>
 
-        <div className="w-full bg-[var(--color-bg)] rounded-lg shadow sm:max-w-md xl:p-0 border border-[var(--color-primary)]">
-          <div className="p-6 space-y-6">
-            <h1 className="text-xl font-bold text-[var(--color-text)]">
+        <div className="w-full bg-[var(--color-bg)] rounded-lg shadow sm:rounded-lg border border-[var(--color-primary)]">
+          <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
+            <h1 className="text-lg sm:text-xl font-bold text-[var(--color-text)]">
               Inicia sesión en tu cuenta
             </h1>
 
-            {error && <div className="text-red-600 text-sm">{error}</div>}
+            {error && <div className="text-red-600 text-xs sm:text-sm bg-red-100 border border-red-400 p-2 rounded">{error}</div>}
 
-            <form className="space-y-4" onSubmit={handleSubmit}>
+            <form className="space-y-3 sm:space-y-4" onSubmit={handleSubmit}>
               <div>
                 <label htmlFor="email" className="block mb-2 text-sm font-medium text-[var(--color-text)]">
                   Correo electrónico

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { getAllScheduleByClass } from "../services/scheduleService";
 import { enrollClass } from "../services/enrollmentService";
+import { formatDateInTimezone, getUserTimezone } from "../services/timezone";
 
 export const ClassCard = ({ classData }) => {
     const { id_class, title_class, level_class, teacher, description_class, is_blocked } = classData;
@@ -44,12 +45,12 @@ export const ClassCard = ({ classData }) => {
     }
 
     return (
-        <article className="bg-[var(--color-bg-secondary)] rounded-xl border border-[var(--color-primary)] shadow-md p-6 hover:shadow-lg transition-all duration-200 hover:scale-105">
+        <article className="bg-[var(--color-bg-secondary)] rounded-lg sm:rounded-xl border border-[var(--color-primary)] shadow-md p-4 sm:p-6 hover:shadow-lg transition-all duration-200 hover:scale-105 flex flex-col h-full">
             {/* Encabezado con título y estado */}
-            <div className="flex items-start justify-between mb-3">
-                <h3 className="text-xl font-bold text-[var(--color-text)] flex-1">{title_class}</h3>
+            <div className="flex flex-col sm:flex-row items-start sm:items-start justify-between gap-2 sm:gap-3 mb-3">
+                <h3 className="text-lg sm:text-xl font-bold text-[var(--color-text)] flex-1 break-words">{title_class}</h3>
                 <span
-                    className={`px-3 py-1 rounded-full text-xs font-semibold whitespace-nowrap ml-2 ${is_blocked
+                    className={`px-2 sm:px-3 py-1 rounded-full text-xs font-semibold whitespace-nowrap flex-shrink-0 ${is_blocked
                             ? "bg-red-100 text-red-700"
                             : "bg-green-100 text-green-700"
                         }`}
@@ -60,19 +61,19 @@ export const ClassCard = ({ classData }) => {
 
             {/* Profesor */}
             <div className="mb-3">
-                <p className="text-sm text-[var(--color-text)] font-semibold">
+                <p className="text-xs sm:text-sm text-[var(--color-text)] font-semibold line-clamp-2">
                     Profesor: <span className="text-[var(--color-text)]">{teacher.name_user}</span>
                 </p>
             </div>
 
             {/* Descripción */}
-            <p className="text-[var(--color-text)] text-sm mb-4 line-clamp-2">
+            <p className="text-[var(--color-text)] text-xs sm:text-sm mb-4 line-clamp-2 flex-grow">
                 {description_class}
             </p>
 
             {/* Nivel */}
-            <div className="flex items-center justify-between pt-4 border-t border-[var(--color-primary)] border-opacity-30 mb-4">
-                <span className="inline-block px-3 py-1 bg-[var(--color-primary)] bg-opacity-20 text-[var(--color-text)] rounded-lg text-xs font-semibold capitalize">
+            <div className="flex items-center justify-between pt-3 sm:pt-4 border-t border-[var(--color-primary)] border-opacity-30 mb-4">
+                <span className="inline-block px-2 sm:px-3 py-1 bg-[var(--color-primary)] bg-opacity-20 text-[var(--color-text)] rounded-lg text-xs font-semibold capitalize">
                     {level_class}
                 </span>
             </div>
@@ -80,7 +81,7 @@ export const ClassCard = ({ classData }) => {
             {/* Botón Ver Horarios */}
             <button
                 onClick={handleShowSchedules}
-                className="w-full py-2 px-4 bg-[var(--color-primary)] text-white rounded-lg hover:bg-opacity-80 transition font-semibold text-sm"
+                className="w-full py-2 px-3 sm:px-4 bg-[var(--color-primary)] text-white rounded-lg hover:bg-opacity-80 transition font-semibold text-xs sm:text-sm"
             >
                 {showSchedules ? "Ocultar horarios ▲" : "Ver horarios ▼"}
             </button>
@@ -90,30 +91,30 @@ export const ClassCard = ({ classData }) => {
                 <div className="mt-4 pt-4 border-t border-[var(--color-primary)] border-opacity-30">
                     {loadingSchedules ? (
                         <div className="text-center py-4">
-                            <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-[var(--color-primary)]"></div>
-                            <p className="text-sm text-[var(--color-text)] mt-2">Cargando horarios...</p>
+                            <div className="inline-block animate-spin rounded-full h-6 sm:h-8 w-6 sm:w-8 border-b-2 border-[var(--color-primary)]"></div>
+                            <p className="text-xs sm:text-sm text-[var(--color-text)] mt-2">Cargando horarios...</p>
                         </div>
                     ) : error ? (
-                        <div className="bg-red-100 border border-red-400 text-red-700 px-3 py-2 rounded-lg text-sm">
+                        <div className="bg-red-100 border border-red-400 text-red-700 px-2 sm:px-3 py-2 rounded-lg text-xs sm:text-sm">
                             {error}
                         </div>
                     ) : schedules.length > 0 ? (
-                        <div className="space-y-3">
+                        <div className="space-y-2 sm:space-y-3">
                             {schedules.map(schedule => (
                                 <div
                                     key={schedule.id_schedule}
-                                    className="bg-[var(--color-bg)] p-4 rounded-lg border border-[var(--color-primary)] border-opacity-30 hover:border-opacity-60 transition"
+                                    className="bg-[var(--color-bg)] p-3 sm:p-4 rounded-lg border border-[var(--color-primary)] border-opacity-30 hover:border-opacity-60 transition"
                                 >
                                     {/* Fecha y horario */}
                                     <div className="mb-3">
-                                        <p className="text-sm font-semibold text-[var(--color-text)]">
-                                            📅 {new Date(schedule.date_class).toLocaleDateString("es-CO")}
+                                        <p className="text-xs sm:text-sm font-semibold text-[var(--color-text)]">
+                                            📅 {formatDateInTimezone(schedule.date_class, schedule.time_zone_user || "Europe/Paris", getUserTimezone()).split('-').reverse().join('/')}
                                         </p>
                                         <p className="text-xs text-[var(--color-text)] mt-1">
                                             🕐 {schedule.start_time} - {schedule.end_time}
                                         </p>
-                                        <p className="text-xs text-[var(--color-text)] mt-1">
-                                            {schedule.time_zone_user}
+                                        <p className="text-xs text-[var(--color-text)] mt-1 truncate">
+                                            📍 {schedule.time_zone_user}
                                         </p>
                                     </div>
 
@@ -132,7 +133,7 @@ export const ClassCard = ({ classData }) => {
                                     {/* Botones de acción */}
                                     <div className="grid grid-cols-1 gap-2">
                                         <button
-                                            className="py-2 px-3 bg-[var(--color-primary)] text-white rounded-lg hover:bg-opacity-80 transition text-xs font-semibold"
+                                            className="py-2 px-2 sm:px-3 bg-[var(--color-primary)] text-white rounded-lg hover:bg-opacity-80 transition text-xs sm:text-sm font-semibold w-full"
                                             onClick={() => handleEnroll(schedule.id_schedule)}
                                         >
                                             ✓ Enlistarse
@@ -143,7 +144,7 @@ export const ClassCard = ({ classData }) => {
                         </div>
                     ) : (
                         <div className="text-center py-4">
-                            <p className="text-sm text-[var(--color-text)]">Sin horarios disponibles</p>
+                            <p className="text-xs sm:text-sm text-[var(--color-text)]">Sin horarios disponibles</p>
                         </div>
                     )}
                 </div>

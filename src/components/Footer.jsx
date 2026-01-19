@@ -2,29 +2,29 @@ import logo from '../assets/logo_menu_nury_barragan.png'
 
 export default function Footer() {
     return (
-        <footer className="p-6 bg-[#333333] text-[#fff8e1]">
+        <footer className="p-3 sm:p-6 bg-[#333333] text-[#fff8e1]">
             <div className="mx-auto max-w-screen-xl">
                 {/* Sección principal */}
-                <div className="md:flex md:justify-between">
+                <div className="flex flex-col md:flex-row md:justify-between gap-4 sm:gap-6">
                     {/* Logo + Marca */}
-                    <div className="mb-6 md:mb-0">
+                    <div className="mb-4 sm:mb-6 md:mb-0">
                         <a href="#" className="flex items-center">
                             <img
                                 src={logo} // coloca tu logo local o URL
-                                className="mr-2 h-20"
+                                className="mr-2 h-12 sm:h-16 md:h-20 w-auto"
                                 alt="Logo"
                             />
                         </a>
                     </div>
 
                     {/* Enlaces */}
-                    <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
+                    <div className="grid grid-cols-2 gap-4 sm:gap-6 sm:grid-cols-3">
                         {/* Recursos */}
                         <div>
-                            <h2 className="mb-6 text-sm font-semibold text-[#ffc107] uppercase">
+                            <h2 className="mb-3 sm:mb-6 text-xs sm:text-sm font-semibold text-[#ffc107] uppercase">
                                 Recursos
                             </h2>
-                            <ul className="text-[#fff8e1]">
+                            <ul className="text-[#fff8e1] text-xs sm:text-sm">
                                 <li>
                                     <a href="#" className="hover:text-[#ffb300] transition-colors">
                                         Soporte
@@ -35,11 +35,11 @@ export default function Footer() {
 
                         {/* Redes sociales */}
                         <div>
-                            <h2 className="mb-6 text-sm font-semibold text-[#ffc107] uppercase">
+                            <h2 className="mb-3 sm:mb-6 text-xs sm:text-sm font-semibold text-[#ffc107] uppercase">
                                 Síguenos
                             </h2>
-                            <ul className="text-[#fff8e1]">
-                                <li className="mb-4">
+                            <ul className="text-[#fff8e1] text-xs sm:text-sm">
+                                <li className="mb-2 sm:mb-4">
                                     <a
                                         href="#"
                                         className="hover:text-[#ffb300] transition-colors"
@@ -60,11 +60,11 @@ export default function Footer() {
 
                         {/* Legal */}
                         <div>
-                            <h2 className="mb-6 text-sm font-semibold text-[#ffc107] uppercase">
+                            <h2 className="mb-3 sm:mb-6 text-xs sm:text-sm font-semibold text-[#ffc107] uppercase">
                                 Legal
                             </h2>
-                            <ul className="text-[#fff8e1]">
-                                <li className="mb-4">
+                            <ul className="text-[#fff8e1] text-xs sm:text-sm">
+                                <li className="mb-2 sm:mb-4">
                                     <a href="#" className="hover:text-[#ffb300] transition-colors">
                                         Política de privacidad
                                     </a>
@@ -80,11 +80,11 @@ export default function Footer() {
                 </div>
 
                 {/* Separador */}
-                <hr className="my-6 border-[#ffc107]/30 sm:mx-auto lg:my-8" />
+                <hr className="my-4 sm:my-6 md:my-8 border-[#ffc107]/30" />
 
                 {/* Parte inferior */}
-                <div className="sm:flex sm:items-center sm:justify-between">
-                    <span className="text-sm text-[#fff8e1]/80">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-0">
+                    <span className="text-xs sm:text-sm text-[#fff8e1]/80">
                         © {new Date().getFullYear()}{" "}
                         <a href="#" className="hover:text-[#ffc107]">
                             Nury Barragán
@@ -93,14 +93,14 @@ export default function Footer() {
                     </span>
 
                     {/* Íconos sociales */}
-                    <div className="flex mt-4 space-x-6 sm:justify-center sm:mt-0">
+                    <div className="flex gap-4 sm:gap-6">
                         {/* Facebook */}
                         <a
                             href="#"
                             className="text-[#fff8e1]/70 hover:text-[#ffc107] transition-colors"
                         >
                             <svg
-                                className="w-5 h-5"
+                                className="w-4 h-4 sm:w-5 sm:h-5"
                                 fill="currentColor"
                                 viewBox="0 0 24 24"
                                 aria-hidden="true"
@@ -126,7 +126,7 @@ export default function Footer() {
                             className="text-[#fff8e1]/70 hover:text-[#ffc107] transition-colors"
                         >
                             <svg
-                                className="w-5 h-5"
+                                className="w-4 h-4 sm:w-5 sm:h-5"
                                 fill="currentColor"
                                 viewBox="0 0 24 24"
                                 aria-hidden="true"

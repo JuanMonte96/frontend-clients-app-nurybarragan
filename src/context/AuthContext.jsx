@@ -11,10 +11,13 @@ export const AuthProvider = ({ children }) => {
   const id_user = localStorage.getItem("id_user");
 
   const refreshProfile = async (id_user) => {
+    setAuthLoading(true);
     try {
       const data = await getProfile(id_user);
+      console.log("Profile loaded:", data);
       setProfile(data);
-    } catch {
+    } catch (error) {
+      console.error("Error loading profile:", error);
       setProfile(null);
     } finally {
       setAuthLoading(false);
@@ -31,7 +34,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ profile, setProfile, refreshProfile, authLoading }}>
+    <AuthContext.Provider value={{ profile, setProfile, refreshProfile, authLoading, id_user }}>
       {children}
     </AuthContext.Provider>
   );

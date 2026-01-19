@@ -75,14 +75,14 @@ export default function PackagePage() {
     }
   };
 
-  if (loading) return <div className="p-10 text-center">Cargando...</div>; // Cambiar cuando ya se vaya a producción crear un componente Loading
-  if (error) return <div className="p-10 text-center text-red-600">Error: {error}</div>;
+  if (loading) return <div className="p-6 sm:p-8 md:p-10 text-center text-xs sm:text-sm md:text-base">Cargando...</div>; // Cambiar cuando ya se vaya a producción crear un componente Loading
+  if (error) return <div className="p-6 sm:p-8 md:p-10 text-center text-red-600 text-xs sm:text-sm md:text-base">Error: {error}</div>;
 
   return (
-    <main className="min-h-screen bg-[#2c2c2c] p-8">
-      <h1 className="text-3xl font-bold mb-8 text-center text-[#ffc107]">Paquetes disponibles</h1>
+    <main className="min-h-screen bg-[#2c2c2c] p-3 sm:p-6 md:p-8">
+      <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 text-center text-[#ffc107]">Paquetes disponibles</h1>
 
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <div className="grid gap-4 sm:gap-5 md:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {packages.map((pkg) => (
           <PackageCard key={pkg.id_package} pkg={pkg} onBuy={handleBuyClick} />
         ))}

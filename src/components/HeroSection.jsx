@@ -2,21 +2,21 @@ import classImg from '../assets/nurybarragan42.jpg';
 
 export default function HeroSection() {
   return (
-    <section className="bg-[var(--color-bg)] pt-28">
-      <div className="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
-        <div className="mr-auto place-self-center lg:col-span-7">
-          <h1 className="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl text-[var(--color-text)]">
+    <section className="bg-[var(--color-bg)] pt-20 sm:pt-24 md:pt-28 pb-8 md:pb-12">
+      <div className="grid max-w-screen-xl px-3 sm:px-4 py-6 sm:py-8 md:py-16 mx-auto lg:gap-8 xl:gap-0 lg:grid-cols-12">
+        <div className="mr-auto place-self-center lg:col-span-7 mb-8 lg:mb-0">
+          <h1 className="max-w-2xl mb-3 sm:mb-4 text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold tracking-tight leading-none text-[var(--color-text)]">
             Vivir en salud plena
           </h1>
-          <p className="max-w-2xl mb-6 font-light text-[var(--color-text)] lg:mb-8 md:text-lg lg:text-xl">
+          <p className="max-w-2xl mb-4 sm:mb-6 font-light text-xs sm:text-sm md:text-base lg:text-lg text-[var(--color-text)] lg:mb-8">
             Transmitir a cada persona a cada individuo mi saber mi pasión por la danza, por el deporte, mi folclore tan rico y tan variado, mi cultura en general. Es una misión, un compromiso que debo cumplir despues de 25 años de experiencia profesional.
           </p>
         </div>
-        <div className="hidden lg:mt-0 lg:col-span-5 lg:flex ">
+        <div className="hidden sm:flex lg:mt-0 lg:col-span-5 lg:flex justify-center">
           <img
             src={classImg}
             alt="hero image"
-            className="w-full h-auto rounded-2xl shadow-lg object-cover"
+            className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-none h-auto rounded-2xl shadow-lg object-cover"
           />
         </div>
       </div>

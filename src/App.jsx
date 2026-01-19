@@ -12,6 +12,7 @@ import UserLayout from './pages/Users/UserLayout';
 import { ProfileUser } from './pages/Users/ProfileUser';
 import {ClassesUser} from './pages/Users/ClassesUser';
 import { EnrolmentUser } from './pages/Users/EnrolmentUser';
+import { ConfigurationUser } from './pages/Users/ConfigurationUser';
 function App() {
 
   const links = [
@@ -46,7 +47,8 @@ function App() {
               <Route index element={<ProfileUser />} />         {/* /user */}
               <Route path="profile" element={<ProfileUser />} />{/* /user/profile */}
               <Route path="classes" element={<ClassesUser />} /> {/* /user/classes */}
-              <Route path="enrollments" element={<EnrolmentUser />} />
+              <Route path="enrollments" element={<EnrolmentUser />} /> {/* /user/enrollments */}
+              <Route path="configuration" element={<ConfigurationUser />} /> {/* /user/configuration */}
             </Route>
 
           </Routes>

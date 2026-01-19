@@ -1,53 +1,63 @@
 import { NavLink } from "react-router-dom";
-import { useState } from "react";
-import { Menu, X, User, BookOpen, ClipboardList, Settings } from "lucide-react";
+import { User, BookOpen, ClipboardList, Settings } from "lucide-react";
 import logo from '../../assets/logo_menu_nury_barragan.png';
 
 const menuItems = [
   { label: "PERFIL", path: "/user/profile", icon: <User size={20}/> },
   { label: "CLASES", path: "/user/classes", icon: <BookOpen size={20}/> },
-  { label: "MIS INCRIPCIONES", path: "/user/enrollments", icon: <ClipboardList size={20}/> },
+  { label: "MIS INSCRIPCIONES", path: "/user/enrollments", icon: <ClipboardList size={20}/> },
   { label: "CONFIGURACIÓN", path:"/user/configuration",  icon: <Settings size={20}/>}
 ];
 
-export const UserSideBar = () => {
-  const [open, setOpen] = useState(true);
-
+export const UserSideBar = ({ sidebarOpen, setSidebarOpen }) => {
   return (
     <>
-      {/* Botón móvil */}
-      <button
-        onClick={() => setOpen(!open)}
-        className="sm:hidden p-2 m-3 shadow-md text-[var(--color-text)] rounded-lg hover:bg-[var(--color-header)] focus:outline-none"
-      >
-        {open ? <X size={22} /> : <Menu size={22} />}
-      </button>
+      {/* Overlay móvil con blur - Solo difuminado sin fondo oscuro */}
+      {sidebarOpen && (
+        <div
+          className="sm:hidden fixed top-16 left-0 right-0 bottom-0 backdrop-blur-md z-30"
+          style={{ backgroundColor: 'rgba(0, 0, 0, 0.05)' }}
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
 
       {/* Sidebar */}
       <aside
-        className={`fixed top-0 left-0 z-40 h-screen w-64 bg-[var(--color-header)] border-r border-[var(--color-primary)] transform transition-transform duration-300 ${open ? "translate-x-0" : "-translate-x-full"
-          } sm:translate-x-0`}
+        className={`fixed top-16 left-0 z-40 h-[calc(100vh-64px)] w-56 bg-[var(--color-header)] border-r border-[var(--color-primary)] transform transition-all duration-300 ${
+          sidebarOpen ? "translate-x-0" : "-translate-x-full"
+        } sm:sticky sm:top-0 sm:translate-x-0 sm:h-screen sm:z-auto flex flex-col`}
       >
-        <div className="pb-2 pl-0 pr-0 pt-2 border-b border-[var(--color-primary)]">
-          <img src={logo} alt="Logo" className="h-20 w-auto" />
+        {/* Header con Logo */}
+        <div className="pb-3 sm:pb-2 pt-2 border-b border-[var(--color-primary)] px-2">
+          <img src={logo} alt="Logo" className="h-14 sm:h-16 w-auto object-contain" />
         </div>
 
-        <ul className="py-4 space-y-2">
-          {menuItems.map((item) => (
-            <li key={item.path}>
-              <NavLink
-                to={item.path}
-                className={({ isActive }) =>
-                  `flex items-center gap-3 px-5 py-2 t font-semibold text-[var(--color-text-secondary)] hover:bg-[var(--color-header)] rounded-2xl transition ${isActive ? "bg-[var(--color-header)] font-semibold" : ""
-                  }`
-                }
-              >
-                <span>{item.icon}</span>
-                <span>{item.label}</span>
-              </NavLink>
-            </li>
-          ))}
-        </ul>
+        {/* Menú Items */}
+        <nav className="flex-1 py-4 px-2 overflow-y-auto">
+          <ul className="space-y-2">
+            {menuItems.map((item) => (
+              <li key={item.path}>
+                <NavLink
+                  to={item.path}
+                  onClick={() => setSidebarOpen(false)}
+                  className={({ isActive }) =>
+                    `flex items-center gap-3 px-3 sm:px-4 py-2.5 rounded-lg transition-colors whitespace-nowrap ${
+                      isActive
+                        ? "bg-[var(--color-primary)] text-white font-semibold"
+                        : "text-[var(--color-text-secondary)] hover:bg-[var(--color-primary)] hover:bg-opacity-20 font-medium"
+                    }`
+                  }
+                >
+                  <span className="w-5 h-5 flex-shrink-0">{item.icon}</span>
+                  <span className="text-sm">{item.label}</span>
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        {/* Footer spacer para móvil */}
+        <div className="h-4 sm:hidden" />
       </aside>
     </>
   );

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { ClassesList } from "../../components/ClassesList";
 import { useClasses } from "../../context/ClassesContext";
 import { ClassesRemainingCard } from "../../components/ClassesRemainingCard";
@@ -11,15 +11,14 @@ export const ClassesUser = () => {
     }, [fetchClassesRemaining]);
 
     return (
-        <div className="space-y-6">
-            {/* Card de clases restantes */}
-            <ClassesRemainingCard />
-
-            {/* Lista de clases disponibles */}
-            <div>
-                <h1 className="text-3xl font-bold text-[var(--color-text)] mb-6">Clases Disponibles</h1>
+            <div className="w-full">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 mb-6 sm:mb-10">
+                  <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[var(--color-text)]">Clases Disponibles</h1>
+                  <div className="w-full sm:w-auto">
+                    <ClassesRemainingCard />
+                  </div>
+                </div>
                 <ClassesList />
             </div>
-        </div>
     );
 }

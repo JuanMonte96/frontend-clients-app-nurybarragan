@@ -53,34 +53,34 @@ export const ChangePassword = () => {
     };
 
     return (
-        <section className="bg-[var(--color-header)] min-h-screen flex flex-col justify-center items-center px-6 py-8">
+        <section className="bg-[var(--color-header)] min-h-screen flex flex-col justify-center items-center px-3 sm:px-4 md:px-6 py-6 sm:py-8">
             <a
                 href="/"
-                className="flex items-center mb-6 text-2xl font-semibold "
+                className="flex items-center mb-4 sm:mb-6 text-xl sm:text-2xl font-semibold"
             >
                 <img
-                    className="w-auto h-20 mr-2"
+                    className="w-auto h-14 sm:h-16 md:h-20 mr-2"
                     src={logo}
                     alt="Logo"
                 />
             </a>
 
-            <div className="w-full bg-[var(--color-bg)] rounded-lg shadow sm:max-w-md xl:p-0">
-                <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-                    <h1 className="text-xl font-bold leading-tight tracking-tight text-[var(--color-text)] md:text-2xl text-center">
+            <div className="w-full bg-[var(--color-bg)] rounded-lg sm:rounded-xl shadow sm:max-w-md xl:p-0">
+                <div className="p-4 sm:p-6 space-y-3 sm:space-y-4 md:space-y-6">
+                    <h1 className="text-lg sm:text-xl md:text-2xl font-bold leading-tight tracking-tight text-[var(--color-text)] text-center">
                         Cambia tu contraseña
                     </h1>
 
-                    <p className="text-sm text-[var(--color-text)] text-center">
+                    <p className="text-xs sm:text-sm text-[var(--color-text)] text-center">
                         Por seguridad, debes actualizar tu contraseña antes de continuar.
                     </p>
 
-                    <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
+                    <form className="space-y-3 sm:space-y-4 md:space-y-6" onSubmit={handleSubmit}>
                         {/* Contraseña actual */}
                         <div>
                             <label
                                 htmlFor="current_password"
-                                className="block mb-2 text-sm font-medium text-[var(--color-text)]"
+                                className="block mb-1 sm:mb-2 text-xs sm:text-sm font-medium text-[var(--color-text)]"
                             >
                                 Contraseña actual
                             </label>
@@ -91,7 +91,7 @@ export const ChangePassword = () => {
                                 onChange={handleChange}
                                 placeholder="••••••••"
                                 required
-                                className="bg-[var(--color-header)] border border-[var(--color-primary)] text-[var(--color-text-secondary)] text-sm rounded-lg focus:ring-[var(--color-primary)] focus:border-[var(--color-primary)] block w-full p-2.5"
+                                className="bg-[var(--color-header)] border border-[var(--color-primary)] text-[var(--color-text-secondary)] text-xs sm:text-sm rounded-lg focus:ring-[var(--color-primary)] focus:border-[var(--color-primary)] block w-full p-2 sm:p-2.5"
                             />
                         </div>
 
@@ -99,7 +99,7 @@ export const ChangePassword = () => {
                         <div>
                             <label
                                 htmlFor="new_password"
-                                className="block mb-2 text-sm font-medium text-[var(--color-text)]"
+                                className="block mb-1 sm:mb-2 text-xs sm:text-sm font-medium text-[var(--color-text)]"
                             >
                                 Nueva contraseña
                             </label>
@@ -110,7 +110,7 @@ export const ChangePassword = () => {
                                 onChange={handleChange}
                                 placeholder="••••••••"
                                 required
-                                className="bg-[var(--color-header)] border border-[var(--color-primary)] text-[var(--color-text-secondary)] text-sm rounded-lg focus:ring-[var(--color-primary)] focus:border-[var(--color-primary)] block w-full p-2.5"
+                                className="bg-[var(--color-header)] border border-[var(--color-primary)] text-[var(--color-text-secondary)] text-xs sm:text-sm rounded-lg focus:ring-[var(--color-primary)] focus:border-[var(--color-primary)] block w-full p-2 sm:p-2.5"
                             />
                         </div>
 
@@ -118,7 +118,7 @@ export const ChangePassword = () => {
                         <div>
                             <label
                                 htmlFor="confirm_password"
-                                className="block mb-2 text-sm font-medium text-[var(--color-text)]"
+                                className="block mb-1 sm:mb-2 text-xs sm:text-sm font-medium text-[var(--color-text)]"
                             >
                                 Confirmar nueva contraseña
                             </label>
@@ -129,22 +129,22 @@ export const ChangePassword = () => {
                                 onChange={handleChange}
                                 placeholder="••••••••"
                                 required
-                                className="bg-[var(--color-header)] border border-[var(--color-primary)] text-[var(--color-text-secondary)] text-sm rounded-lg focus:ring-[var(--color-primary)] focus:border-[var(--color-primary)] block w-full p-2.5"
+                                className="bg-[var(--color-header)] border border-[var(--color-primary)] text-[var(--color-text-secondary)] text-xs sm:text-sm rounded-lg focus:ring-[var(--color-primary)] focus:border-[var(--color-primary)] block w-full p-2 sm:p-2.5"
                             />
                         </div>
 
                         {/* Mensajes */}
                         {error && (
-                            <p className="text-red-600 text-sm font-medium">{error}</p>
+                            <p className="text-red-600 text-xs sm:text-sm font-medium">{error}</p>
                         )}
                         {success && (
-                            <p className="text-green-600 text-sm font-medium">{success}</p>
+                            <p className="text-green-600 text-xs sm:text-sm font-medium">{success}</p>
                         )}
 
                         {/* Botón */}
                         <button
                             type="submit"
-                            className="w-full text-[var(--color-button_text)] bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] focus:ring-4 focus:outline-none focus:ring-[var(--color-primary)] font-semibold rounded-3xl text-sm px-5 py-2.5 text-center"
+                            className="w-full text-[var(--color-button_text)] bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] focus:ring-4 focus:outline-none focus:ring-[var(--color-primary)] font-semibold rounded-2xl sm:rounded-3xl text-xs sm:text-sm px-3 sm:px-5 py-2 sm:py-2.5"
                         >
                             ACTUALIZAR CONTRASEÑA
                         </button>
