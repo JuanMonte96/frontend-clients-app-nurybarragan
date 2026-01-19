@@ -1,0 +1,153 @@
+{
+    "common": {
+        "language": "Langue",
+        "spanish": "Español",
+        "english": "English",
+        "french": "Français",
+        "loading": "Chargement...",
+        "error": "Erreur",
+        "cancel": "Annuler",
+        "save": "Enregistrer",
+        "delete": "Supprimer",
+        "edit": "Modifier",
+        "close": "Fermer"
+    },
+    "header": {
+        "login": "Connexion",
+        "signup": "S'inscrire",
+        "home": "Accueil",
+        "about": "À propos",
+        "contact": "Contact",
+        "packages": "Forfaits"
+    },
+    "hero": {
+        "title": "Vivre en Bonne Santé",
+        "subtitle": "Transmettre à chaque personne mon savoir, ma passion pour la danse, pour le sport, mon folklore riche et varié, ma culture en général. C'est une mission, un engagement que je dois tenir après 25 ans d'expérience professionnelle."
+    },
+    "aboutUs": {
+        "title": "Ressentez le rythme. Apprenez à votre manière.",
+        "description": "Chez Nury Barragán, nous transformons la danse en une expérience de liberté, d'énergie et de plaisir.",
+        "description2": "Choisissez votre forfait, profitez de vos cours et découvrez le pouvoir du mouvement. Vous décidez quand, comment et avec qui danser.",
+        "explorePackages": "EXPLOREZ LES FORFAITS"
+    },
+    "packages": {
+        "title": "Forfaits disponibles",
+        "buy": "Acheter"
+    },
+    "contact": {
+        "title": "Nous contacter",
+        "description": "Avez-vous des questions sur nos forfaits ou besoin d'aide avec votre abonnement ? Écrivez-nous et nous vous répondrons dès que possible.",
+        "name": "Votre nom",
+        "email": "Votre adresse e-mail",
+        "phone": "Votre numéro de téléphone",
+        "subject": "Sujet",
+        "subjectPlaceholder": "Dites-nous comment nous pouvons vous aider ?",
+        "message": "Votre message",
+        "send": "ENVOYER LE MESSAGE"
+    },
+    "login": {
+        "title": "Connexion",
+        "email": "Adresse e-mail",
+        "password": "Mot de passe",
+        "rememberMe": "Se souvenir de moi",
+        "forgotPassword": "Mot de passe oublié ?",
+        "signin": "SE CONNECTER",
+        "noAccount": "Vous n'avez pas de compte ?",
+        "signUp": "Inscrivez-vous ici"
+    },
+    "changePassword": {
+        "title": "Changer votre mot de passe",
+        "description": "Pour des raisons de sécurité, vous devez mettre à jour votre mot de passe avant de continuer.",
+        "currentPassword": "Mot de passe actuel",
+        "newPassword": "Nouveau mot de passe",
+        "confirmPassword": "Confirmer le nouveau mot de passe",
+        "update": "METTRE À JOUR LE MOT DE PASSE"
+    },
+    "userPanel": {
+        "title": "TABLEAU DE BORD",
+        "profile": "PROFIL",
+        "classes": "COURS",
+        "enrollments": "MES INSCRIPTIONS",
+        "configuration": "PARAMÈTRES",
+        "myProfile": "Mon profil",
+        "changePassword": "Changer le mot de passe",
+        "logout": "Déconnexion",
+        "availableClasses": "Cours disponibles",
+        "myEnrollments": "Mes inscriptions"
+    },
+    "profile": {
+        "title": "Profil",
+        "role": "Rôle",
+        "status": "Statut",
+        "activeAccount": "Compte actif",
+        "blocked": "Compte bloqué",
+        "medicalCertificate": "Certificat médical",
+        "subscriptionHistory": "Historique des abonnements",
+        "noSubscriptions": "Aucun abonnement enregistré.",
+        "classes": "Cours",
+        "price": "Prix",
+        "startDate": "Début",
+        "expirationDate": "Expiration",
+        "active": "Actif",
+        "cancelled": "Annulé"
+    },
+    "configuration": {
+        "title": "Paramètres du profil",
+        "personalData": "Données personnelles",
+        "fullName": "Nom complet",
+        "email": "Adresse e-mail",
+        "phone": "Téléphone",
+        "saveChanges": "Enregistrer les modifications",
+        "certificate": "Certificat",
+        "allowedFormats": "Formats autorisés",
+        "selectCertificate": "Sélectionner le certificat",
+        "clickToSelect": "Cliquez pour sélectionner le fichier",
+        "selectedFile": "Fichier sélectionné",
+        "uploadCertificate": "Télécharger le certificat",
+        "errorLoading": "Erreur : Le profil n'a pas pu être chargé",
+        "loadingProfile": "Chargement du profil..."
+    },
+    "enrollment": {
+        "class": "Cours",
+        "professor": "Professeur",
+        "level": "Niveau",
+        "date": "Date",
+        "time": "Heure",
+        "attendance": "Présence",
+        "status": "Statut",
+        "noEnrollments": "Aucune inscription à afficher",
+        "noClasses": "Aucun cours à afficher"
+    },
+    "purchase": {
+        "title": "Acheter",
+        "buy": "Acheter",
+        "description": "Description",
+        "price": "Prix",
+        "duration": "Durée",
+        "days": "jours",
+        "limit": "Limite de cours"
+    },
+    "footer": {
+        "resources": "Ressources",
+        "support": "Support",
+        "followUs": "Nous suivre",
+        "instagram": "Instagram",
+        "facebook": "Facebook",
+        "legal": "Légal",
+        "privacy": "Politique de confidentialité",
+        "terms": "Conditions d'utilisation",
+        "copyright": "Tous les droits réservés."
+    },
+    "classes": {
+        "title": "Cours disponibles",
+        "level": "Niveau",
+        "professor": "Professeur",
+        "description": "Description",
+        "schedule": "Horaire",
+        "enroll": "S'inscrire",
+        "enrolled": "Inscrit",
+        "full": "Plein",
+        "blocked": "Bloqué",
+        "noClasses": "Aucun cours disponible pour le moment."
+    }
+}

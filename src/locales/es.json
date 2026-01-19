@@ -1,0 +1,153 @@
+{
+    "common": {
+        "language": "Idioma",
+        "spanish": "Español",
+        "english": "English",
+        "french": "Français",
+        "loading": "Cargando...",
+        "error": "Error",
+        "cancel": "Cancelar",
+        "save": "Guardar",
+        "delete": "Eliminar",
+        "edit": "Editar",
+        "close": "Cerrar"
+    },
+    "header": {
+        "login": "Iniciar Sesión",
+        "signup": "Registrarse",
+        "home": "Inicio",
+        "about": "Acerca de Nosotros",
+        "contact": "Contactanos",
+        "packages": "Paquetes"
+    },
+    "hero": {
+        "title": "Vivir en salud plena",
+        "subtitle": "Transmitir a cada persona a cada individuo mi saber mi pasión por la danza, por el deporte, mi folclore tan rico y tan variado, mi cultura en general. Es una misión, un compromiso que debo cumplir después de 25 años de experiencia profesional."
+    },
+    "aboutUs": {
+        "title": "Vive el ritmo. Aprende a tu manera.",
+        "description": "En Nury Barragán transformamos el baile en una experiencia de libertad, energía y diversión.",
+        "description2": "Elige tu plan, disfruta tus clases y vive el poder del movimiento. Tú decides cuándo, cómo y con quién bailar.",
+        "explorePackages": "EXPLORAR PAQUETES"
+    },
+    "packages": {
+        "title": "Paquetes disponibles",
+        "buy": "Comprar"
+    },
+    "contact": {
+        "title": "Contáctanos",
+        "description": "¿Tienes dudas sobre nuestros paquetes o necesitas ayuda con tu suscripción? Escríbenos y te responderemos lo antes posible.",
+        "name": "Tu nombre",
+        "email": "Tu correo electrónico",
+        "phone": "Tu número de teléfono",
+        "subject": "Asunto",
+        "subjectPlaceholder": "Cuentanos ¿Como podemos ayudarte?",
+        "message": "Tu mensaje",
+        "send": "ENVIAR MENSAJE"
+    },
+    "login": {
+        "title": "Iniciar Sesión",
+        "email": "Correo Electrónico",
+        "password": "Contraseña",
+        "rememberMe": "Recuérdame",
+        "forgotPassword": "¿Olvidaste tu contraseña?",
+        "signin": "INICIAR SESIÓN",
+        "noAccount": "¿No tienes cuenta?",
+        "signUp": "Regístrate aquí"
+    },
+    "changePassword": {
+        "title": "Cambia tu contraseña",
+        "description": "Por seguridad, debes actualizar tu contraseña antes de continuar.",
+        "currentPassword": "Contraseña actual",
+        "newPassword": "Nueva contraseña",
+        "confirmPassword": "Confirmar nueva contraseña",
+        "update": "ACTUALIZAR CONTRASEÑA"
+    },
+    "userPanel": {
+        "title": "PANEL DE USUARIO",
+        "profile": "PERFIL",
+        "classes": "CLASES",
+        "enrollments": "MIS INSCRIPCIONES",
+        "configuration": "CONFIGURACIÓN",
+        "myProfile": "Mi perfil",
+        "changePassword": "Cambiar contraseña",
+        "logout": "Cerrar sesión",
+        "availableClasses": "Clases Disponibles",
+        "myEnrollments": "Mis Inscripciones"
+    },
+    "profile": {
+        "title": "Perfil",
+        "role": "Rol",
+        "status": "Estado",
+        "activeAccount": "Cuenta activa",
+        "blocked": "Cuenta bloqueada",
+        "medicalCertificate": "Certificado médico",
+        "subscriptionHistory": "Historial de suscripciones",
+        "noSubscriptions": "No hay suscripciones registradas.",
+        "classes": "Clases",
+        "price": "Precio",
+        "startDate": "Inicio",
+        "expirationDate": "Vencimiento",
+        "active": "Activa",
+        "cancelled": "Cancelada"
+    },
+    "configuration": {
+        "title": "Configuración de Perfil",
+        "personalData": "Datos Personales",
+        "fullName": "Nombre Completo",
+        "email": "Correo Electrónico",
+        "phone": "Teléfono",
+        "saveChanges": "Guardar Cambios",
+        "certificate": "Certificado",
+        "allowedFormats": "Formatos permitidos",
+        "selectCertificate": "Seleccionar Certificado",
+        "clickToSelect": "Haz clic para seleccionar archivo",
+        "selectedFile": "Archivo seleccionado",
+        "uploadCertificate": "Cargar Certificado",
+        "errorLoading": "Error: No se pudo cargar el perfil",
+        "loadingProfile": "Cargando perfil..."
+    },
+    "enrollment": {
+        "class": "Clase",
+        "professor": "Profesor",
+        "level": "Nivel",
+        "date": "Fecha",
+        "time": "Hora",
+        "attendance": "Asistencia",
+        "status": "Estado",
+        "noEnrollments": "No hay Inscripciones para mostrar",
+        "noClasses": "No hay Clases para mostrar"
+    },
+    "purchase": {
+        "title": "Comprar",
+        "buy": "Comprar",
+        "description": "Descripcion",
+        "price": "Precio",
+        "duration": "Duración",
+        "days": "días",
+        "limit": "Límite de clases"
+    },
+    "footer": {
+        "resources": "Recursos",
+        "support": "Soporte",
+        "followUs": "Síguenos",
+        "instagram": "Instagram",
+        "facebook": "Facebook",
+        "legal": "Legal",
+        "privacy": "Política de privacidad",
+        "terms": "Términos y condiciones",
+        "copyright": "Todos los derechos reservados."
+    },
+    "classes": {
+        "title": "Clases disponibles",
+        "level": "Nivel",
+        "professor": "Profesor",
+        "description": "Descripción",
+        "schedule": "Horario",
+        "enroll": "Inscribirse",
+        "enrolled": "Inscrito",
+        "full": "Lleno",
+        "blocked": "Bloqueado",
+        "noClasses": "No hay clases disponibles por el momento."
+    }
+}

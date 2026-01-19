@@ -140,7 +140,7 @@ export const EnrolTable = ({ enrollments }) => {
                             {/* Horario */}
                             <td className="px-2 sm:px-4 md:px-6 py-2 sm:py-4">
                                 <p className="text-[var(--color-text)] text-xs sm:text-sm truncate">
-                                    {scheduleData?.start_time || "N/A"} - {scheduleData?.end_time || ""}
+                                    {scheduleData?.start_local || "N/A"} - {scheduleData?.end_local|| ""}
                                 </p>
                                 <p className="text-xs text-[var(--color-text-secondary)] truncate">
                                     {scheduleData?.date_class || "Sin fecha"}

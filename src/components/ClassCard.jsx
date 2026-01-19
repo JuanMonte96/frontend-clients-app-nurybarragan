@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { getAllScheduleByClass } from "../services/scheduleService";
 import { enrollClass } from "../services/enrollmentService";
 import { formatDateInTimezone, getUserTimezone } from "../services/timezone";
+import { useTranslation } from "react-i18next";
 
-export const ClassCard = ({ classData }) => {
+export const ClassCard = ({ classData }) => {   
+    const { t } = useTranslation();
     const { id_class, title_class, level_class, teacher, description_class, is_blocked } = classData;
 
     const [showSchedules, setShowSchedules] = useState(false);
@@ -62,7 +64,7 @@ export const ClassCard = ({ classData }) => {
             {/* Profesor */}
             <div className="mb-3">
                 <p className="text-xs sm:text-sm text-[var(--color-text)] font-semibold line-clamp-2">
-                    Profesor: <span className="text-[var(--color-text)]">{teacher.name_user}</span>
+                    {t("classes.professor")}: <span className="text-[var(--color-text)]">{teacher.name_user}</span>
                 </p>
             </div>
 
@@ -92,7 +94,7 @@ export const ClassCard = ({ classData }) => {
                     {loadingSchedules ? (
                         <div className="text-center py-4">
                             <div className="inline-block animate-spin rounded-full h-6 sm:h-8 w-6 sm:w-8 border-b-2 border-[var(--color-primary)]"></div>
-                            <p className="text-xs sm:text-sm text-[var(--color-text)] mt-2">Cargando horarios...</p>
+                            <p className="text-xs sm:text-sm text-[var(--color-text)] mt-2">{t("common.loading")}...</p>
                         </div>
                     ) : error ? (
                         <div className="bg-red-100 border border-red-400 text-red-700 px-2 sm:px-3 py-2 rounded-lg text-xs sm:text-sm">
@@ -126,7 +128,7 @@ export const ClassCard = ({ classData }) => {
                                                     : "bg-gray-200 text-gray-700"
                                                 }`}
                                         >
-                                            {schedule.is_active ? "Activo" : "Inactivo"}
+                                            {schedule.is_active ? `${t('profile.active')}` : `${t('profile.cancelled')}`}
                                         </span>
                                     </div>
 
@@ -136,7 +138,7 @@ export const ClassCard = ({ classData }) => {
                                             className="py-2 px-2 sm:px-3 bg-[var(--color-primary)] text-white rounded-lg hover:bg-opacity-80 transition text-xs sm:text-sm font-semibold w-full"
                                             onClick={() => handleEnroll(schedule.id_schedule)}
                                         >
-                                            ✓ Enlistarse
+                                            ✓ {t("classes.enroll")}
                                         </button>
                                     </div>
                                 </div>
@@ -144,7 +146,7 @@ export const ClassCard = ({ classData }) => {
                         </div>
                     ) : (
                         <div className="text-center py-4">
-                            <p className="text-xs sm:text-sm text-[var(--color-text)]">Sin horarios disponibles</p>
+                            <p className="text-xs sm:text-sm text-[var(--color-text)]">{t("classes.noClasses")}</p>
                         </div>
                     )}
                 </div>

@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import logo from '../../assets/logo_menu_nury_barragan.png';
 import api from "../../services/api";
 
 export const ChangePassword = () => {
     const navigate = useNavigate();
+    const { t } = useTranslation();
     const [form, setForm] = useState({
         currentPassword: "",
         newPassword: "",
@@ -23,7 +25,7 @@ export const ChangePassword = () => {
         setSuccess("");
 
         if (form.newPassword !== form.confirmPassword) {
-            setError("Las contraseñas nuevas no coinciden");
+            setError(t('changePassword.error') || "Las contraseñas nuevas no coinciden");
             return; 
         }
 
@@ -39,7 +41,7 @@ export const ChangePassword = () => {
             );
 
             if (res.status === 200) {
-                setSuccess("Tu contraseña ha sido actualizada correctamente ✅");
+                setSuccess(t('changePassword.success') || "Tu contraseña ha sido actualizada correctamente ✅");
                 setTimeout(() => {
                     navigate("/user"); // o "/login" si quieres forzar nuevo inicio de sesión
                 }, 1500);
@@ -68,11 +70,11 @@ export const ChangePassword = () => {
             <div className="w-full bg-[var(--color-bg)] rounded-lg sm:rounded-xl shadow sm:max-w-md xl:p-0">
                 <div className="p-4 sm:p-6 space-y-3 sm:space-y-4 md:space-y-6">
                     <h1 className="text-lg sm:text-xl md:text-2xl font-bold leading-tight tracking-tight text-[var(--color-text)] text-center">
-                        Cambia tu contraseña
+                        {t('changePassword.title')}
                     </h1>
 
                     <p className="text-xs sm:text-sm text-[var(--color-text)] text-center">
-                        Por seguridad, debes actualizar tu contraseña antes de continuar.
+                        {t('changePassword.description')}
                     </p>
 
                     <form className="space-y-3 sm:space-y-4 md:space-y-6" onSubmit={handleSubmit}>
@@ -82,7 +84,7 @@ export const ChangePassword = () => {
                                 htmlFor="current_password"
                                 className="block mb-1 sm:mb-2 text-xs sm:text-sm font-medium text-[var(--color-text)]"
                             >
-                                Contraseña actual
+                                {t('changePassword.currentPassword')}
                             </label>
                             <input
                                 type="password"
@@ -101,7 +103,7 @@ export const ChangePassword = () => {
                                 htmlFor="new_password"
                                 className="block mb-1 sm:mb-2 text-xs sm:text-sm font-medium text-[var(--color-text)]"
                             >
-                                Nueva contraseña
+                                {t('changePassword.newPassword')}
                             </label>
                             <input
                                 type="password"
@@ -120,7 +122,7 @@ export const ChangePassword = () => {
                                 htmlFor="confirm_password"
                                 className="block mb-1 sm:mb-2 text-xs sm:text-sm font-medium text-[var(--color-text)]"
                             >
-                                Confirmar nueva contraseña
+                                {t('changePassword.confirmPassword')}
                             </label>
                             <input
                                 type="password"
@@ -146,7 +148,7 @@ export const ChangePassword = () => {
                             type="submit"
                             className="w-full text-[var(--color-button_text)] bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] focus:ring-4 focus:outline-none focus:ring-[var(--color-primary)] font-semibold rounded-2xl sm:rounded-3xl text-xs sm:text-sm px-3 sm:px-5 py-2 sm:py-2.5"
                         >
-                            ACTUALIZAR CONTRASEÑA
+                            {t('changePassword.change')}
                         </button>
                     </form>
                 </div>

@@ -2,11 +2,14 @@ import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { LogOut, User, Settings, Menu, X } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import LanguageSwitcher from "../../components/LanguageSwitcher";
 
 export const HeaderUser = ({ sidebarOpen, setSidebarOpen }) => {
   const { profile } = useAuth();
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
+  const { t } = useTranslation();
 
   const userName = profile?.user?.name_user || "Usuario";
   const userEmail = profile?.user?.email_user || "";
@@ -28,8 +31,13 @@ export const HeaderUser = ({ sidebarOpen, setSidebarOpen }) => {
 
       {/* Título - Centered/End en mobile, end en desktop */}
       <h1 className="flex-1 text-center sm:text-right text-sm sm:text-base md:text-lg font-bold tracking-wide text-[var(--color-text-secondary)]">
-        PANEL DE USUARIO
+        {t('userPanel.title')}
       </h1>
+
+      {/* Selector de idiomas - Solo en desktop */}
+      <div className="hidden sm:block ml-3 sm:ml-4">
+        <LanguageSwitcher />
+      </div>
 
       {/* Perfil del usuario */}
       <div className="relative ml-3 sm:ml-4">
@@ -59,7 +67,7 @@ export const HeaderUser = ({ sidebarOpen, setSidebarOpen }) => {
               className="w-full flex items-center gap-2 text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] px-2 sm:px-3 py-2 rounded-md text-xs sm:text-sm transition"
             >
               <User size={14} />
-              Mi perfil
+              {t('userPanel.profile')}
             </button>
             <button
               onClick={() => {
@@ -69,14 +77,14 @@ export const HeaderUser = ({ sidebarOpen, setSidebarOpen }) => {
               className="w-full flex items-center gap-2 text-[var(--color-text)] hover:bg-[var(--color-bg-secondary)] px-2 sm:px-3 py-2 rounded-md text-xs sm:text-sm transition"
             >
               <Settings size={14} />
-              Cambiar contraseña
+              {t('changePassword.title')}
             </button>
             <button
               onClick={handleLogout}
               className="w-full flex items-center gap-2 text-red-600 hover:bg-red-50 dark:hover:bg-red-950 px-2 sm:px-3 py-2 rounded-md text-xs sm:text-sm transition"
             >
               <LogOut size={14} />
-              Cerrar sesión
+              {t('userPanel.logout')}
             </button>
           </div>
         )}

@@ -1,15 +1,17 @@
 import { NavLink } from "react-router-dom";
 import { User, BookOpen, ClipboardList, Settings } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import logo from '../../assets/logo_menu_nury_barragan.png';
 
-const menuItems = [
-  { label: "PERFIL", path: "/user/profile", icon: <User size={20}/> },
-  { label: "CLASES", path: "/user/classes", icon: <BookOpen size={20}/> },
-  { label: "MIS INSCRIPCIONES", path: "/user/enrollments", icon: <ClipboardList size={20}/> },
-  { label: "CONFIGURACIÓN", path:"/user/configuration",  icon: <Settings size={20}/>}
-];
-
 export const UserSideBar = ({ sidebarOpen, setSidebarOpen }) => {
+  const { t } = useTranslation();
+
+  const menuItems = [
+    { label: t('userPanel.profile'), path: "/user/profile", icon: <User size={20}/> },
+    { label: t('userPanel.classes'), path: "/user/classes", icon: <BookOpen size={20}/> },
+    { label: t('userPanel.enrollments'), path: "/user/enrollments", icon: <ClipboardList size={20}/> },
+    { label: t('userPanel.configuration'), path:"/user/configuration",  icon: <Settings size={20}/>}
+  ];
   return (
     <>
       {/* Overlay móvil con blur - Solo difuminado sin fondo oscuro */}

@@ -1,0 +1,153 @@
+{
+    "common": {
+        "language": "Language",
+        "spanish": "Español",
+        "english": "English",
+        "french": "Français",
+        "loading": "Loading...",
+        "error": "Error",
+        "cancel": "Cancel",
+        "save": "Save",
+        "delete": "Delete",
+        "edit": "Edit",
+        "close": "Close"
+    },
+    "header": {
+        "login": "Sign In",
+        "signup": "Sign Up",
+        "home": "Home",
+        "about": "About Us",
+        "contact": "Contact Us",
+        "packages": "Packages"
+    },
+    "hero": {
+        "title": "Living in Full Health",
+        "subtitle": "To transmit to each person my knowledge, my passion for dance, for sports, my rich and varied folklore, my culture in general. It is a mission, a commitment that I must fulfill after 25 years of professional experience."
+    },
+    "aboutUs": {
+        "title": "Feel the rhythm. Learn your way.",
+        "description": "At Nury Barragán we transform dance into an experience of freedom, energy and fun.",
+        "description2": "Choose your plan, enjoy your classes and experience the power of movement. You decide when, how and with whom to dance.",
+        "explorePackages": "EXPLORE PACKAGES"
+    },
+    "packages": {
+        "title": "Available packages",
+        "buy": "Buy"
+    },
+    "contact": {
+        "title": "Contact Us",
+        "description": "Do you have questions about our packages or need help with your subscription? Write to us and we will respond as soon as possible.",
+        "name": "Your name",
+        "email": "Your email address",
+        "phone": "Your phone number",
+        "subject": "Subject",
+        "subjectPlaceholder": "Tell us how we can help you?",
+        "message": "Your message",
+        "send": "SEND MESSAGE"
+    },
+    "login": {
+        "title": "Sign In",
+        "email": "Email Address",
+        "password": "Password",
+        "rememberMe": "Remember me",
+        "forgotPassword": "Forgot your password?",
+        "signin": "SIGN IN",
+        "noAccount": "Don't have an account?",
+        "signUp": "Sign up here"
+    },
+    "changePassword": {
+        "title": "Change your password",
+        "description": "For security, you must update your password before continuing.",
+        "currentPassword": "Current password",
+        "newPassword": "New password",
+        "confirmPassword": "Confirm new password",
+        "update": "UPDATE PASSWORD"
+    },
+    "userPanel": {
+        "title": "USER PANEL",
+        "profile": "PROFILE",
+        "classes": "CLASSES",
+        "enrollments": "MY ENROLLMENTS",
+        "configuration": "SETTINGS",
+        "myProfile": "My profile",
+        "changePassword": "Change password",
+        "logout": "Sign out",
+        "availableClasses": "Available Classes",
+        "myEnrollments": "My Enrollments"
+    },
+    "profile": {
+        "title": "Profile",
+        "role": "Role",
+        "status": "Status",
+        "activeAccount": "Active account",
+        "blocked": "Blocked account",
+        "medicalCertificate": "Medical certificate",
+        "subscriptionHistory": "Subscription history",
+        "noSubscriptions": "No subscriptions registered.",
+        "classes": "Classes",
+        "price": "Price",
+        "startDate": "Start",
+        "expirationDate": "Expiration",
+        "active": "Active",
+        "cancelled": "Cancelled"
+    },
+    "configuration": {
+        "title": "Profile Settings",
+        "personalData": "Personal Data",
+        "fullName": "Full Name",
+        "email": "Email Address",
+        "phone": "Phone",
+        "saveChanges": "Save Changes",
+        "certificate": "Certificate",
+        "allowedFormats": "Allowed formats",
+        "selectCertificate": "Select Certificate",
+        "clickToSelect": "Click to select file",
+        "selectedFile": "Selected file",
+        "uploadCertificate": "Upload Certificate",
+        "errorLoading": "Error: Profile could not be loaded",
+        "loadingProfile": "Loading profile..."
+    },
+    "enrollment": {
+        "class": "Class",
+        "professor": "Professor",
+        "level": "Level",
+        "date": "Date",
+        "time": "Time",
+        "attendance": "Attendance",
+        "status": "Status",
+        "noEnrollments": "No Enrollments to display",
+        "noClasses": "No Classes to display"
+    },
+    "purchase": {
+        "title": "Buy",
+        "buy": "Buy",
+        "description": "Description",
+        "price": "Price",
+        "duration": "Duration",
+        "days": "days",
+        "limit": "Limit of Classes"
+    },
+    "footer": {
+        "resources": "Resources",
+        "support": "Support",
+        "followUs": "Follow Us",
+        "instagram": "Instagram",
+        "facebook": "Facebook",
+        "legal": "Legal",
+        "privacy": "Privacy Policy",
+        "terms": "Terms and conditions",
+        "copyright": "All rights reserved."
+    },
+    "classes": {
+        "title": "Available Classes",
+        "level": "Level",
+        "professor": "Professor",
+        "description": "Description",
+        "schedule": "Schedule",
+        "enroll": "Enroll",
+        "enrolled": "Enrolled",
+        "full": "Full",
+        "blocked": "Blocked",
+        "noClasses": "No classes available at the moment."
+    }
+}

@@ -13,13 +13,15 @@ import { ProfileUser } from './pages/Users/ProfileUser';
 import {ClassesUser} from './pages/Users/ClassesUser';
 import { EnrolmentUser } from './pages/Users/EnrolmentUser';
 import { ConfigurationUser } from './pages/Users/ConfigurationUser';
+import { useTranslation } from 'react-i18next';
 function App() {
 
+  const { t } = useTranslation();
   const links = [
-    { label: "INICIO", to: "/" },
-    { label: "PACKAGES", to: "/" },
-    { label: "NOSOTROS", to: "/" },
-    { label: "CONTACTO", to: "/" },
+    { label: t("header.home"), to: "/" },
+    { label: t("header.packages"), to: "/" },
+    { label: t("header.about"), to: "/" },
+    { label: t("header.contact"), to: "/" },
   ];
 
   return (

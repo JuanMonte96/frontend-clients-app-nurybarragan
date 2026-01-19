@@ -1,4 +1,7 @@
+import { useTranslation } from "react-i18next";
+
 export default function PackageCard({ pkg, onBuy }) {
+  const { t } = useTranslation();
   return (
     <div className="bg-[#fff8e1] shadow-md rounded-lg sm:rounded-lg p-4 sm:p-6 flex flex-col justify-between hover:shadow-lg transition-shadow">
       {/* Nombre */}
@@ -8,7 +11,7 @@ export default function PackageCard({ pkg, onBuy }) {
 
       {/* Descripción */}
       <p className="text-xs sm:text-sm text-[#333333] mb-4 line-clamp-3">
-        {pkg.description_package || "Sin descripción disponible."}      
+        {pkg.description_package || "Sin descripción disponible."}
       </p>
 
       {/* Precio */}
@@ -21,8 +24,8 @@ export default function PackageCard({ pkg, onBuy }) {
 
       {/* Detalles */}
       <ul className="text-xs sm:text-sm text-[#333333] mb-4 space-y-1">
-        <li className="truncate">Duración: {pkg.duration_package} días</li>
-        <li className="truncate">Límite de clases: {pkg.class_limit}</li>
+        <li className="truncate">{t('purchase.duration')}: {pkg.duration_package} {t('purchase.days')}</li>
+        <li className="truncate">{t('purchase.limit')}: {pkg.class_limit}</li>
       </ul>
 
       {/* Botón */}
@@ -30,7 +33,7 @@ export default function PackageCard({ pkg, onBuy }) {
         onClick={() => onBuy(pkg)}
         className="mt-auto w-full bg-[#ffc107] hover:bg-[#ffb300] text-[#333333] font-bold py-2 px-4 rounded-3xl transition-colors text-sm sm:text-base"
       >
-        COMPRAR
+        {t('purchase.buy')}
       </button>
     </div>
   );

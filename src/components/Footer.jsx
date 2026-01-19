@@ -1,6 +1,8 @@
 import logo from '../assets/logo_menu_nury_barragan.png'
+import { useTranslation } from 'react-i18next'
 
 export default function Footer() {
+    const { t } = useTranslation();
     return (
         <footer className="p-3 sm:p-6 bg-[#333333] text-[#fff8e1]">
             <div className="mx-auto max-w-screen-xl">
@@ -22,12 +24,12 @@ export default function Footer() {
                         {/* Recursos */}
                         <div>
                             <h2 className="mb-3 sm:mb-6 text-xs sm:text-sm font-semibold text-[#ffc107] uppercase">
-                                Recursos
+                                {t('footer.resources')}
                             </h2>
                             <ul className="text-[#fff8e1] text-xs sm:text-sm">
                                 <li>
                                     <a href="#" className="hover:text-[#ffb300] transition-colors">
-                                        Soporte
+                                        {t('footer.support')}
                                     </a>
                                 </li>
                             </ul>
@@ -36,7 +38,7 @@ export default function Footer() {
                         {/* Redes sociales */}
                         <div>
                             <h2 className="mb-3 sm:mb-6 text-xs sm:text-sm font-semibold text-[#ffc107] uppercase">
-                                Síguenos
+                                {t('footer.followUs')}
                             </h2>
                             <ul className="text-[#fff8e1] text-xs sm:text-sm">
                                 <li className="mb-2 sm:mb-4">
@@ -61,17 +63,17 @@ export default function Footer() {
                         {/* Legal */}
                         <div>
                             <h2 className="mb-3 sm:mb-6 text-xs sm:text-sm font-semibold text-[#ffc107] uppercase">
-                                Legal
+                                {t('footer.legal')}
                             </h2>
                             <ul className="text-[#fff8e1] text-xs sm:text-sm">
                                 <li className="mb-2 sm:mb-4">
                                     <a href="#" className="hover:text-[#ffb300] transition-colors">
-                                        Política de privacidad
+                                        {t('footer.privacy')}
                                     </a>
                                 </li>
                                 <li>
                                     <a href="#" className="hover:text-[#ffb300] transition-colors">
-                                        Términos y condiciones
+                                        {t('footer.terms')}
                                     </a>
                                 </li>
                             </ul>
@@ -89,7 +91,7 @@ export default function Footer() {
                         <a href="#" className="hover:text-[#ffc107]">
                             Nury Barragán
                         </a>{" "}
-                        — Todos los derechos reservados.
+                        — {t('footer.copyright')}
                     </span>
 
                     {/* Íconos sociales */}

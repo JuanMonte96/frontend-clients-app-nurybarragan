@@ -1,15 +1,18 @@
 import classImg from '../assets/nurybarragan42.jpg';
+import { useTranslation } from 'react-i18next';
 
 export default function HeroSection() {
+  const { t } = useTranslation();
+
   return (
     <section className="bg-[var(--color-bg)] pt-20 sm:pt-24 md:pt-28 pb-8 md:pb-12">
       <div className="grid max-w-screen-xl px-3 sm:px-4 py-6 sm:py-8 md:py-16 mx-auto lg:gap-8 xl:gap-0 lg:grid-cols-12">
         <div className="mr-auto place-self-center lg:col-span-7 mb-8 lg:mb-0">
           <h1 className="max-w-2xl mb-3 sm:mb-4 text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold tracking-tight leading-none text-[var(--color-text)]">
-            Vivir en salud plena
+            {t('hero.title')}
           </h1>
           <p className="max-w-2xl mb-4 sm:mb-6 font-light text-xs sm:text-sm md:text-base lg:text-lg text-[var(--color-text)] lg:mb-8">
-            Transmitir a cada persona a cada individuo mi saber mi pasión por la danza, por el deporte, mi folclore tan rico y tan variado, mi cultura en general. Es una misión, un compromiso que debo cumplir despues de 25 años de experiencia profesional.
+            {t('hero.subtitle')}
           </p>
         </div>
         <div className="hidden sm:flex lg:mt-0 lg:col-span-5 lg:flex justify-center">

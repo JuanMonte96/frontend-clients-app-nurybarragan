@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import logo from '../../assets/logo_menu_nury_barragan.png';
 import { loginService } from "../../services/authServices";
 import { useAuth } from "../../context/AuthContext";
@@ -11,6 +12,7 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const { refreshProfile } = useAuth();
 
@@ -47,7 +49,7 @@ export default function LoginPage() {
         <div className="w-full bg-[var(--color-bg)] rounded-lg shadow sm:rounded-lg border border-[var(--color-primary)]">
           <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
             <h1 className="text-lg sm:text-xl font-bold text-[var(--color-text)]">
-              Inicia sesión en tu cuenta
+              {t('login.title')}
             </h1>
 
             {error && <div className="text-red-600 text-xs sm:text-sm bg-red-100 border border-red-400 p-2 rounded">{error}</div>}
@@ -55,7 +57,7 @@ export default function LoginPage() {
             <form className="space-y-3 sm:space-y-4" onSubmit={handleSubmit}>
               <div>
                 <label htmlFor="email" className="block mb-2 text-sm font-medium text-[var(--color-text)]">
-                  Correo electrónico
+                  {t('login.email')}
                 </label>
                 <input
                   id="email"
@@ -63,13 +65,14 @@ export default function LoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
+                  placeholder={t('contact.email')}
                   className="bg-[var(--color-header)] border border-[var(--color-primary)] text-[var(--color-text-secondary)] rounded-lg focus:ring-[var(--color-primary)] focus:border-[var(--color-accent)] block w-full p-2.5"
                 />
               </div>
 
               <div>
                 <label htmlFor="password" className="block mb-2 text-sm font-medium text-[var(--color-text)]">
-                  Contraseña
+                  {t('login.password')}
                 </label>
                 <input
                   id="password"
@@ -77,6 +80,7 @@ export default function LoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
+                  placeholder={t('login.password')}
                   className="bg-[var(--color-header)] border border-[var(--color-primary)] text-[var(--color-text-secondary)] rounded-lg focus:ring-[var(--color-primary)] focus:border-[var(--color-accent)] block w-full p-2.5"
                 />
               </div>
@@ -89,16 +93,16 @@ export default function LoginPage() {
                     onChange={(e) => setRemember(e.target.checked)}
                     className="w-4 h-4 border rounded bg-[var(--color-header)] focus:ring-3 focus:ring-primary-300"
                   />
-                  Recuérdame
+                  {t('login.rememberMe')}
                 </label>
               </div>
 
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full text-[var(--color-text)] bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] focus:ring-4 focus:outline-none focus:ring-[var(--color-primary)] font-semibold rounded-2xl text-sm px-5 py-2.5 "
+                className="w-full text-[var(--color-text)] bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] focus:ring-4 focus:outline-none focus:ring-[var(--color-primary)] font-semibold rounded-2xl text-sm px-5 py-2.5"
               >
-                {loading ? "Ingresando..." : "INICIAR SESIÓN"}
+                {loading ? t('common.loading') : t('login.signin')}
               </button>
             </form>
           </div>
