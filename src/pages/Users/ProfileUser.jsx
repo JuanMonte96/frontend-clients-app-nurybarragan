@@ -1,9 +1,12 @@
-import { useEffect } from "react";
+import { use, useEffect } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { useClasses } from "../../context/ClassesContext";
 import { ClassesRemainingCard } from "../../components/ClassesRemainingCard";
+import { useTranslation } from "react-i18next";
 
 export const ProfileUser = () => {
+
+  const { t } = useTranslation();
   const { profile } = useAuth();
   const { fetchClassesRemaining } = useClasses();
 
@@ -30,10 +33,10 @@ export const ProfileUser = () => {
               </div>
             </div>
             <p className="text-xs sm:text-sm text-[var(--color-text)] mb-2">
-              <span className="font-semibold">Rol:</span> {user?.role}
+              <span className="font-semibold">{t("profile.role")}:</span> {user?.role}
             </p>
             <p className="text-xs sm:text-sm text-[var(--color-text)]">
-              <span className="font-semibold">Certificado médico:</span>{" "}
+              <span className="font-semibold">{t("profile.medicalCertificate")}:</span>{" "}
               {user?.medical_certificated || "No registrado"}
             </p>
           </div>
@@ -46,7 +49,7 @@ export const ProfileUser = () => {
                 : "bg-green-200 text-green-700"
                 }`}
             >
-              {user?.is_blocked ? "Cuenta bloqueada" : "Cuenta activa"}
+              {user?.is_blocked ? t("profile.blocked") : t("profile.activeAccount")}
             </span>
             <div className="pt-3 sm:pt-10">
               <ClassesRemainingCard />
@@ -58,11 +61,11 @@ export const ProfileUser = () => {
 
         {/* Historial de suscripciones */}
         <h3 className="text-lg sm:text-xl font-semibold text-[var(--color-text)] mb-4">
-          Historial de suscripciones
+          {t("profile.subscriptionHistory")}
         </h3>
 
         {subscriptions.length === 0 ? (
-          <p className="text-xs sm:text-sm text-[var(--color-text)]">No hay suscripciones registradas.</p>
+          <p className="text-xs sm:text-sm text-[var(--color-text)]">{t("profile.noSubscriptions")}</p>
         ) : (
           <div className="grid gap-3 sm:gap-4 sm:grid-cols-2">
             {subscriptions.map((subscription) => (
@@ -80,7 +83,7 @@ export const ProfileUser = () => {
                       : "bg-gray-200 text-gray-700"
                       }`}
                   >
-                    {subscription.status === "active" ? "Activa" : "Cancelada"}
+                    {subscription.status === "active" ? t("profile.active") : t("profile.cancelled")}
                   </span>
                 </div>
                 <p className="text-[var(--color-text)] text-xs sm:text-sm line-clamp-2">
@@ -88,19 +91,19 @@ export const ProfileUser = () => {
                 </p>
                 <div className="mt-2 text-[var(--color-text)] text-xs sm:text-sm space-y-1">
                   <p>
-                    <span className="font-semibold">Inicio:</span>{" "}
+                    <span className="font-semibold">{t("profile.startDate")}:</span>{" "}
                     {new Date(subscription.start_date).toLocaleDateString("es-CO")}
                   </p>
                   <p>
-                    <span className="font-semibold">Fin:</span>{" "}
+                    <span className="font-semibold">{t("profile.expirationDate")}:</span>{" "}
                     {new Date(subscription.end_date).toLocaleDateString("es-CO")}
                   </p>
                   <p>
-                    <span className="font-semibold">Duración:</span>{" "}
+                    <span className="font-semibold">{t("profile.duration")}:</span>{" "}
                     {subscription.Package?.duration_package} días
                   </p>
                   <p>
-                    <span className="font-semibold">Clases:</span>{" "}
+                    <span className="font-semibold">{t("profile.classes")}:</span>{" "}
                     {subscription.Package?.class_limit}
                   </p>
                 </div>

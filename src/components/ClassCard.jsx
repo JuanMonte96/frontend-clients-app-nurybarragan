@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { getAllScheduleByClass } from "../services/scheduleService";
 import { enrollClass } from "../services/enrollmentService";
 import { formatDateInTimezone, getUserTimezone } from "../services/timezone";
@@ -57,7 +57,7 @@ export const ClassCard = ({ classData }) => {
                             : "bg-green-100 text-green-700"
                         }`}
                 >
-                    {is_blocked ? "Bloqueada" : "Disponible"}
+                    {is_blocked ? t("classes.blocked") : t("classes.available")}
                 </span>
             </div>
 
@@ -85,7 +85,7 @@ export const ClassCard = ({ classData }) => {
                 onClick={handleShowSchedules}
                 className="w-full py-2 px-3 sm:px-4 bg-[var(--color-primary)] text-white rounded-lg hover:bg-opacity-80 transition font-semibold text-xs sm:text-sm"
             >
-                {showSchedules ? "Ocultar horarios ▲" : "Ver horarios ▼"}
+                {showSchedules ? t("classes.hideSchedules") : t("classes.showSchedules")}
             </button>
 
             {/* SECCIÓN EXPANDIBLE DE HORARIOS */}

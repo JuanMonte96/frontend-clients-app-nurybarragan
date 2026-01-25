@@ -85,11 +85,12 @@
         "subscriptionHistory": "Historial de suscripciones",
         "noSubscriptions": "No hay suscripciones registradas.",
         "classes": "Clases",
-        "price": "Precio",
+        "duration": "Duración",
         "startDate": "Inicio",
         "expirationDate": "Vencimiento",
         "active": "Activa",
-        "cancelled": "Cancelada"
+        "cancelled": "Cancelada",
+        "days": "días"
     },
     "configuration": {
         "title": "Configuración de Perfil",
@@ -105,18 +106,20 @@
         "selectedFile": "Archivo seleccionado",
         "uploadCertificate": "Cargar Certificado",
         "errorLoading": "Error: No se pudo cargar el perfil",
-        "loadingProfile": "Cargando perfil..."
+        "loadingProfile": "Cargando perfil...",
+        "maxSize":"Maximo Tamaño"
     },
     "enrollment": {
         "class": "Clase",
         "professor": "Profesor",
         "level": "Nivel",
-        "date": "Fecha",
+        "schedule": "Horario",
         "time": "Hora",
         "attendance": "Asistencia",
         "status": "Estado",
         "noEnrollments": "No hay Inscripciones para mostrar",
-        "noClasses": "No hay Clases para mostrar"
+        "noClasses": "No hay Clases para mostrar",
+        "noAttendance": "No Asistir"
     },
     "purchase": {
         "title": "Comprar",
@@ -143,11 +146,17 @@
         "level": "Nivel",
         "professor": "Profesor",
         "description": "Descripción",
+        "showSchedules": "Ver horarios ▼",
+        "hideSchedules": "Ocultar horarios ▲",
         "schedule": "Horario",
         "enroll": "Inscribirse",
         "enrolled": "Inscrito",
         "full": "Lleno",
+        "available": "Disponible",
         "blocked": "Bloqueado",
-        "noClasses": "No hay clases disponibles por el momento."
+        "noClasses": "No hay clases disponibles por el momento.",
+        "classesRemaining": "Classes restantes",
+        "totalClasses": "Total de Classes",
+        "totalEnrolled": "Total de classes inscritas"
     }
 }

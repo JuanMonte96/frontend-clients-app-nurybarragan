@@ -85,11 +85,12 @@
         "subscriptionHistory": "Subscription history",
         "noSubscriptions": "No subscriptions registered.",
         "classes": "Classes",
-        "price": "Price",
+        "duration": "Duration",
         "startDate": "Start",
         "expirationDate": "Expiration",
         "active": "Active",
-        "cancelled": "Cancelled"
+        "cancelled": "Cancelled",
+        "days": "days"
     },
     "configuration": {
         "title": "Profile Settings",
@@ -105,18 +106,20 @@
         "selectedFile": "Selected file",
         "uploadCertificate": "Upload Certificate",
         "errorLoading": "Error: Profile could not be loaded",
-        "loadingProfile": "Loading profile..."
+        "loadingProfile": "Loading profile...",
+        "maxSize":"Max size"
     },
     "enrollment": {
         "class": "Class",
         "professor": "Professor",
         "level": "Level",
-        "date": "Date",
+        "schedule": "Schedule",
         "time": "Time",
         "attendance": "Attendance",
         "status": "Status",
         "noEnrollments": "No Enrollments to display",
-        "noClasses": "No Classes to display"
+        "noClasses": "No Classes to display",
+        "noAttendance": "No Attendance"
     },
     "purchase": {
         "title": "Buy",
@@ -143,11 +146,17 @@
         "level": "Level",
         "professor": "Professor",
         "description": "Description",
+        "showSchedules": "Show Schedules ▼",
+        "hideSchedules": "Hide Schedules ▲",
         "schedule": "Schedule",
         "enroll": "Enroll",
         "enrolled": "Enrolled",
         "full": "Full",
+        "available": "Available",
         "blocked": "Blocked",
-        "noClasses": "No classes available at the moment."
+        "noClasses": "No classes available at the moment.",
+        "classesRemaining": "Classes Remaining",
+        "totalClasses": "Total Classes",
+        "totalEnrolled": "Total Enrolled Classes"
     }
 }

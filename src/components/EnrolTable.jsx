@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { updateStateEnrollment } from "../services/enrollmentService";
 import { useClasses } from "../context/ClassesContext";
+import { useTranslation } from "react-i18next";
 
 export const EnrolTable = ({ enrollments }) => {
+    const { t } = useTranslation();
     const [loadingId, setLoadingId] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
     const { updateEnrollmentStatus } = useClasses();
@@ -84,22 +86,22 @@ export const EnrolTable = ({ enrollments }) => {
                 <thead>
                     <tr className="bg-[var(--color-table-header)] border-b border-[var(--color-primary)]">
                         <th className="px-2 sm:px-4 md:px-6 py-2 sm:py-4 text-left text-xs sm:text-sm font-bold text-[var(--color-text)]">
-                            Clase
+                            {t("enrollment.class")}
                         </th>
                         <th className="px-2 sm:px-4 md:px-6 py-2 sm:py-4 text-left text-xs sm:text-sm font-bold text-[var(--color-text)] hidden sm:table-cell">
-                            Profesor
+                            {t("enrollment.professor")}
                         </th>
                         <th className="px-2 sm:px-4 md:px-6 py-2 sm:py-4 text-left text-xs sm:text-sm font-bold text-[var(--color-text)] hidden md:table-cell">
-                            Nivel
+                            {t("enrollment.level")}
                         </th>
                         <th className="px-2 sm:px-4 md:px-6 py-2 sm:py-4 text-left text-xs sm:text-sm font-bold text-[var(--color-text)]">
-                            Horario
+                            {t("enrollment.schedule")}
                         </th>
                         <th className="px-2 sm:px-4 md:px-6 py-2 sm:py-4 text-left text-xs sm:text-sm font-bold text-[var(--color-text)]">
-                            Estado
+                            {t("enrollment.status")}
                         </th>
                         <th className="px-2 sm:px-4 md:px-6 py-2 sm:py-4 text-center text-xs sm:text-sm font-bold text-[var(--color-text)]">
-                            Asistir
+                            {t("enrollment.attendance")}
                         </th>
                     </tr>
                 </thead>
@@ -165,7 +167,7 @@ export const EnrolTable = ({ enrollments }) => {
                                                 ? "bg-green-500 hover:bg-green-600"
                                                 : "bg-red-500 hover:bg-red-600"
                                         } disabled:opacity-50 disabled:cursor-not-allowed`}
-                                        title={enrollment.status === "active" ? "Puedo asistir - Click para no asistir" : "No puedo asistir - Click para asistir"}
+                                        title={enrollment.status === "active" ? t("enrollment.attendance") : t("enrollment.noAttendance")}
                                     >
                                         <span
                                             className={`inline-block h-5 sm:h-6 w-5 sm:w-6 transform rounded-full bg-white transition-transform ${
@@ -174,7 +176,7 @@ export const EnrolTable = ({ enrollments }) => {
                                         />
                                     </button>
                                     <span className="text-xs font-semibold text-[var(--color-text)] hidden sm:inline">
-                                        {enrollment.status === "active" ? "Asistir" : "No asistir"}
+                                        {enrollment.status === "active" ? t("enrollment.attendance") : t("enrollment.noAttendance")}
                                     </span>
                                 </div>
                             </td>
