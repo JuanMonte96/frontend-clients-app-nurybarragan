@@ -1,24 +1,40 @@
 // src/pages/ContactPage.jsx
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { sendContactMessage } from "../services/contacService.js";
 
 export const ContactUS = () => {
     const { t } = useTranslation();
     const [formData, setFormData] = useState({
-        email: "",
-        phone: "",
+        name_client: "",
+        email_client: "",
+        telephone_client: "",
         subject: "",
-        message: "",
+        description: ""
     });
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.id]: e.target.value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         console.log("Datos del formulario:", formData);
-        // 👉 Aquí puedes agregar tu lógica para enviar el mensaje (por ejemplo, con tu API o email service)
+        try {
+            const response = await sendContactMessage(formData);
+            alert(t('contact.successMessage'));
+            setFormData({
+                name_client: "",
+                email_client: "",
+                telephone_client: "",
+                subject: "",
+                description: "",
+            });
+            console.log("Respuesta del servidor:", response);
+        } catch (error) {
+            console.error("Error al enviar el mensaje de contacto:", error);
+            alert(t('contact.errorMessage'));
+        }   
     };
 
     return (
@@ -41,8 +57,8 @@ export const ContactUS = () => {
                         </label>
                         <input
                             type="text"
-                            id="name"
-                            value={formData.name}
+                            id="name_client"
+                            value={formData.name_client}
                             onChange={handleChange}
                             className="shadow-sm bg-[var(--color-header)] border border-[var(--color-primary)] text-[var(--color-text-secondary)] text-xs sm:text-sm rounded-xl sm:rounded-2xl focus:ring-[var(--color-primary)] focus:border-[var(--color-primary)] block w-full p-2 sm:p-2.5"
                             placeholder={t('contact.name')}
@@ -59,8 +75,8 @@ export const ContactUS = () => {
                         </label>
                         <input
                             type="email"
-                            id="email"
-                            value={formData.email}
+                            id="email_client"
+                            value={formData.email_client}
                             onChange={handleChange}
                             className="shadow-sm bg-[var(--color-header)] border border-[var(--color-primary)] text-[var(--color-text-secondary)] text-xs sm:text-sm rounded-xl sm:rounded-2xl focus:ring-[var(--color-primary)] focus:border-[var(--color-primary)] block w-full p-2 sm:p-2.5"
                             placeholder="example@example.com"
@@ -76,8 +92,8 @@ export const ContactUS = () => {
                         </label>
                         <input
                             type="tel"
-                            id="phone"
-                            value={formData.phone}
+                            id="telephone_client"
+                            value={formData.telephone_client}
                             onChange={handleChange}
                             className="shadow-sm bg-[var(--color-header)] border border-[var(--color-primary)] text-[var(--color-text-secondary)] text-xs sm:text-sm rounded-xl sm:rounded-2xl focus:ring-[var(--color-primary)] focus:border-[var(--color-primary)] block w-full p-2 sm:p-2.5"
                             placeholder={t('contact.phone')}
@@ -113,9 +129,9 @@ export const ContactUS = () => {
                             {t('contact.message')}
                         </label>
                         <textarea
-                            id="message"
+                            id="description"
                             rows="6"
-                            value={formData.message}
+                            value={formData.description}
                             onChange={handleChange}
                             className="block p-2 sm:p-2.5 w-full text-xs sm:text-sm text-[var(--color-text-secondary)] bg-[var(--color-header)] rounded-xl sm:rounded-2xl border border-[var(--color-primary)] shadow-sm focus:ring-[var(--color-primary)] focus:border-[var(--color-primary)]"
                             placeholder={t('contact.message')}
