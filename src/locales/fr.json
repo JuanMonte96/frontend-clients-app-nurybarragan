@@ -128,7 +128,11 @@
         "price": "Prix",
         "duration": "Durée",
         "days": "jours",
-        "limit": "Limite de cours"
+        "limit": "Limite de cours",
+        "name": "Nom complet",
+        "email": "Adresse e-mail",
+        "phone": "Téléphone",
+        "cancel": "Annuler"
     },
     "footer": {
         "resources": "Ressources",
