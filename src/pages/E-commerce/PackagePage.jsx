@@ -81,7 +81,7 @@ export default function PackagePage() {
   if (error) return <div className="p-6 sm:p-8 md:p-10 text-center text-red-600 text-xs sm:text-sm md:text-base">{t("common.error")} : {error}</div>;
 
   return (
-    <main className="min-h-screen bg-[var(--color-header)] p-3 sm:p-6 md:p-8">
+    <main id="packages" className="min-h-screen bg-[var(--color-header)] scroll-mt-24 p-3 sm:p-6 md:p-8">
       <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 text-center text-[#ffc107]">{t("packages.title")}</h1>
 
       <div className="grid gap-4 sm:gap-5 md:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">

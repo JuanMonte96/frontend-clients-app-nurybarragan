@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { User, BookOpen, ClipboardList, Settings } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import logo from '../../assets/logo_menu_nury_barragan.png';
+import logo from '../../assets/final-logo-nb.png';
 
 export const UserSideBar = ({ sidebarOpen, setSidebarOpen }) => {
   const { t } = useTranslation();
@@ -31,7 +31,7 @@ export const UserSideBar = ({ sidebarOpen, setSidebarOpen }) => {
       >
         {/* Header con Logo */}
         <div className="pb-3 sm:pb-2 pt-2 border-b border-[var(--color-primary)] px-2">
-          <img src={logo} alt="Logo" className="h-14 sm:h-16 w-auto object-contain" />
+          <img src={logo} alt="Logo" className="h-12 sm:h-16 md:h-20 lg:h-28 w-auto object-contain max-w-[320px]" />
         </div>
 
         {/* Menú Items */}

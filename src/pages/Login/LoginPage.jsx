@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import logo from '../../assets/logo_menu_nury_barragan.png';
 import { loginService } from "../../services/authServices";
@@ -38,13 +38,13 @@ export default function LoginPage() {
   return (
     <section className="bg-[var(--color-header)] min-h-screen flex items-center justify-center px-4 py-8">
       <div className="flex flex-col items-center justify-center max-w-md mx-auto w-full">
-        <a href="/" className="flex items-center mb-6 text-xl sm:text-2xl font-semibold text-[var(--color-text)]">
+        <Link to="/" className="flex items-center mb-6 text-xl sm:text-2xl font-semibold text-[var(--color-text)]">
           <img
             className="w-auto h-14 sm:h-16 md:h-20 mr-2"
             src={logo}
             alt="logo"
           />
-        </a>
+        </Link>
 
         <div className="w-full bg-[var(--color-bg)] rounded-lg shadow sm:rounded-lg border border-[var(--color-primary)]">
           <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">

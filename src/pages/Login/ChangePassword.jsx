@@ -148,7 +148,7 @@ export const ChangePassword = () => {
                             type="submit"
                             className="w-full text-[var(--color-button_text)] bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] focus:ring-4 focus:outline-none focus:ring-[var(--color-primary)] font-semibold rounded-2xl sm:rounded-3xl text-xs sm:text-sm px-3 sm:px-5 py-2 sm:py-2.5"
                         >
-                            {t('changePassword.change')}
+                            {t('changePassword.update')}
                         </button>
                     </form>
                 </div>

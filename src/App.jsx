@@ -1,5 +1,5 @@
 import Header from './components/Header';
-import logo from './assets/logo_menu_nury_barragan.png';
+import logo from './assets/final-logo-nb.png';
 import HeroSection from './components/HeroSection';
 import PackagePage from './pages/E-commerce/PackagePage';
 import Footer from './components/Footer';
@@ -14,14 +14,15 @@ import {ClassesUser} from './pages/Users/ClassesUser';
 import { EnrolmentUser } from './pages/Users/EnrolmentUser';
 import { ConfigurationUser } from './pages/Users/ConfigurationUser';
 import { useTranslation } from 'react-i18next';
+import  TeacherProfile  from './components/TeachersProfile';
 function App() {
 
   const { t } = useTranslation();
   const links = [
-    { label: t("header.home"), to: "/" },
-    { label: t("header.packages"), to: "/" },
-    { label: t("header.about"), to: "/" },
-    { label: t("header.contact"), to: "/" },
+    { label: t("header.home"), to: "#hero" },
+    { label: t("header.packages"), to: "#packages" },
+    { label: t("header.about"), to: "#about" },
+    { label: t("header.contact"), to: "#contact" },
   ];
 
   return (
@@ -35,6 +36,7 @@ function App() {
                 <HeroSection />
                 <AboutUs />
                 <PackagePage />
+                <TeacherProfile/>
                 <ContactUS />
                 <Footer />
               </>

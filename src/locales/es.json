@@ -132,7 +132,8 @@
         "name": "Nombre Completo",
         "email": "Correo Electrónico",
         "phone": "Teléfono",
-        "cancel": "Cancelar"
+        "cancel": "Cancelar",
+        "limit_description":"Ilimitados"
     },
     "footer": {
         "resources": "Recursos",
@@ -162,5 +163,10 @@
         "classesRemaining": "Classes restantes",
         "totalClasses": "Total de Classes",
         "totalEnrolled": "Total de classes inscritas"
+    },
+    "teachers":{
+        "title":"Nuestros Profesores profesionales",
+        "experience":"Nury Barragán es bailarina e instructora con amplia trayectoria internacional. Formada en gimnasia olímpica, yoga y diversas disciplinas de danza, integró compañías como el Ballet Nacional de Colombia y se presentó como solista en escenarios de todo el mundo. Tricampeona en aeróbicos deportivos, combina arte, fitness y bienestar en su labor pedagógica para todas las edades.",
+        "profesional":"Profesora"
     }
 }

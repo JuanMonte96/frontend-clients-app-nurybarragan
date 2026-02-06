@@ -34,7 +34,7 @@ export const LanguageSwitcher = () => {
 
       {/* Menú desplegable */}
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-40 bg-[var(--color-bg-secondary)] border border-[var(--color-primary)] rounded-lg shadow-lg p-2 z-50">
+        <div className="absolute left-0 md:right-0 mt-2 w-44 bg-[var(--color-bg-secondary)] border border-[var(--color-primary)] rounded-lg shadow-lg p-2 z-50">
           {languages.map((lang) => (
             <button
               key={lang.code}

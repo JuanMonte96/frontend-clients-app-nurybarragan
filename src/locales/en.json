@@ -132,7 +132,8 @@
         "name": "Full Name",
         "email": "Email Address",
         "phone": "Phone",
-        "cancel": "Cancel"
+        "cancel": "Cancel",
+        "limit_description":"Unlimited"
     },
     "footer": {
         "resources": "Resources",
@@ -162,5 +163,10 @@
         "classesRemaining": "Classes Remaining",
         "totalClasses": "Total Classes",
         "totalEnrolled": "Total Enrolled Classes"
+    },
+    "teachers":{
+        "title":"Our Professional Teachers",
+        "experience":"Nury Barragán is a dancer and instructor with an extensive international career. Trained in artistic gymnastics, yoga, and multiple dance disciplines, she was a member of renowned companies such as the National Ballet of Colombia and performed as a soloist on stages worldwide. A three-time champion in sports aerobics, she blends art, fitness, and well-being in her teaching for all ages.",
+        "profesional":"Teacher"
     }
 }

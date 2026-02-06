@@ -38,7 +38,7 @@ export const ContactUS = () => {
     };
 
     return (
-        <section className="bg-[var(--color-bg)] py-8 sm:py-12 md:py-16 lg:py-20 px-3 sm:px-4">
+        <section id="contact" className="bg-[var(--color-bg)] scroll-mt-24 py-8 sm:py-12 md:py-16 lg:py-20 px-3 sm:px-4">
             <div className="mx-auto max-w-screen-md">
                 <h2 className="mb-3 sm:mb-4 md:mb-6 text-2xl sm:text-3xl md:text-4xl lg:text-5xl tracking-tight font-extrabold text-center text-[var(--color-text)]">
                     {t('contact.title')}

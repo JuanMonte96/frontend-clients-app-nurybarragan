@@ -1,8 +1,25 @@
-import logo from '../assets/logo_menu_nury_barragan.png'
+import logo from '../assets/final-logo-nb.png'
 import { useTranslation } from 'react-i18next'
+import { Link, useNavigate } from 'react-router-dom'
 
 export default function Footer() {
     const { t } = useTranslation();
+    const navigate = useNavigate();
+
+    const handleScrollTo = (hash) => (e) => {
+        e.preventDefault();
+        const id = hash.replace('#', '');
+        const el = document.getElementById(id);
+        if (el) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else {
+            navigate('/');
+            setTimeout(() => {
+                const el2 = document.getElementById(id);
+                if (el2) el2.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 200);
+        }
+    };
     return (
         <footer className="p-3 sm:p-6 bg-[#333333] text-[#fff8e1]">
             <div className="mx-auto max-w-screen-xl">
@@ -10,10 +27,10 @@ export default function Footer() {
                 <div className="flex flex-col md:flex-row md:justify-between gap-4 sm:gap-6">
                     {/* Logo + Marca */}
                     <div className="mb-4 sm:mb-6 md:mb-0">
-                        <a href="#" className="flex items-center">
+                        <a href="#hero" onClick={handleScrollTo('#hero')} className="flex items-center">
                             <img
                                 src={logo} // coloca tu logo local o URL
-                                className="mr-2 h-12 sm:h-16 md:h-20 w-auto"
+                                className="h-12 sm:h-16 md:h-20 lg:h-28 w-auto object-contain max-w-[320px]"
                                 alt="Logo"
                             />
                         </a>
@@ -28,14 +45,12 @@ export default function Footer() {
                             </h2>
                             <ul className="text-[#fff8e1] text-xs sm:text-sm">
                                 <li>
-                                    <a href="#" className="hover:text-[#ffb300] transition-colors">
+                                    <a href="#contact" onClick={handleScrollTo('#contact')} className="hover:text-[#ffb300] transition-colors">
                                         {t('footer.support')}
                                     </a>
                                 </li>
                             </ul>
                         </div>
-
-                        {/* Redes sociales */}
                         <div>
                             <h2 className="mb-3 sm:mb-6 text-xs sm:text-sm font-semibold text-[#ffc107] uppercase">
                                 {t('footer.followUs')}
@@ -86,11 +101,11 @@ export default function Footer() {
 
                 {/* Parte inferior */}
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-0">
-                    <span className="text-xs sm:text-sm text-[#fff8e1]/80">
-                        © {new Date().getFullYear()}{" "}
-                        <a href="#" className="hover:text-[#ffc107]">
+                        <span className="text-xs sm:text-sm text-[#fff8e1]/80">
+                        © {new Date().getFullYear()} {" "}
+                        <Link to="/" className="hover:text-[#ffc107]">
                             Nury Barragán
-                        </a>{" "}
+                        </Link>{" "}
                         — {t('footer.copyright')}
                     </span>
 
