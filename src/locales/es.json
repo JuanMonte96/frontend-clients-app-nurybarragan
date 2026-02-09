@@ -31,8 +31,11 @@
         "explorePackages": "EXPLORAR PAQUETES"
     },
     "packages": {
-        "title": "Paquetes disponibles",
-        "buy": "Comprar"
+        "title": "Paquetes Disponibles",
+        "buy": "Comprar",
+        "premium": "Premium",
+        "popular": "Popular",
+        "other": "Otros"
     },
     "contact": {
         "title": "Contáctanos",
@@ -41,7 +44,7 @@
         "email": "Tu correo electrónico",
         "phone": "Tu número de teléfono",
         "subject": "Asunto",
-        "subjectPlaceholder": "Cuentanos ¿Como podemos ayudarte?",
+        "subjectPlaceholder": "Cuéntanos ¿Cómo podemos ayudarte?",
         "message": "Tu mensaje",
         "send": "ENVIAR MENSAJE"
     },
@@ -124,16 +127,24 @@
     "purchase": {
         "title": "Comprar",
         "buy": "Comprar",
-        "description": "Descripcion",
+        "description": "Descripción",
         "price": "Precio",
         "duration": "Duración",
-        "days": "días",
-        "limit": "Límite de clases",
+        "months": "meses",
+        "days":"días",
+        "limit": "Clases",
         "name": "Nombre Completo",
         "email": "Correo Electrónico",
         "phone": "Teléfono",
         "cancel": "Cancelar",
-        "limit_description":"Ilimitados"
+        "limit_description":"Ilimitadas",
+        "starter_description": "Ideal para empezar de forma presencial y crear una rutina deportiva progresiva.",
+        "booster_description":"Compromiso intensivo en modalidad presencial para lograr resultados visibles y duraderos.",
+        "power_description":"Para reforzar tu constancia y avanzar mediante clases presenciales.",
+        "uni_description":"Una clase presencial a la carta para descubrir o complementar tu práctica.",
+        "ultimate_description":"Libertad total en modalidad presencial para entrenar sin restricciones durante 3 meses.",
+        "freedom_description":"Experiencia completa en modalidad presencial para un estilo de vida activo durante 6 meses.",
+        "terms": "Los paquetes son nominales, personales e intransferibles. No son reembolsables, total ni parcialmente. Deben utilizarse dentro del período de vigencia indicado; las clases no usadas al vencimiento se perderán sin derecho a reembolso ni prórroga. Al comprar, aceptas nuestros términos y condiciones."
     },
     "footer": {
         "resources": "Recursos",
@@ -160,9 +171,9 @@
         "available": "Disponible",
         "blocked": "Bloqueado",
         "noClasses": "No hay clases disponibles por el momento.",
-        "classesRemaining": "Classes restantes",
-        "totalClasses": "Total de Classes",
-        "totalEnrolled": "Total de classes inscritas"
+        "classesRemaining": "Clases restantes",
+        "totalClasses": "Total de Clases",
+        "totalEnrolled": "Total de clases inscritas"
     },
     "teachers":{
         "title":"Nuestros Profesores profesionales",

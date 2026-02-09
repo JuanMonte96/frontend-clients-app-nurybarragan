@@ -11,8 +11,8 @@ export default function PurchaseModal({ isOpen, onClose, pkg, onConfirm }) {
   if (!isOpen) return null; // si no está abierto, no renderiza nada
 
   return (
-    <div className="fixed inset-0 bg-[#333333] bg-opacity-70 flex items-center justify-center z-50 p-3 sm:p-4">
-      <div className="bg-[#fff8e1] rounded-lg sm:rounded-xl shadow-lg w-full max-w-md p-4 sm:p-6 relative">
+    <div className="modal-backdrop fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-3 sm:p-4">
+      <div className="modal-content bg-[#fff8e1] rounded-lg sm:rounded-xl shadow-lg w-full max-w-md p-4 sm:p-6 relative">
         <h2 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-[var(--color-text)] text-center">
           {t("purchase.title")} {pkg.name_package}
         </h2>
@@ -20,7 +20,7 @@ export default function PurchaseModal({ isOpen, onClose, pkg, onConfirm }) {
           {t("purchase.description")}: {pkg.description_package}
         </h3>
         <h3 className="mb-3 sm:mb-4 text-center text-lg sm:text-xl font-semibold text-[var(--color-text )]">
-          {t("purchase.price")}: <span className="text-[var(--color-primary)]">{pkg.price_package} EUR</span>
+          {t("purchase.price")}: <span className="text-[var(--color-primary)]">€{pkg.price_package}</span>
         </h3>
         <form
           onSubmit={(e) => {

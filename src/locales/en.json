@@ -31,8 +31,11 @@
         "explorePackages": "EXPLORE PACKAGES"
     },
     "packages": {
-        "title": "Available packages",
-        "buy": "Buy"
+        "title": "Available Packages",
+        "buy": "Buy",
+        "premium": "Premium",
+        "popular": "Popular",
+        "other": "Other"
     },
     "contact": {
         "title": "Contact Us",
@@ -128,12 +131,20 @@
         "price": "Price",
         "duration": "Duration",
         "days": "days",
-        "limit": "Limit of Classes",
+        "months": "months",    
+        "limit": "Classes",
         "name": "Full Name",
         "email": "Email Address",
         "phone": "Phone",
         "cancel": "Cancel",
-        "limit_description":"Unlimited"
+        "limit_description":"Unlimited",
+        "starter_description": "Ideal for starting with in-person sessions and building a progressive workout routine.",
+        "booster_description":"To strengthen your consistency and progress with in-person classes.",
+        "power_description":"Intensive commitment in-person for visible and lasting results.",
+        "uni_description":"A la carte in-person class to discover or complement your practice.",
+        "ultimate_description":"Total freedom in-person to practice without constraints for 3 months.",
+        "freedom_description":"Complete in-person experience for an active lifestyle over 6 months.",
+        "terms": "Packages are nominal, personal, and non-transferable. No refunds will be issued, in whole or in part. Packages must be used within the stated validity period; unused sessions after expiration are forfeited, with no extension or refund. By purchasing, you agree to our terms and conditions."
     },
     "footer": {
         "resources": "Resources",

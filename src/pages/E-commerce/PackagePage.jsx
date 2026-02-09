@@ -5,7 +5,7 @@ import api from "../../services/api";
 import { useTranslation } from "react-i18next";
 
 export default function PackagePage() {
-  
+
   const { t } = useTranslation();
   const [packages, setPackages] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -80,15 +80,50 @@ export default function PackagePage() {
   if (loading) return <div className="p-6 sm:p-8 md:p-10 text-center text-xs sm:text-sm md:text-base">{t("common.loading")}</div>; // Cambiar cuando ya se vaya a producción crear un componente Loading
   if (error) return <div className="p-6 sm:p-8 md:p-10 text-center text-red-600 text-xs sm:text-sm md:text-base">{t("common.error")} : {error}</div>;
 
-  return (
-    <main id="packages" className="min-h-screen bg-[var(--color-header)] scroll-mt-24 p-3 sm:p-6 md:p-8">
-      <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 text-center text-[#ffc107]">{t("packages.title")}</h1>
+  // 👉 Organizar paquetes en 3 grupos
+  const premiumPackages = packages.filter((pkg) => pkg.class_limit === null);
+  const midPackages = packages.filter((pkg) => pkg.class_limit > 1);
+  const otherPackages = packages.filter((pkg) => pkg.class_limit !== null && pkg.class_limit <= 1);
 
-      <div className="grid gap-4 sm:gap-5 md:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {packages.map((pkg) => (
-          <PackageCard key={pkg.id_package} pkg={pkg} onBuy={handleBuyClick} />
-        ))}
-      </div>
+  return (
+    <main id="packages" className="min-h-screen bg-[var(--color-bg)] scroll-mt-24 p-3 sm:p-6 md:p-8">
+      <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 text-center text-[var(--color-text)]">{t("packages.title")}</h1>
+
+    
+      {premiumPackages.length > 0 && (
+        <section className="mb-12 sm:mb-14 md:mb-16">
+          <h2 className="text-center sm:text-xl md:text-2xl lg:text-3xl font-semibold mb-4 sm:mb-6 text-[var(--color-text)]">{t("packages.premium") || "Premium"}</h2>
+          <div className="grid gap-2 sm:gap-3 md:gap-4 grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 justify-items-center w-full max-w-7xl mx-auto">
+            {premiumPackages.map((pkg) => (
+              <PackageCard key={pkg.id_package} pkg={pkg} onBuy={handleBuyClick} />
+            ))}
+          </div>
+        </section>
+
+      )}
+
+     
+      {midPackages.length > 0 && (
+        <section className="mb-10 sm:mb-12 md:mb-14">
+          <h2 className="text-center sm:text-xl md:text-2xl lg:text-3xl font-semibold mb-4 sm:mb-6 text-[var(--color-text)]">{t("packages.popular") || "Popular"}</h2>
+          <div className="grid gap-2 sm:gap-3 md:gap-4 grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center w-full max-w-7xl mx-auto">
+              {midPackages.map((pkg) => (
+                <PackageCard key={pkg.id_package} pkg={pkg} onBuy={handleBuyClick} />
+              ))}
+            </div>
+        </section>
+      )}
+
+      {otherPackages.length > 0 && (
+        <section className="mb-10 sm:mb-12 md:mb-14">
+          <h2 className="text-center sm:text-xl md:text-2xl lg:text-3xl font-semibold mb-4 sm:mb-6 text-[var(--color-text)]">{t("packages.other") || "Other"}</h2>
+          <div className="grid gap-2 sm:gap-3 md:gap-4 grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 justify-items-center w-full max-w-7xl mx-auto">
+            {otherPackages.map((pkg) => (
+              <PackageCard key={pkg.id_package} pkg={pkg} onBuy={handleBuyClick} />
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* MODAL */}
       <PurchaseModal

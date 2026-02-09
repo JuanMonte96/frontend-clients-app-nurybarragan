@@ -31,8 +31,11 @@
         "explorePackages": "EXPLOREZ LES FORFAITS"
     },
     "packages": {
-        "title": "Forfaits disponibles",
-        "buy": "Acheter"
+        "title": "Forfaits Disponibles",
+        "buy": "Acheter",
+        "premium": "Premium",
+        "popular": "Populaire",
+        "other": "Autres"
     },
     "contact": {
         "title": "Nous contacter",
@@ -127,13 +130,21 @@
         "description": "Description",
         "price": "Prix",
         "duration": "Durée",
+        "months": "mois",
         "days": "jours",
-        "limit": "Limite de cours",
+        "limit": "Cours",
         "name": "Nom complet",
         "email": "Adresse e-mail",
         "phone": "Téléphone",
         "cancel": "Annuler",
-        "limit_description":"Illimité"
+        "limit_description":"Illimité",
+        "starter_description": "Idéal pour débuter en présentiel et créer une routine sportive progressive.",
+        "booster_description":"Pour renforcer votre régularité et progresser avec des cours présentiels.",
+        "power_description":"Engagement intensif en présentiel pour des résultats visibles et durables.",
+        "uni_description":"Un cours présentiel à la carte pour découvrir ou compléter votre pratique.",
+        "ultimate_description":"Liberté totale en présentiel pour pratiquer sans contrainte sur 3 mois.",
+        "freedom_description":"Expérience complète en présentiel pour un mode de vie actif sur 6 mois.",
+        "terms":"Les forfaits sont nominatifs, personnels et non transférables. Aucun remboursement, total ou partiel, ne sera accordé. Ils doivent être utilisés pendant la période de validité indiquée ; les séances non utilisées à l’expiration seront perdues, sans report ni remboursement. En achetant, vous acceptez nos termes et conditions."
     },
     "footer": {
         "resources": "Ressources",
