@@ -21,17 +21,36 @@
         "packages": "Paquetes"
     },
     "hero": {
-        "title": "Vivir en salud plena",
-        "subtitle": "Transmitir a cada persona a cada individuo mi saber mi pasión por la danza, por el deporte, mi folclore tan rico y tan variado, mi cultura en general. Es una misión, un compromiso que debo cumplir después de 25 años de experiencia profesional."
+        "title": "¡¡Vivir en salud plena!!",
+        "subtitle": "Compartir nuestra pasión por la danza, el deporte y el folclore es más que un sueño: es nuestro compromiso después de 25 años de experiencia profesional"
     },
     "aboutUs": {
         "title": "Vive el ritmo. Aprende a tu manera.",
-        "description": "En Nury Barragán transformamos el baile en una experiencia de libertad, energía y diversión.",
+        "description": "En NB Dance & Fitness transformamos el baile en una experiencia de libertad, energía y diversión.",
         "description2": "Elige tu plan, disfruta tus clases y vive el poder del movimiento. Tú decides cuándo, cómo y con quién bailar.",
         "explorePackages": "EXPLORAR PAQUETES"
     },
+    "information": {
+        "title": "Clases disponibles",
+        "intro": "Al adquirir cualquiera de nuestros planes, podrás acceder libremente a las siguientes clases según el horario establecido:",
+        "scheduleTitle": "Horario de clases",
+        "monday": "Lunes",
+        "mondayClass1": "18:00 – 19:00 | Pilates",
+        "mondayClass2": "19:00 – 20:00 | Zumba",
+        "saturday": "Sábados",
+        "saturdayClass1": "10:00 – 11:00 | Salsa Colombiana – Style Girl",
+        "saturdayClass2": "11:00 – 12:00 | Danzas Tradicionales de Colombia",
+        "startTitle": "Inicio de clases",
+        "startDate": "Lunes 8 de septiembre de 2025",
+        "locationTitle": "Lugar",
+        "locationName": "Studio Bleu",
+        "locationAddress": "10 rue Erard, 75012 París",
+        "locationMetro": "Metro: Líneas 1, 8 y 14 – Nation (RER A)",
+        "note": "Todas las clases están dirigidas a diferentes niveles y combinan técnica, energía y cultura, ofreciendo una experiencia dinámica y enriquecedora.",
+        "contact": "Para más información, puedes ponerte en contacto en cualquier momento."
+    },
     "packages": {
-        "title": "Paquetes Disponibles",
+        "title": "Escoge Tu Paquete",
         "buy": "Comprar",
         "premium": "Premium",
         "popular": "Popular",

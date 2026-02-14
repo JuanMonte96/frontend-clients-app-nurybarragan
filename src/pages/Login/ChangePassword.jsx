@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import logo from '../../assets/logo_menu_nury_barragan.png';
+import logo from '../../assets/final-logo-nb.png';
 import api from "../../services/api";
 
 export const ChangePassword = () => {

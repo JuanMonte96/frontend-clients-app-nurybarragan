@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import PackageCard from "../../components/PackageCard";
 import PurchaseModal from "../../components/PurchaseModal";
 import api from "../../services/api";
@@ -13,6 +14,7 @@ export default function PackagePage() {
 
   const [selectedPackage, setSelectedPackage] = useState(null); // paquete actual
   const [modalOpen, setModalOpen] = useState(false); // abrir/cerrar modal
+  const skeletonItems = Array.from({ length: 6 });
 
   useEffect(() => {
     const controller = new AbortController();
@@ -77,7 +79,39 @@ export default function PackagePage() {
     }
   };
 
-  if (loading) return <div className="p-6 sm:p-8 md:p-10 text-center text-xs sm:text-sm md:text-base">{t("common.loading")}</div>; // Cambiar cuando ya se vaya a producción crear un componente Loading
+  if (loading) {
+    return (
+      <main id="packages" className="min-h-screen bg-[var(--color-bg)] scroll-mt-24 p-3 sm:p-6 md:p-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="h-10 sm:h-12 w-56 sm:w-72 bg-[var(--color-border)]/60 rounded mx-auto mb-6 sm:mb-8 animate-pulse" />
+          <div className="grid gap-2 sm:gap-3 md:gap-4 grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center w-full">
+            {skeletonItems.map((_, index) => (
+              <div
+                key={`package-skeleton-${index}`}
+                className="w-full max-w-sm rounded-lg p-4 sm:p-6 bg-[var(--color-header)] border border-[var(--color-border)] shadow-md animate-pulse"
+              >
+                <div className="h-7 w-3/4 bg-[var(--color-border)]/60 rounded mb-3" />
+                <div className="h-4 w-full bg-[var(--color-border)]/60 rounded mb-2" />
+                <div className="h-4 w-5/6 bg-[var(--color-border)]/60 rounded mb-6" />
+                <div className="grid grid-cols-2 gap-4 mb-6">
+                  <div className="space-y-2">
+                    <div className="h-8 w-14 bg-[var(--color-border)]/60 rounded" />
+                    <div className="h-3 w-16 bg-[var(--color-border)]/60 rounded" />
+                  </div>
+                  <div className="space-y-2">
+                    <div className="h-8 w-14 bg-[var(--color-border)]/60 rounded" />
+                    <div className="h-3 w-16 bg-[var(--color-border)]/60 rounded" />
+                  </div>
+                </div>
+                <div className="h-10 w-24 bg-[var(--color-border)]/60 rounded mx-auto mb-4" />
+                <div className="h-10 w-full bg-[var(--color-border)]/60 rounded" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </main>
+    );
+  }
   if (error) return <div className="p-6 sm:p-8 md:p-10 text-center text-red-600 text-xs sm:text-sm md:text-base">{t("common.error")} : {error}</div>;
 
   // 👉 Organizar paquetes en 3 grupos
@@ -87,42 +121,91 @@ export default function PackagePage() {
 
   return (
     <main id="packages" className="min-h-screen bg-[var(--color-bg)] scroll-mt-24 p-3 sm:p-6 md:p-8">
-      <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 text-center text-[var(--color-text)]">{t("packages.title")}</h1>
+      <motion.h1
+        className="text-5xl sm:text-3xl md:text-4xl font-extrabold mb-6 sm:mb-8 text-center text-[var(--color-text)]"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+      >
+        {t("packages.title")}
+      </motion.h1>
 
     
       {premiumPackages.length > 0 && (
-        <section className="mb-12 sm:mb-14 md:mb-16">
-          <h2 className="text-center sm:text-xl md:text-2xl lg:text-3xl font-semibold mb-4 sm:mb-6 text-[var(--color-text)]">{t("packages.premium") || "Premium"}</h2>
+        <motion.section
+          className="mb-12 sm:mb-14 md:mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+        >
+          <h2 className="text-center sm:text-2xl md:text-3xl lg:text-4xl font-semibold mb-4 sm:mb-6 text-[var(--color-text)]">{t("packages.premium") || "Premium"}</h2>
           <div className="grid gap-2 sm:gap-3 md:gap-4 grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 justify-items-center w-full max-w-7xl mx-auto">
-            {premiumPackages.map((pkg) => (
-              <PackageCard key={pkg.id_package} pkg={pkg} onBuy={handleBuyClick} />
+            {premiumPackages.map((pkg, index) => (
+              <motion.div
+                key={pkg.id_package}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.6, ease: "easeOut", delay: index * 0.08 }}
+              >
+                <PackageCard pkg={pkg} onBuy={handleBuyClick} />
+              </motion.div>
             ))}
           </div>
-        </section>
-
+        </motion.section>
       )}
 
      
       {midPackages.length > 0 && (
-        <section className="mb-10 sm:mb-12 md:mb-14">
-          <h2 className="text-center sm:text-xl md:text-2xl lg:text-3xl font-semibold mb-4 sm:mb-6 text-[var(--color-text)]">{t("packages.popular") || "Popular"}</h2>
+        <motion.section
+          className="mb-10 sm:mb-12 md:mb-14"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+        >
+          <h2 className="text-center sm:text-2xl md:text-3xl lg:text-4xl font-semibold mb-4 sm:mb-6 text-[var(--color-text)]">{t("packages.popular") || "Popular"}</h2>
           <div className="grid gap-2 sm:gap-3 md:gap-4 grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center w-full max-w-7xl mx-auto">
-              {midPackages.map((pkg) => (
-                <PackageCard key={pkg.id_package} pkg={pkg} onBuy={handleBuyClick} />
+              {midPackages.map((pkg, index) => (
+                <motion.div
+                  key={pkg.id_package}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.6, ease: "easeOut", delay: index * 0.08 }}
+                >
+                  <PackageCard pkg={pkg} onBuy={handleBuyClick} />
+                </motion.div>
               ))}
             </div>
-        </section>
+        </motion.section>
       )}
 
       {otherPackages.length > 0 && (
-        <section className="mb-10 sm:mb-12 md:mb-14">
-          <h2 className="text-center sm:text-xl md:text-2xl lg:text-3xl font-semibold mb-4 sm:mb-6 text-[var(--color-text)]">{t("packages.other") || "Other"}</h2>
+        <motion.section
+          className="mb-10 sm:mb-12 md:mb-14"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+        >
+          <h2 className="text-center sm:text-2xl md:text-3xl lg:text-4xl font-semibold mb-4 sm:mb-6 text-[var(--color-text)]">{t("packages.other") || "Other"}</h2>
           <div className="grid gap-2 sm:gap-3 md:gap-4 grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 justify-items-center w-full max-w-7xl mx-auto">
-            {otherPackages.map((pkg) => (
-              <PackageCard key={pkg.id_package} pkg={pkg} onBuy={handleBuyClick} />
+            {otherPackages.map((pkg, index) => (
+              <motion.div
+                key={pkg.id_package}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.6, ease: "easeOut", delay: index * 0.08 }}
+              >
+                <PackageCard pkg={pkg} onBuy={handleBuyClick} />
+              </motion.div>
             ))}
           </div>
-        </section>
+        </motion.section>
       )}
 
       {/* MODAL */}

@@ -21,7 +21,7 @@ export default function Footer() {
         }
     };
     return (
-        <footer className="p-3 sm:p-6 bg-[#333333] text-[#fff8e1]">
+        <footer className="p-3 sm:p-6 bg-[var(--color-header)] text-[var(--color-primary)]">
             <div className="mx-auto max-w-screen-xl">
                 {/* Sección principal */}
                 <div className="flex flex-col md:flex-row md:justify-between gap-4 sm:gap-6">
@@ -40,26 +40,26 @@ export default function Footer() {
                     <div className="grid grid-cols-2 gap-4 sm:gap-6 sm:grid-cols-3">
                         {/* Recursos */}
                         <div>
-                            <h2 className="mb-3 sm:mb-6 text-xs sm:text-sm font-semibold text-[#ffc107] uppercase">
+                            <h2 className="mb-3 sm:mb-6 text-xs sm:text-sm font-semibold text-[var(--color-primary)] uppercase">
                                 {t('footer.resources')}
                             </h2>
-                            <ul className="text-[#fff8e1] text-xs sm:text-sm">
+                            <ul className="text-[var(--color-primary)] text-xs sm:text-sm">
                                 <li>
-                                    <a href="#contact" onClick={handleScrollTo('#contact')} className="hover:text-[#ffb300] transition-colors">
+                                    <a href="#contact" onClick={handleScrollTo('#contact')} className="hover:text-[var(--color-primary-hover)] transition-colors">
                                         {t('footer.support')}
                                     </a>
                                 </li>
                             </ul>
                         </div>
                         <div>
-                            <h2 className="mb-3 sm:mb-6 text-xs sm:text-sm font-semibold text-[#ffc107] uppercase">
+                            <h2 className="mb-3 sm:mb-6 text-xs sm:text-sm font-semibold text-[var(--color-primary)] uppercase">
                                 {t('footer.followUs')}
                             </h2>
-                            <ul className="text-[#fff8e1] text-xs sm:text-sm">
+                            <ul className="text-[var(--color-primary)] text-xs sm:text-sm">
                                 <li className="mb-2 sm:mb-4">
                                     <a
                                         href="#"
-                                        className="hover:text-[#ffb300] transition-colors"
+                                        className="hover:text-[var(--color-primary-hover)] transition-colors"
                                     >
                                         Instagram
                                     </a>
@@ -67,7 +67,7 @@ export default function Footer() {
                                 <li>
                                     <a
                                         href="#"
-                                        className="hover:text-[#ffb300] transition-colors"
+                                        className="hover:text-[var(--color-primary-hover)] transition-colors"
                                     >
                                         Facebook
                                     </a>
@@ -77,17 +77,17 @@ export default function Footer() {
 
                         {/* Legal */}
                         <div>
-                            <h2 className="mb-3 sm:mb-6 text-xs sm:text-sm font-semibold text-[#ffc107] uppercase">
+                            <h2 className="mb-3 sm:mb-6 text-xs sm:text-sm font-semibold text-[var(--color-primary)] uppercase">
                                 {t('footer.legal')}
                             </h2>
-                            <ul className="text-[#fff8e1] text-xs sm:text-sm">
+                            <ul className="text-[var(--color-primary)] text-xs sm:text-sm">
                                 <li className="mb-2 sm:mb-4">
-                                    <a href="#" className="hover:text-[#ffb300] transition-colors">
+                                    <a href="#" className="hover:text-[var(--color-primary-hover)] transition-colors">
                                         {t('footer.privacy')}
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" className="hover:text-[#ffb300] transition-colors">
+                                    <a href="#" className="hover:text-[var(--color-primary-hover)] transition-colors">
                                         {t('footer.terms')}
                                     </a>
                                 </li>
@@ -97,14 +97,14 @@ export default function Footer() {
                 </div>
 
                 {/* Separador */}
-                <hr className="my-4 sm:my-6 md:my-8 border-[#ffc107]/30" />
+                <hr className="my-4 sm:my-6 md:my-8 border-[var(--color-primary)]/30" />
 
                 {/* Parte inferior */}
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-0">
-                        <span className="text-xs sm:text-sm text-[#fff8e1]/80">
+                        <span className="text-xs sm:text-sm text-[var(--color-primary)]">
                         © {new Date().getFullYear()} {" "}
-                        <Link to="/" className="hover:text-[#ffc107]">
-                            Nury Barragán
+                        <Link to="/" className="hover:text-[var(--color-primary-hover)] transition-colors font-semibold">
+                            NB Dance & Fitness
                         </Link>{" "}
                         — {t('footer.copyright')}
                     </span>
@@ -114,7 +114,7 @@ export default function Footer() {
                         {/* Facebook */}
                         <a
                             href="#"
-                            className="text-[#fff8e1]/70 hover:text-[#ffc107] transition-colors"
+                            className="text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors"
                         >
                             <svg
                                 className="w-4 h-4 sm:w-5 sm:h-5"
@@ -140,7 +140,7 @@ export default function Footer() {
                         {/* Instagram */}
                         <a
                             href="#"
-                            className="text-[#fff8e1]/70 hover:text-[#ffc107] transition-colors"
+                            className="text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors"
                         >
                             <svg
                                 className="w-4 h-4 sm:w-5 sm:h-5"

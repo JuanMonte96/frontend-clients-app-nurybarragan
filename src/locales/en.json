@@ -21,17 +21,36 @@
         "packages": "Packages"
     },
     "hero": {
-        "title": "Living in Full Health",
-        "subtitle": "To transmit to each person my knowledge, my passion for dance, for sports, my rich and varied folklore, my culture in general. It is a mission, a commitment that I must fulfill after 25 years of professional experience."
+        "title": "¡¡Living in Full Health!!",
+        "subtitle": "Sharing our passion for dance, sport, and folklore is more than a dream: it is our commitment after 25 years of professional experience."
     },
     "aboutUs": {
         "title": "Feel the rhythm. Learn your way.",
-        "description": "At Nury Barragán we transform dance into an experience of freedom, energy and fun.",
+        "description": "At NB Dance & Fitness we transform dance into an experience of freedom, energy and fun.",
         "description2": "Choose your plan, enjoy your classes and experience the power of movement. You decide when, how and with whom to dance.",
         "explorePackages": "EXPLORE PACKAGES"
     },
+    "information": {
+        "title": "Available classes",
+        "intro": "By purchasing any of our plans, you can freely access the following classes according to the established schedule:",
+        "scheduleTitle": "Class schedule",
+        "monday": "Monday",
+        "mondayClass1": "18:00 – 19:00 | Pilates",
+        "mondayClass2": "19:00 – 20:00 | Zumba",
+        "saturday": "Saturdays",
+        "saturdayClass1": "10:00 – 11:00 | Colombian Salsa – Style Girl",
+        "saturdayClass2": "11:00 – 12:00 | Traditional Dances of Colombia",
+        "startTitle": "Start date",
+        "startDate": "Monday, September 8, 2025",
+        "locationTitle": "Location",
+        "locationName": "Studio Bleu",
+        "locationAddress": "10 rue Erard, 75012 Paris",
+        "locationMetro": "Metro: Lines 1, 8 and 14 – Nation (RER A)",
+        "note": "All classes are aimed at different levels and combine technique, energy, and culture, offering a dynamic and enriching experience.",
+        "contact": "For more information, you can contact us at any time."
+    },
     "packages": {
-        "title": "Available Packages",
+        "title": "Choose Your Package",
         "buy": "Buy",
         "premium": "Premium",
         "popular": "Popular",

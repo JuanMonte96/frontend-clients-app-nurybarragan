@@ -41,7 +41,7 @@ export default function PackageCard({ pkg, onBuy }) {
 
   return (
     <div
-      className="shadow-md rounded-lg sm:rounded-lg p-4 sm:p-6 flex flex-col justify-between hover:shadow-lg transition-shadow h-full relative overflow-hidden"
+      className="shadow-md rounded-lg sm:rounded-lg p-4 sm:p-6 flex flex-col justify-between hover:shadow-lg transition-shadow transition-transform duration-500 ease-out h-full relative overflow-hidden transform hover:scale-[1.02]"
       style={{ border: `10px solid ${packageColor}`, backgroundImage: `url(${poster})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
     >
       {/* OVERLAY DIFUMINADO - Oscurece la imagen de fondo */}

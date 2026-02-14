@@ -8,7 +8,7 @@ export default function PurchaseModal({ isOpen, onClose, pkg, onConfirm }) {
   const [email, setEmail] = useState("");
   const [telephone, setTelephone] = useState("");
 
-  if (!isOpen) return null; // si no está abierto, no renderiza nada
+  if (!isOpen) return null;
 
   return (
     <div className="modal-backdrop fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-3 sm:p-4">

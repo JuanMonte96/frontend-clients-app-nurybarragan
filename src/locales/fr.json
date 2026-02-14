@@ -21,17 +21,36 @@
         "packages": "Forfaits"
     },
     "hero": {
-        "title": "Vivre en Bonne Santé",
-        "subtitle": "Transmettre à chaque personne mon savoir, ma passion pour la danse, pour le sport, mon folklore riche et varié, ma culture en général. C'est une mission, un engagement que je dois tenir après 25 ans d'expérience professionnelle."
+        "title": "¡¡Vivre en Bonne Santé!!",
+        "subtitle": "Partager notre passion pour la danse, le sport et le folklore est plus qu’un rêve : c’est notre engagement après 25 ans d’expérience professionnelle"
     },
     "aboutUs": {
         "title": "Ressentez le rythme. Apprenez à votre manière.",
-        "description": "Chez Nury Barragán, nous transformons la danse en une expérience de liberté, d'énergie et de plaisir.",
+        "description": "Chez NB Dance & Fitness, nous transformons la danse en une expérience de liberté, d'énergie et de plaisir.",
         "description2": "Choisissez votre forfait, profitez de vos cours et découvrez le pouvoir du mouvement. Vous décidez quand, comment et avec qui danser.",
         "explorePackages": "EXPLOREZ LES FORFAITS"
     },
+    "information": {
+        "title": "Cours disponibles",
+        "intro": "En achetant l’un de nos forfaits, vous pouvez accéder librement aux cours suivants selon l’horaire établi :",
+        "scheduleTitle": "Horaires des cours",
+        "monday": "Lundi",
+        "mondayClass1": "18:00 – 19:00 | Pilates",
+        "mondayClass2": "19:00 – 20:00 | Zumba",
+        "saturday": "Samedis",
+        "saturdayClass1": "10:00 – 11:00 | Salsa colombienne – Style Girl",
+        "saturdayClass2": "11:00 – 12:00 | Danses traditionnelles de Colombie",
+        "startTitle": "Début des cours",
+        "startDate": "Lundi 8 septembre 2025",
+        "locationTitle": "Lieu",
+        "locationName": "Studio Bleu",
+        "locationAddress": "10 rue Erard, 75012 Paris",
+        "locationMetro": "Métro : Lignes 1, 8 et 14 – Nation (RER A)",
+        "note": "Tous les cours s’adressent à différents niveaux et combinent technique, énergie et culture, offrant une expérience dynamique et enrichissante.",
+        "contact": "Pour plus d’informations, vous pouvez nous contacter à tout moment."
+    },
     "packages": {
-        "title": "Forfaits Disponibles",
+        "title": "Choisissez Votre Forfait",
         "buy": "Acheter",
         "premium": "Premium",
         "popular": "Populaire",

@@ -15,6 +15,7 @@ import { EnrolmentUser } from './pages/Users/EnrolmentUser';
 import { ConfigurationUser } from './pages/Users/ConfigurationUser';
 import { useTranslation } from 'react-i18next';
 import  TeacherProfile  from './components/TeachersProfile';
+import Information from './components/Information';
 function App() {
 
   const { t } = useTranslation();
@@ -35,6 +36,7 @@ function App() {
                 <Header logo={logo} links={links} />
                 <HeroSection />
                 <AboutUs />
+                <Information />
                 <PackagePage />
                 <TeacherProfile/>
                 <ContactUS />
