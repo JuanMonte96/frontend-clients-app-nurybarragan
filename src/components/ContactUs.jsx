@@ -60,7 +60,7 @@ export const ContactUS = () => {
     };
 
     return (
-        <section ref={sectionRef} id="contact" className="bg-[var(--color-bg)] scroll-mt-24 py-8 sm:py-12 md:py-16 lg:py-20 px-3 sm:px-4">
+        <section ref={sectionRef} id="contact" className="bg-gradient-to-br from-[var(--color-bg)] to-[var(--color-primary)] scroll-mt-24 py-8 sm:py-12 md:py-16 lg:py-20 px-3 sm:px-4">
             <div className="mx-auto max-w-screen-md">
                 <motion.h2 
                     initial={{ opacity: 0, y: 30 }}
@@ -190,7 +190,7 @@ export const ContactUS = () => {
                         animate={isVisible ? { opacity: 1, y: 0 } : {}}
                         transition={{ duration: 0.7, delay: 0.4 }}
                         type="submit"
-                        className="py-2 sm:py-3 px-3 sm:px-5 text-xs sm:text-sm font-semibold text-center text-[var(--color-text-button)] rounded-2xl sm:rounded-3xl bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] focus:ring-4 focus:outline-none focus:ring-yellow-300 w-full sm:w-fit"
+                        className="py-2 sm:py-3 px-3 sm:px-5 text-xs sm:text-sm font-semibold text-center text-[var(--color-text-button)] rounded-2xl sm:rounded-3xl bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-gradient-button)] focus:ring-4 focus:outline-none focus:ring-yellow-300 w-full sm:w-fit transition-all duration-300 hover:scale-105 active:scale-95"
                     >
                         {t('contact.send')}
                     </motion.button>

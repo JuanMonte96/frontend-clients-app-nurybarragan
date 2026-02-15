@@ -163,7 +163,8 @@
         "uni_description":"Una clase presencial a la carta para descubrir o complementar tu práctica.",
         "ultimate_description":"Libertad total en modalidad presencial para entrenar sin restricciones durante 3 meses.",
         "freedom_description":"Experiencia completa en modalidad presencial para un estilo de vida activo durante 6 meses.",
-        "terms": "Los paquetes son nominales, personales e intransferibles. No son reembolsables, total ni parcialmente. Deben utilizarse dentro del período de vigencia indicado; las clases no usadas al vencimiento se perderán sin derecho a reembolso ni prórroga. Al comprar, aceptas nuestros términos y condiciones."
+        "terms": "Los paquetes son nominales, personales e intransferibles. No son reembolsables, total ni parcialmente. Deben utilizarse dentro del período de vigencia indicado; las clases no usadas al vencimiento se perderán sin derecho a reembolso ni prórroga. Al comprar, aceptas nuestros términos y condiciones.",
+        "close_hint": "Haz clic fuera del modal para cerrar"
     },
     "footer": {
         "resources": "Recursos",

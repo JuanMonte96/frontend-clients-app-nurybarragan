@@ -24,7 +24,7 @@ export const LanguageSwitcher = () => {
       {/* Botón de idioma */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] text-[var(--color-text)] transition-all duration-200 border border-[var(--color-primary)] text-xs sm:text-sm font-semibold"
+        className="flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-gradient-button)] text-[var(--color-text)] transition-all duration-300 hover:scale-105 active:scale-95 border border-[var(--color-primary)] text-xs sm:text-sm font-semibold"
         title={t('common.language')}
       >
         <Globe size={20} />
@@ -34,15 +34,15 @@ export const LanguageSwitcher = () => {
 
       {/* Menú desplegable */}
       {isOpen && (
-        <div className="absolute left-0 md:right-0 mt-2 w-44 bg-[var(--color-bg-secondary)] border border-[var(--color-primary)] rounded-lg shadow-lg p-2 z-50">
+        <div className="absolute left-0 md:right-0 mt-2 w-44 bg-gradient-to-br from-[var(--color-bg)] to-[var(--color-primary)] border border-[var(--color-primary)] rounded-lg shadow-lg p-2 z-50">
           {languages.map((lang) => (
             <button
               key={lang.code}
               onClick={() => handleLanguageChange(lang.code)}
-              className={`w-full text-left px-3 py-2 rounded-md text-sm transition-all duration-200 flex items-center gap-2 ${
+              className={`w-full text-left px-3 py-2 rounded-md text-sm transition-all duration-300 flex items-center gap-2 ${
                 i18n.language === lang.code
-                  ? 'bg-[var(--color-primary)] text-[var(--color-text)] font-semibold'
-                  : 'text-[var(--color-text)] hover:bg-[var(--color-primary-hover)]'
+                  ? 'bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-gradient-button)] text-[var(--color-text)] font-semibold'
+                  : 'text-[var(--color-text)] hover:bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-gradient-button)] hover:scale-105 active:scale-95'
               }`}
             >
               <span>{lang.flag}</span>

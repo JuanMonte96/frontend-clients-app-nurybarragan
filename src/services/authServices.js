@@ -11,19 +11,20 @@ export const loginService = async (email, password) => {
       timezone: timezoneInfo.timezone
     });
 
-    if (data.token) {
-      localStorage.setItem("token", data.token);
+    if(!data.token || !data.user?.id){
+      throw new Error(data.message || 'Invalid Credential, Please try again');
     }
 
-    if (data?.user.id) {
-      localStorage.setItem("id_user", data.user.id)
-    }
+    localStorage.setItem("token", data.token);
+    localStorage.setItem("id_user", data.user.id);
 
     return data;
   } catch (error) {
+    console.error("Error en loginService:", error.response?.data || error.message);
     throw {
       response: error.response,
-      message: error.response?.data?.message || "Error al iniciar sesión",
+      message: error.response?.data?.message || error.response?.data?.error || "Error al iniciar sesión",
+      errors: error.response?.data?.errors || null
     };
   }
 };

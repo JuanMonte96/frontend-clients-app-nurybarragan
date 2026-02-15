@@ -31,7 +31,7 @@ export default function Information() {
     <section
       id="information"
       ref={sectionRef}
-      className="bg-[var(--color-text)] scroll-mt-24 py-8 sm:py-12 md:py-16 lg:py-20 px-3 sm:px-4 md:px-6 lg:px-24"
+      className="bg-gradient-to-br from-[var(--color-text)] to-[var(--color-header)] scroll-mt-24 py-8 sm:py-12 md:py-16 lg:py-20 px-3 sm:px-4 md:px-6 lg:px-24"
     >
       <div className="max-w-7xl mx-auto">
         <div className="space-y-4 sm:space-y-5 md:space-y-6">

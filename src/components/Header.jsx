@@ -51,7 +51,7 @@ export default function Header({ logo, links = [] }) {
         {/* Menú */}
         <nav
           className={`transform transition-all duration-300 ${open ? 'max-h-96 opacity-100 translate-y-0' : 'max-h-0 opacity-0 -translate-y-2'} md:max-h-full md:opacity-100 md:translate-y-0 md:flex md:items-center md:gap-2 lg:gap-4 absolute md:static top-full left-0 w-full md:w-auto ${open ? 'bg-[var(--color-header)]' : 'bg-transparent'} ${isScrolled ? 'md:bg-header' : 'md:bg-transparent'} shadow-md md:shadow-none ${open ? 'overflow-visible' : 'overflow-hidden'} md:overflow-visible`}>
-          <ul className="flex flex-col md:flex-row gap-2 md:gap-2 lg:gap-4 p-3 sm:p-4 md:p-0 text-[var(--color-primary)]">
+          <ul className="flex flex-col md:flex-row gap-2 md:gap-2 lg:gap-4 p-3 sm:p-4 md:p-0 text-[var(--color-primary)] ">
             {links.map((link) => (
               <li key={link.to}>
                 {link.to && link.to.startsWith("#") ? (
@@ -74,7 +74,7 @@ export default function Header({ logo, links = [] }) {
                         }, 200);
                       }
                     }}
-                    className={"block px-3 py-2 rounded-md font-semibold text-base sm:text-lg md:text-xl lg:text-xl text-[var(--color-primary)] hover:text-[var(--color-text)] transition"}
+                    className={"block px-3 py-2 rounded-full bg-gradient-to-br from-[var(--color-header)] to-[var(--color-text)] font-semibold text-base sm:text-lg md:text-xl lg:text-xl text-[var(--color-primary)] hover:text-[var(--color-text-secondary)] transition"}
                   >
                     {link.label}
                   </a>
@@ -82,7 +82,7 @@ export default function Header({ logo, links = [] }) {
                   <NavLink
                     to={link.to}
                     className={({ isActive }) =>
-                      `block px-3 py-2 rounded-md font-semibold text-base sm:text-lg md:text-xl lg:text-xl text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition ${
+                      `block px-3 py-2 rounded-full bg-[var(--color-header)] font-semibold text-base sm:text-lg md:text-xl lg:text-xl text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition ${
                         isActive ? "font-bold text-[var(--color-accent)]" : ""
                       }`
                     }
@@ -106,7 +106,7 @@ export default function Header({ logo, links = [] }) {
               navigate("/login");
               setOpen(false);
             }}
-            className="w-1/3 md:w-auto bg-[var(--color-primary)] text-[var(--color-text-button)] font-bold px-3 sm:px-4 py-2 rounded-2xl sm:rounded-3xl hover:bg-[var(--color-primary-hover)] transition mx-3 sm:mx-4 md:mx-0 md:ml-2 mb-3 md:mb-0 flex justify-center items-end text-xs sm:text-sm md:text-base"
+            className="w-1/3 md:w-auto bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-gradient-button)] text-[var(--color-text-button)] font-bold px-3 sm:px-4 py-2 rounded-2xl sm:rounded-3xl transition-all duration-300 hover:scale-105 active:scale-95 mx-3 sm:mx-4 md:mx-0 md:ml-2 mb-3 md:mb-0 flex justify-center items-end text-xs sm:text-sm md:text-base"
           >
             <span>{t('header.login')}</span>
           </button>

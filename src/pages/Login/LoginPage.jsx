@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import logo from '../../assets/final-logo-nb.png';
@@ -14,30 +14,94 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const hasCheckedAuth = useRef(false);
 
-  const { refreshProfile } = useAuth();
+  const { refreshProfile, profile } = useAuth();
+
+  // Si el usuario ya está autenticado, redirigir a /user
+  useEffect(() => {
+    if (hasCheckedAuth.current) return;
+    hasCheckedAuth.current = true;
+    
+    if(profile?.id){
+      navigate("/user");
+    }
+  }, []); // Array vacío - ejecutar solo una vez
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError(null);
     
     try {
       const data = await loginService(email, password);
-      console.log("Login exitoso:", data);
+      console.log("Login successful:", data);
       console.log(data.user.id);
+      setError(null);
       await refreshProfile(data.user.id); 
       navigate("/user");
     } catch (err) {
-      console.log(err);
-      setError(err.message || "Error al iniciar sesión");
+      // console.log("Error en login:", err);
+      // console.log("Error response:", err.response);
+      // console.log("Error response data:", err.response?.data);
+      // console.log("Error message:", err.message);
+      
+      // Normalizar errores a un array de strings
+      let errorArray = [];
+      
+      const errorData = err.response?.data;
+      
+      // console.log("Tipo de errorData:", typeof errorData);
+      // console.log("errorData completo:", JSON.stringify(errorData));
+      
+      // Si viene como message string directo
+      if (typeof errorData?.message === "string") {
+        // console.log("Caso 1: message string");
+        errorArray = [errorData.message];
+      }
+      // Si viene como un array de strings
+      else if (Array.isArray(errorData?.message)) {
+        // console.log("Caso 2: message array");
+        errorArray = errorData.message;
+      }
+      // Si viene como un array de objetos {field, message}
+      else if (Array.isArray(errorData?.errors)) {
+        // console.log("Caso 3: errors array");
+        errorArray = errorData.errors.map(err => {
+          if (typeof err === "string") return err;
+          if (err.message) return err.message;
+          return JSON.stringify(err);
+        });
+      }
+      // Si viene como un objeto de errores {field: message}
+      else if (typeof errorData?.errors === "object" && errorData.errors !== null) {
+        // console.log("Caso 4: errors object");
+        errorArray = Object.values(errorData.errors).flat();
+      }
+      // Si el error viene como propiedad error
+      else if (typeof errorData?.error === "string") {
+        // console.log("Caso 5: error string");
+        errorArray = [errorData.error];
+      }
+      // Último recurso
+      else if (err.message) {
+        // console.log("Caso 6: err.message");
+        errorArray = [err.message];
+      }
+      // Si todo falla
+      else {
+        // console.log("Caso 7: fallback");
+        errorArray = ["Error in login. Please try again."];
+      }
+      
+      // console.log("Errores normalizados:", errorArray);
+      setError(errorArray);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <section className="bg-[var(--color-header)] min-h-screen flex items-center justify-center px-4 py-8">
+    <section className="bg-gradient-to-br from-[var(--color-header)] to-[var(--color-text)] min-h-screen flex items-center justify-center px-4 py-8">
       <div className="flex flex-col items-center justify-center max-w-md mx-auto w-full">
         <Link to="/" className="flex items-center mb-6 text-xl sm:text-2xl font-semibold text-[var(--color-text)]">
           <img
@@ -47,13 +111,25 @@ export default function LoginPage() {
           />
         </Link>
 
-        <div className="w-full bg-[var(--color-bg)] rounded-lg shadow sm:rounded-lg border border-[var(--color-primary)]">
+        <div className="w-full bg-gradient-to-br from-[var(--color-bg)] to-[var(--color-primary)] rounded-lg shadow sm:rounded-lg border border-[var(--color-primary)]">
           <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
             <h1 className="text-lg sm:text-xl font-bold text-[var(--color-text)]">
               {t('login.title')}
             </h1>
 
-            {error && <div className="text-red-600 text-xs sm:text-sm bg-red-100 border border-red-400 p-2 rounded">{error}</div>}
+            {error && (
+              <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded text-xs sm:text-sm">
+                {Array.isArray(error) ? (
+                  <ul className="list-disc list-inside space-y-1">
+                    {error.map((err, index) => (
+                      <li key={index}>{err}</li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p>{error}</p>
+                )}
+              </div>
+            )}
 
             <form className="space-y-3 sm:space-y-4" onSubmit={handleSubmit}>
               <div>
@@ -122,7 +198,7 @@ export default function LoginPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full text-[var(--color-text)] bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] focus:ring-4 focus:outline-none focus:ring-[var(--color-primary)] font-semibold rounded-2xl text-sm px-5 py-2.5"
+                className="w-full text-[var(--color-text)] bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-gradient-button)] transition-all duration-300 hover:scale-105 active:scale-95 focus:ring-4 focus:outline-none focus:ring-[var(--color-primary)] font-semibold rounded-2xl text-sm px-5 py-2.5"
               >
                 {loading ? t('common.loading') : t('login.signin')}
               </button>

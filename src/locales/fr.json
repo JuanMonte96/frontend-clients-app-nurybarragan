@@ -163,7 +163,8 @@
         "uni_description":"Un cours présentiel à la carte pour découvrir ou compléter votre pratique.",
         "ultimate_description":"Liberté totale en présentiel pour pratiquer sans contrainte sur 3 mois.",
         "freedom_description":"Expérience complète en présentiel pour un mode de vie actif sur 6 mois.",
-        "terms":"Les forfaits sont nominatifs, personnels et non transférables. Aucun remboursement, total ou partiel, ne sera accordé. Ils doivent être utilisés pendant la période de validité indiquée ; les séances non utilisées à l’expiration seront perdues, sans report ni remboursement. En achetant, vous acceptez nos termes et conditions."
+        "terms":"Les forfaits sont nominatifs, personnels et non transférables. Aucun remboursement, total ou partiel, ne sera accordé. Ils doivent être utilisés pendant la période de validité indiquée ; les séances non utilisées à l’expiration seront perdues, sans report ni remboursement. En achetant, vous acceptez nos termes et conditions.",
+        "close_hint": "Cliquez en dehors du modal pour fermer"
     },
     "footer": {
         "resources": "Ressources",

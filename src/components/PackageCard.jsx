@@ -95,7 +95,7 @@ export default function PackageCard({ pkg, onBuy }) {
         {/* BOTÓN COMPRAR */}
         <button
           onClick={() => onBuy(pkg)}
-          className="w-full bg-[var(--color-primary)] hover:bg-[#ffb300] text-[var(--color-text)] font-bold py-3 px-4 rounded-lg transition-colors text-sm sm:text-base shadow-md hover:shadow-lg"
+          className="w-full bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-gradient-button)] text-[var(--color-text)] font-bold py-3 px-4 rounded-lg transition-all duration-300 text-sm sm:text-base shadow-md hover:shadow-lg hover:scale-105 active:scale-95"
         >
           {t('purchase.buy')}
         </button>

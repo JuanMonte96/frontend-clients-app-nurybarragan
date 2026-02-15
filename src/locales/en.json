@@ -163,7 +163,8 @@
         "uni_description":"A la carte in-person class to discover or complement your practice.",
         "ultimate_description":"Total freedom in-person to practice without constraints for 3 months.",
         "freedom_description":"Complete in-person experience for an active lifestyle over 6 months.",
-        "terms": "Packages are nominal, personal, and non-transferable. No refunds will be issued, in whole or in part. Packages must be used within the stated validity period; unused sessions after expiration are forfeited, with no extension or refund. By purchasing, you agree to our terms and conditions."
+        "terms": "Packages are nominal, personal, and non-transferable. No refunds will be issued, in whole or in part. Packages must be used within the stated validity period; unused sessions after expiration are forfeited, with no extension or refund. By purchasing, you agree to our terms and conditions.",
+        "close_hint": "Click outside the modal to close"
     },
     "footer": {
         "resources": "Resources",

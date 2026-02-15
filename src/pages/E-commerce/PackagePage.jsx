@@ -81,7 +81,7 @@ export default function PackagePage() {
 
   if (loading) {
     return (
-      <main id="packages" className="min-h-screen bg-[var(--color-bg)] scroll-mt-24 p-3 sm:p-6 md:p-8">
+      <main id="packages" className="min-h-screen bg-gradient-to-br from-[var(--color-bg)] to-[var(--color-primary)] scroll-mt-24 p-3 sm:p-6 md:p-8">
         <div className="max-w-7xl mx-auto">
           <div className="h-10 sm:h-12 w-56 sm:w-72 bg-[var(--color-border)]/60 rounded mx-auto mb-6 sm:mb-8 animate-pulse" />
           <div className="grid gap-2 sm:gap-3 md:gap-4 grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center w-full">
@@ -120,7 +120,7 @@ export default function PackagePage() {
   const otherPackages = packages.filter((pkg) => pkg.class_limit !== null && pkg.class_limit <= 1);
 
   return (
-    <main id="packages" className="min-h-screen bg-[var(--color-bg)] scroll-mt-24 p-3 sm:p-6 md:p-8">
+    <main id="packages" className="min-h-screen bg-gradient-to-br from-[var(--color-bg)] to-[var(--color-primary)] scroll-mt-24 p-3 sm:p-6 md:p-8">
       <motion.h1
         className="text-5xl sm:text-3xl md:text-4xl font-extrabold mb-6 sm:mb-8 text-center text-[var(--color-text)]"
         initial={{ opacity: 0, y: 30 }}
