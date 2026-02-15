@@ -15,15 +15,23 @@ export default function LoginPage() {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const hasCheckedAuth = useRef(false);
+  const renderCount = useRef(0);
 
   const { refreshProfile, profile } = useAuth();
 
+  renderCount.current += 1;
+  if (renderCount.current === 1 || error !== null) {
+    console.log(`LoginPage render #${renderCount.current} - error:`, error);
+  }
+
   // Si el usuario ya está autenticado, redirigir a /user
   useEffect(() => {
+    console.log("LoginPage useEffect: checking auth, profile:", profile?.id);
     if (hasCheckedAuth.current) return;
     hasCheckedAuth.current = true;
     
     if(profile?.id){
+      console.log("LoginPage: redirecting to /user");
       navigate("/user");
     }
   }, []); // Array vacío - ejecutar solo una vez

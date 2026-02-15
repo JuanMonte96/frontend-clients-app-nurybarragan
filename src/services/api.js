@@ -17,13 +17,19 @@ api.interceptors.response.use(
   (error) => {
     const status = error.response?.status;
     const data = error.response?.data;
+    const currentPath = window.location.pathname;
+    
     // Evitar redirecciones si ya estamos en /changePassword
-    const isChangePasswordPage = window.location.pathname === "/changePassword";
+    const isChangePasswordPage = currentPath === "/changePassword";
+    const isLoginPage = currentPath === "/login";
     
     if (status === 401) {
       // token inválido o expirado
       localStorage.removeItem("token");
-      window.location.href = "/login";
+      // Solo redirigir a /login si NO estamos ya en /login
+      if (!isLoginPage) {
+        window.location.href = "/login";
+      }
     }
     if (status === 400 && data?.must_change_pass && !isChangePasswordPage) {
       window.location.href = "/changePassword";

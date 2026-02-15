@@ -13,6 +13,7 @@ export const AuthProvider = ({ children }) => {
   const id_user = useMemo(() => localStorage.getItem("id_user"), []);
 
   const refreshProfile = async (userId) => {
+    console.log("AuthContext: refreshProfile called with userId:", userId);
     setAuthLoading(true);
     try {
       const data = await getProfile(userId);
@@ -20,6 +21,7 @@ export const AuthProvider = ({ children }) => {
       setProfile(data);
     } catch (error) {
       console.error("Error loading profile:", error);
+      console.log("AuthContext: Setting profile to null due to error");
       setProfile(null);
     } finally {
       setAuthLoading(false);
