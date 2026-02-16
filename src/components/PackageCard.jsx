@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import poster from '../assets/bg-poster.webp';
 
 export default function PackageCard({ pkg, onBuy }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   // Función para obtener el color del paquete basado en su nombre o identificador
   const getPackageColor = () => {
@@ -20,17 +20,13 @@ export default function PackageCard({ pkg, onBuy }) {
   };
 
   const getPackageDescription = () => {
-    const name = pkg.name_package?.toLowerCase() || "";
 
-    // Mapear nombres de paquetes a colores
-    if (name.includes("starter")) return t('purchase.starter_description');
-    if (name.includes("booster")) return t('purchase.booster_description');
-    if (name.includes("power")) return t('purchase.power_description');
-    if (name.includes("uni")) return t('purchase.uni_description');
-    if (name.includes("ultimate")) return t('purchase.ultimate_description');
-    if (name.includes("freedom")) return t('purchase.freedom_description');
-
-    return pkg.description_package
+    const descriptionMap = {
+      es: pkg.description_spanish,
+      en: pkg.description_english,
+      fr: pkg.description_french
+    };
+    return descriptionMap[i18n.language] || pkg.description_spanish;
   }
 
   const isMonthly = (pkg) => {

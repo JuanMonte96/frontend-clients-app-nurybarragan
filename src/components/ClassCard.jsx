@@ -5,8 +5,17 @@ import { formatDateInTimezone, getUserTimezone } from "../services/timezone";
 import { useTranslation } from "react-i18next";
 
 export const ClassCard = ({ classData }) => {   
-    const { t } = useTranslation();
-    const { id_class, title_class, level_class, teacher, description_class, is_blocked } = classData;
+    const { t, i18n } = useTranslation();
+    const { id_class, title_class, level_class, teacher, description_english, description_spanish, description_french, is_blocked } = classData;
+
+    // Mapear idioma actual a la descripción correspondiente
+    const descriptionMap = {
+      es: description_spanish,
+      en: description_english,
+      fr: description_french
+    };
+    
+    const description = descriptionMap[i18n.language] || description_spanish;
 
     const [showSchedules, setShowSchedules] = useState(false);
     const [schedules, setSchedules] = useState([]);
@@ -47,7 +56,7 @@ export const ClassCard = ({ classData }) => {
     }
 
     return (
-        <article className="bg-[var(--color-bg-secondary)] rounded-lg sm:rounded-xl border border-[var(--color-primary)] shadow-md p-4 sm:p-6 hover:shadow-lg transition-all duration-200 hover:scale-105 flex flex-col h-full">
+        <article className="bg-[var(--color-bg-secondary)] rounded-lg sm:rounded-xl border border-[var(--color-primary)] shadow-md p-4 sm:p-6 hover:shadow-lg transition-all duration-200 hover:scale-102 flex flex-col h-full">
             {/* Encabezado con título y estado */}
             <div className="flex flex-col sm:flex-row items-start sm:items-start justify-between gap-2 sm:gap-3 mb-3">
                 <h3 className="text-lg sm:text-xl font-bold text-[var(--color-text)] flex-1 break-words">{title_class}</h3>
@@ -70,7 +79,7 @@ export const ClassCard = ({ classData }) => {
 
             {/* Descripción */}
             <p className="text-[var(--color-text)] text-xs sm:text-sm mb-4 line-clamp-2 flex-grow">
-                {description_class}
+                {description}
             </p>
 
             {/* Nivel */}

@@ -60,7 +60,7 @@ export const ClassesList = () => {
 
     return (
         <section className="w-full">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4 md:gap-6">
                 {classes.map(classData => <ClassCard key={classData.id_class} classData={classData} />)}
             </div>
         </section>

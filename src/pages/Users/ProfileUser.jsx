@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 
 export const ProfileUser = () => {
 
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { profile } = useAuth();
   const { fetchClassesRemaining } = useClasses();
 
@@ -16,6 +16,15 @@ export const ProfileUser = () => {
 
   const user = profile?.user;
   const subscriptions = profile?.subscriptionByUser || [];
+
+  const getPackageDescription = (pkg) => {
+    const descriptionMap = {
+      es: pkg.description_spanish,
+      en: pkg.description_english,
+      fr: pkg.description_french
+    };
+    return descriptionMap[i18n.language] || pkg.description_spanish;
+  };
 
   return (
     <section className="space-y-4 sm:space-y-6 w-full max-w-6xl mx-auto px-0">
@@ -87,7 +96,7 @@ export const ProfileUser = () => {
                   </span>
                 </div>
                 <p className="text-[var(--color-text)] text-xs sm:text-sm line-clamp-2">
-                  {subscription.Package?.description_package}
+                  {getPackageDescription(subscription.Package)}
                 </p>
                 <div className="mt-2 text-[var(--color-text)] text-xs sm:text-sm space-y-1">
                   <p>

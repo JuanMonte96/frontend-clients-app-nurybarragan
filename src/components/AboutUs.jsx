@@ -83,7 +83,7 @@ const AboutUs = () => {
           <div className="pt-2 sm:pt-3 md:pt-4">
             <a
               href="#packages"
-              className="inline-block bg-[var(--color-table-header)] hover:bg-[var(--color-primary-hover)] text-[var(--color-text-button)] font-bold rounded-3xl px-4 sm:px-6 py-2 sm:py-3 text-xs sm:text-sm md:text-base transition"
+              className="inline-block bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-gradient-button)] hover:scale-105 active:scale-95 font-bold rounded-3xl px-4 sm:px-6 py-2 sm:py-3 text-xs sm:text-sm md:text-base transition-all duration-300"
             >
               {t('aboutUs.explorePackages')}
             </a>
