@@ -19,7 +19,7 @@ api.interceptors.response.use(
     const data = error.response?.data;
     const currentPath = window.location.pathname;
     
-    // Evitar redirecciones si ya estamos en /changePassword
+    // Evitar redirecciones si ya estamos en url protegidas
     const isChangePasswordPage = currentPath === "/changePassword";
     const isLoginPage = currentPath === "/login";
     
@@ -31,6 +31,8 @@ api.interceptors.response.use(
         window.location.href = "/login";
       }
     }
+    // Si debe cambiar contraseña, redirecionar a /changePassword
+    // PERO NO redirecionar si ya estamos en /changePassword (para evitar loops)
     if (status === 400 && data?.must_change_pass && !isChangePasswordPage) {
       window.location.href = "/changePassword";
     }

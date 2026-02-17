@@ -22,6 +22,25 @@ export const ChangePassword = () => {
         setForm({ ...form, [e.target.id]: e.target.value });
     };
 
+    const handleCancel = async () => {
+        try {
+            // Verificar si existe token
+            const token = localStorage.getItem("token");
+            if (!token) {
+                navigate("/login");
+                return;
+            }
+            
+            // Intentar verificar si el token es válido haciendo una petición simple
+            await api.get("/api/users/profile");
+            // Si la petición es exitosa, ir a /user
+            navigate("/user");
+        } catch (err) {
+            // Si hay error (token expirado, inválido, etc), ir a /login
+            navigate("/login");
+        }
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError("");
@@ -209,13 +228,22 @@ export const ChangePassword = () => {
                             <p className="text-green-600 text-md sm:text-md font-medium">{success}</p>
                         )}
 
-                        {/* Botón */}
-                        <button
-                            type="submit"
-                            className="w-full text-[var(--color-button_text)] bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-gradient-button)] transition-all duration-300 hover:scale-105 active:scale-95 focus:ring-4 focus:outline-none focus:ring-[var(--color-primary)] font-semibold rounded-2xl sm:rounded-3xl text-md sm:text-md px-3 sm:px-5 py-2 sm:py-2.5"
-                        >
-                            {t('changePassword.update')}
-                        </button>
+                        {/* Botones */}
+                        <div className="flex gap-4 justify-center w-full pt-2">
+                            <button
+                                type="button"
+                                onClick={handleCancel}
+                                className="px-6 sm:px-8 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold text-[var(--color-text-secondary)] bg-gradient-to-r from-[var(--color-header)] to-[var(--color-text)] rounded-lg hover:shadow-lg transition-all duration-200 active:scale-95"
+                            >
+                                {t('common.cancel') || 'Cancelar'}
+                            </button>
+                            <button
+                                type="submit"
+                                className="px-6 sm:px-8 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold text-[var(--color-button_text)] bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-gradient-button)] rounded-lg hover:shadow-lg transition-all duration-200 active:scale-95"
+                            >
+                                {t('changePassword.update')}
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>
