@@ -1,14 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import img1 from "../assets/nurybarragan1.jpg";
-import img2 from "../assets/nurybarragan2.jpg";
-import img3 from "../assets/nurybarragan3.jpg";
-import img4 from "../assets/nurybarragan4.jpg";
-import img5 from "../assets/nurybarragan5.jpg";
-import img6 from "../assets/nurybarragan6.jpg";
-import img7 from "../assets/nurybarragan7.jpeg";
-import img8 from "../assets/nurybarragan8.jpeg";
+import img3 from "../assets/nurybarragan3.webp";
+import img4 from "../assets/nurybarragan4.webp";
+import img6 from "../assets/nurybarragan6.webp";
+import img8 from "../assets/nurybarragan8.webp";
 
 const bentoImages = [
   { src: img3, alt: "Nury 3", span: "col-span-1 row-span-1" },

@@ -1,8 +1,8 @@
 // src/pages/AboutUs.jsx
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import classes3Img from "../assets/classes3.jpg";
-import classes5Img from "../assets/classes5.jpg";
+import classes3Img from "../assets/classes3.webp";
+import classes5Img from "../assets/classes5.webp";
 import { useTranslation } from "react-i18next";
 
 const AboutUs = () => {

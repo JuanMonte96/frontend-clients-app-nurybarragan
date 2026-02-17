@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import logo from '../../assets/final-logo-nb.png';
+import logo from '../../assets/final-logo-nb.webp';
 import { loginService } from "../../services/authServices";
 import { useAuth } from "../../context/AuthContext";
 

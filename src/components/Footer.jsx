@@ -1,4 +1,4 @@
-import logo from '../assets/final-logo-nb.png'
+import logo from '../assets/final-logo-nb.webp'
 import { useTranslation } from 'react-i18next'
 import { Link, useNavigate } from 'react-router-dom'
 

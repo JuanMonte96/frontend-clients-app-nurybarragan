@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { User, BookOpen, ClipboardList, Settings } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import logo from '../../assets/final-logo-nb.png';
+import logo from '../../assets/final-logo-nb.webp';
 
 export const UserSideBar = ({ sidebarOpen, setSidebarOpen }) => {
   const { t } = useTranslation();

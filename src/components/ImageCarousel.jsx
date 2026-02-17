@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import classes1 from '../assets/classes.jpg';
-import classes2 from '../assets/classes2.jpg';
-import classes3 from '../assets/classes6.jpg';
-import classes4 from '../assets/classes4Prueba.jpg';
-import classes5 from '../assets/classes8.jpeg';
+import classes1 from '../assets/classes.webp';
+import classes2 from '../assets/classes2.webp';
+import classes3 from '../assets/classes6.webp';
+import classes4 from '../assets/classes4Prueba.webp';
+import classes5 from '../assets/classes8.webp';
 
 export default function ImageCarousel() {
   // Array con las 5 imágenes

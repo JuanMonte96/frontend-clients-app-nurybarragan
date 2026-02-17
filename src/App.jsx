@@ -1,5 +1,5 @@
 import Header from './components/Header';
-import logo from './assets/final-logo-nb.png';
+import logo from './assets/final-logo-nb.webp';
 import HeroSection from './components/HeroSection';
 import PackagePage from './pages/E-commerce/PackagePage';
 import Footer from './components/Footer';
