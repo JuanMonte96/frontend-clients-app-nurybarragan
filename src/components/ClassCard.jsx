@@ -15,7 +15,7 @@ export const ClassCard = ({ classData }) => {
       fr: description_french
     };
     
-    const description = descriptionMap[i18n.language] || description_spanish;
+    const description = descriptionMap[i18n.language] || description_french;
 
     const [showSchedules, setShowSchedules] = useState(false);
     const [schedules, setSchedules] = useState([]);
@@ -48,10 +48,10 @@ export const ClassCard = ({ classData }) => {
         try {
             const response = await enrollClass(id_schedule);
             console.log(response)
-            alert ("Inscripción exitosa");
+            alert (t("classes.enrollmentSuccess"));
         } catch (error) {
             const {response} = error; 
-            alert (`Error during enrollment: ${response?.data?.message || error.message}`);
+            alert (`${t("classes.enrollmentError")}: ${response?.data?.message || error.message}`);
         }
     }
 
