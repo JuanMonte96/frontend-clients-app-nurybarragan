@@ -131,18 +131,17 @@ export default function PackagePage() {
         {t("packages.title")}
       </motion.h1>
 
-    
-      {premiumPackages.length > 0 && (
+      {otherPackages.length > 0 && (
         <motion.section
-          className="mb-12 sm:mb-14 md:mb-16"
+          className="mb-10 sm:mb-12 md:mb-14"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
         >
-          <h2 className="text-center sm:text-2xl md:text-3xl lg:text-4xl font-semibold mb-4 sm:mb-6 text-[var(--color-text)]">{t("packages.premium") || "Premium"}</h2>
+          <h2 className="text-center sm:text-2xl md:text-3xl lg:text-4xl font-semibold mb-4 sm:mb-6 text-[var(--color-text)]">{t("packages.other") || "Other"}</h2>
           <div className="grid gap-2 sm:gap-3 md:gap-4 grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 justify-items-center w-full max-w-7xl mx-auto">
-            {premiumPackages.map((pkg, index) => (
+            {otherPackages.map((pkg, index) => (
               <motion.div
                 key={pkg.id_package}
                 initial={{ opacity: 0, y: 30 }}
@@ -182,18 +181,18 @@ export default function PackagePage() {
             </div>
         </motion.section>
       )}
-
-      {otherPackages.length > 0 && (
+      
+      {premiumPackages.length > 0 && (
         <motion.section
-          className="mb-10 sm:mb-12 md:mb-14"
+          className="mb-12 sm:mb-14 md:mb-16"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
         >
-          <h2 className="text-center sm:text-2xl md:text-3xl lg:text-4xl font-semibold mb-4 sm:mb-6 text-[var(--color-text)]">{t("packages.other") || "Other"}</h2>
+          <h2 className="text-center sm:text-2xl md:text-3xl lg:text-4xl font-semibold mb-4 sm:mb-6 text-[var(--color-text)]">{t("packages.premium") || "Premium"}</h2>
           <div className="grid gap-2 sm:gap-3 md:gap-4 grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 justify-items-center w-full max-w-7xl mx-auto">
-            {otherPackages.map((pkg, index) => (
+            {premiumPackages.map((pkg, index) => (
               <motion.div
                 key={pkg.id_package}
                 initial={{ opacity: 0, y: 30 }}
@@ -207,6 +206,7 @@ export default function PackagePage() {
           </div>
         </motion.section>
       )}
+
 
       {/* MODAL */}
       <PurchaseModal

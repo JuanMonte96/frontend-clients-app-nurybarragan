@@ -18,11 +18,11 @@
     /* Package colors */
     --color-pack-5: #FFD666;
     --color-pack-10: #B2DFDB;
-    --color-pack-20: #F09BB4;
-    --color-pack-1: #D67EA0;
-    --color-pack-ulti: #E8B4D4;
+    --color-pack-20: #d56262;
+    --color-pack-1: #ffffff;
+    --color-pack-ulti: #ef7dc4;
     --color-pack-free:  #BCD6A6;
-    --color-pack-default: #fff8e1;
+    --color-pack-default: #f7be63;
   }
 
   @media (prefers-color-scheme: light) {
@@ -38,6 +38,14 @@
     --color-accent: #ff8a50;
     --color-table-header:#d98200;
     --color-gradient-button:#ff9800;
+    /* Package colors */
+    --color-pack-5: #FFD666;
+    --color-pack-10: #B2DFDB;
+    --color-pack-20: #f85b5b;
+    --color-pack-1: #ffffff;
+    --color-pack-ulti: #f868c1;
+    --color-pack-free:  #BCD6A6;
+    --color-pack-default: #fff8e1;
     }
   }
 

@@ -30,7 +30,9 @@ export default function PackageCard({ pkg, onBuy }) {
   }
 
   const isMonthly = (pkg) => {
-    return (Number(pkg.duration_package / 30)) > 1;
+    const months = pkg.duration_package / 30;
+    if (months > 12) return null;
+    return months > 1;
   }
 
   const packageColor = getPackageColor();
@@ -71,12 +73,16 @@ export default function PackageCard({ pkg, onBuy }) {
 
           {/* Duración */}
           <div className="flex flex-col items-start">
-            <p className="text-white font-bold text-2xl sm:text-3xl md:text-4xl leading-none">
-              {isMonthly(pkg) ? `${pkg.duration_package / 30}` : `${pkg.duration_package}`}
-            </p>
-            <p className="text-white font-bold text-xs sm:text-sm leading-none">
-              {isMonthly(pkg) ? t('purchase.months') : t('purchase.days')}
-            </p>
+            {isMonthly(pkg) !== null && (
+              <>
+                <p className="text-white font-bold text-2xl sm:text-3xl md:text-4xl leading-none">
+                  {isMonthly(pkg) ? `${pkg.duration_package / 30}` : `${pkg.duration_package}`}
+                </p>
+                <p className="text-white font-bold text-xs sm:text-sm leading-none">
+                  {isMonthly(pkg) ? t('purchase.months') : t('purchase.days')}
+                </p>
+              </>
+            )}
           </div>
         </div>
 
