@@ -22,6 +22,7 @@
     --color-pack-1: #ffffff;
     --color-pack-ulti: #ef7dc4;
     --color-pack-free:  #BCD6A6;
+    --color-pack-discover:  #faac3e;
     --color-pack-default: #f7be63;
   }
 
@@ -45,6 +46,7 @@
     --color-pack-1: #ffffff;
     --color-pack-ulti: #f868c1;
     --color-pack-free:  #BCD6A6;
+    --color-pack-discover:  #faac3e;
     --color-pack-default: #fff8e1;
     }
   }
@@ -89,5 +91,16 @@
 
   .modal-content {
     animation: modalSlideIn 0.3s ease-out;
+  }
+
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
 }

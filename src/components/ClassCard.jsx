@@ -3,9 +3,12 @@ import { getAllScheduleByClass } from "../services/scheduleService";
 import { enrollClass } from "../services/enrollmentService";
 import { formatDateInTimezone, getUserTimezone } from "../services/timezone";
 import { useTranslation } from "react-i18next";
+import { useToast } from "../context/ToastContext";
+import LoadingSpinner from "./ui/LoadingSpinner";
 
 export const ClassCard = ({ classData }) => {   
     const { t, i18n } = useTranslation();
+    const { showToast } = useToast();
     const { id_class, title_class, level_class, teacher, description_english, description_spanish, description_french, is_blocked } = classData;
 
     // Mapear idioma actual a la descripción correspondiente
@@ -47,11 +50,11 @@ export const ClassCard = ({ classData }) => {
     const handleEnroll = async (id_schedule) => {
         try {
             const response = await enrollClass(id_schedule);
-            console.log(response)
-            alert (t("classes.enrollmentSuccess"));
+            console.log(response);
+            showToast(response?.data?.message || t('classes.enrollmentSuccess'), 'success');
         } catch (error) {
-            const {response} = error; 
-            alert (`${t("classes.enrollmentError")}: ${response?.data?.message || error.message}`);
+            const { response } = error;
+            showToast(response?.data?.message || error.message, 'error');
         }
     }
 
@@ -101,10 +104,7 @@ export const ClassCard = ({ classData }) => {
             {showSchedules && (
                 <div className="mt-4 pt-4 border-t border-[var(--color-primary)] border-opacity-30">
                     {loadingSchedules ? (
-                        <div className="text-center py-4">
-                            <div className="inline-block animate-spin rounded-full h-6 sm:h-8 w-6 sm:w-8 border-b-2 border-[var(--color-primary)]"></div>
-                            <p className="text-xs sm:text-sm text-[var(--color-text)] mt-2">{t("common.loading")}...</p>
-                        </div>
+                        <LoadingSpinner size="sm" message={t('common.loading')} />
                     ) : error ? (
                         <div className="bg-red-100 border border-red-400 text-red-700 px-2 sm:px-3 py-2 rounded-lg text-xs sm:text-sm">
                             {error}

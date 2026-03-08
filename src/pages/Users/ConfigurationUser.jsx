@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { updatedProfile, uploadCertificate } from "../../services/userService";
-import { Upload, Save, AlertCircle, CheckCircle } from "lucide-react";
+import { Upload, Save } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import LoadingSpinner from "../../components/ui/LoadingSpinner";
+import { useToast } from "../../context/ToastContext";
 
 export const ConfigurationUser = () => {
 
     const { t } = useTranslation();
+    const { showToast } = useToast();
     const { profile, authLoading, refreshProfile, id_user } = useAuth();
     const [formData, setFormData] = useState({
         name_user: "",
@@ -17,8 +20,6 @@ export const ConfigurationUser = () => {
     const [file, setFile] = useState(null);
     const [fileName, setFileName] = useState(null);
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
-    const [success, setSuccess] = useState(null);
 
     // Inicializa el formulario con los datos del usuario
     // Se ejecuta cuando el profile está listo
@@ -48,11 +49,12 @@ export const ConfigurationUser = () => {
 
         if (selectedFile) {
             // Extensiones permitidas
+
             const allowedExtensions = ['pdf', 'png', 'jpeg', 'jpg'];
             const fileExtension = selectedFile.name.split('.').pop().toLowerCase();
 
             if (!allowedExtensions.includes(fileExtension)) {
-                setError("Solo se permiten archivos: PDF, PNG, JPEG, JPG");
+                showToast('Solo se permiten archivos: PDF, PNG, JPEG, JPG', 'warning');
                 setFile(null);
                 setFileName(null);
                 return;
@@ -61,7 +63,7 @@ export const ConfigurationUser = () => {
             // Validar tamaño (máximo 5MB)
             const maxSize = 5 * 1024 * 1024; // 5MB
             if (selectedFile.size > maxSize) {
-                setError("El archivo no puede ser mayor a 5MB");
+                showToast('El archivo no puede ser mayor a 5MB', 'warning');
                 setFile(null);
                 setFileName(null);
                 return;
@@ -69,7 +71,6 @@ export const ConfigurationUser = () => {
 
             setFile(selectedFile);
             setFileName(selectedFile.name);
-            setError(null);
         }
     };
 
@@ -78,25 +79,23 @@ export const ConfigurationUser = () => {
         e.preventDefault();
 
         if (!id_user) {
-            setError("Error: No se encontró el ID del usuario");
+            showToast('Error: No se encontró el ID del usuario', 'error');
             return;
         }
 
         setLoading(true);
-        setError(null);
-        setSuccess(null);
 
         try {
             // Actualizar datos del perfil
             const response = await updatedProfile(id_user, formData);
-            setSuccess("Perfil actualizado correctamente");
+            showToast('Perfil actualizado correctamente', 'success');
 
             // Refrescar el perfil para obtener los datos actualizados
             await refreshProfile(id_user);
 
             console.log("Profile updated:", response);
         } catch (err) {
-            setError(`Error al actualizar perfil: ${err.response?.data?.message || err.message}`);
+            showToast(`Error al actualizar perfil: ${err.response?.data?.message || err.message}`, 'error');
             console.error("Error updating profile:", err);
         } finally {
             setLoading(false);
@@ -108,22 +107,20 @@ export const ConfigurationUser = () => {
         e.preventDefault();
 
         if (!file) {
-            setError("Por favor selecciona un archivo");
+            showToast('Por favor selecciona un archivo', 'warning');
             return;
         }
 
         if (!id_user) {
-            setError("Error: No se encontró el ID del usuario");
+            showToast('Error: No se encontró el ID del usuario', 'error');
             return;
         }
 
         setLoading(true);
-        setError(null);
-        setSuccess(null);
 
         try {
             const response = await uploadCertificate(id_user, file);
-            setSuccess("Certificado cargado correctamente");
+            showToast('Certificado cargado correctamente', 'success');
             setFile(null);
             setFileName(null);
 
@@ -132,7 +129,7 @@ export const ConfigurationUser = () => {
 
             console.log("Certificate uploaded:", response);
         } catch (err) {
-            setError(`Error al cargar certificado: ${err.response?.data?.message || err.message}`);
+            showToast(`Error al cargar certificado: ${err.response?.data?.message || err.message}`, 'error');
             console.error("Error uploading certificate:", err);
         } finally {
             setLoading(false);
@@ -146,31 +143,12 @@ export const ConfigurationUser = () => {
 
                 {/* Si el perfil aún está cargando */}
                 {authLoading && (
-                    <div className="flex items-center justify-center py-8 sm:py-12">
-                        <div className="text-center">
-                            <div className="inline-block animate-spin rounded-full h-8 sm:h-12 w-8 sm:w-12 border-b-2 border-[var(--color-primary)]"></div>
-                            <p className="mt-3 sm:mt-4 text-xs sm:text-sm md:text-base text-[var(--color-text)]">{t("configuration.loadingProfile")}</p>
-                        </div>
-                    </div>
+                    <LoadingSpinner message={t('configuration.loadingProfile')} />
                 )}
 
                 {!authLoading && !profile && (
                     <div className="mb-4 sm:mb-6 flex items-start gap-2 sm:gap-3 bg-red-100 border border-red-400 text-red-700 px-3 sm:px-4 py-2 sm:py-3 rounded-lg text-xs sm:text-sm">
-                        <AlertCircle size={16} className="flex-shrink-0 mt-0.5" />
                         <p>{t("configuration.errorloading")}</p>
-                    </div>
-                )}
-                {error && (
-                    <div className="mb-4 sm:mb-6 flex items-start gap-2 sm:gap-3 bg-red-100 border border-red-400 text-red-700 px-3 sm:px-4 py-2 sm:py-3 rounded-lg text-xs sm:text-sm">
-                        <AlertCircle size={16} className="flex-shrink-0 mt-0.5" />
-                        <p>{error}</p>
-                    </div>
-                )}
-
-                {success && (
-                    <div className="mb-4 sm:mb-6 flex items-start gap-2 sm:gap-3 bg-green-100 border border-green-400 text-green-700 px-3 sm:px-4 py-2 sm:py-3 rounded-lg text-xs sm:text-sm">
-                        <CheckCircle size={16} className="flex-shrink-0 mt-0.5" />
-                        <p>{success}</p>
                     </div>
                 )}
 

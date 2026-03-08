@@ -6,7 +6,7 @@ export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
   const [profile, setProfile] = useState(null);
-  const [authLoading, setAuthLoading] = useState(false);
+  const [authLoading, setAuthLoading] = useState(true);
   const hasInitialized = useRef(false);
 
   // Usar useMemo para evitar que id_user cambie en cada render
@@ -36,11 +36,13 @@ export const AuthProvider = ({ children }) => {
     const token = localStorage.getItem("token");
     const storedUserId = localStorage.getItem("id_user");
     
-    // Solo cargar perfil si AMBOS token e id_user existen
     if (token && storedUserId) {
+      // Hay sesión guardada: cargamos el perfil (refreshProfile pone authLoading en false al terminar)
       refreshProfile(storedUserId);
+    } else {
+      // No hay credenciales: terminamos la verificación para que el redirect a /login funcione
+      setAuthLoading(false);
     }
-    // Si no hay token, no hacer nada, simplemente dejar que la app siga
   }, []);
 
   return (

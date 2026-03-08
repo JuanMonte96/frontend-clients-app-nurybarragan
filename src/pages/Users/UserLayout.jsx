@@ -3,13 +3,14 @@ import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { UserSideBar } from "./UserSideBar";
 import { HeaderUser } from "./HeaderUser";
+import LoadingSpinner from "../../components/ui/LoadingSpinner";
 
 export default function UserLayout() {
     const { profile, authLoading } = useAuth();
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
     if (authLoading) {
-        return <div className="min-h-screen flex items-center justify-center">Cargando…</div>;
+        return <LoadingSpinner fullscreen message="Cargando sesión..." />;
     }
 
     if (!authLoading && !profile) return <Navigate to="/login" replace />;

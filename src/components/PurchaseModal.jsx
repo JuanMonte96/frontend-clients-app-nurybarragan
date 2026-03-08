@@ -2,7 +2,7 @@ import  { useState } from "react";
 import { useTranslation } from "react-i18next";
 import bgPoster from "../assets/bg-poster.webp";
 
-export default function PurchaseModal({ isOpen, onClose, pkg, onConfirm }) {
+export default function PurchaseModal({ isOpen, onClose, pkg, onConfirm, isLoading = false }) {
 
   const { t } = useTranslation();
   const [name, setName] = useState("");
@@ -13,6 +13,8 @@ export default function PurchaseModal({ isOpen, onClose, pkg, onConfirm }) {
   if (!isOpen && !isClosing) return null;
 
   const handleBackdropClick = (e) => {
+    // Bloqueamos el cierre si estamos redirigiendo a Stripe
+    if (isLoading) return;
     if (e.target === e.currentTarget) {
       setIsClosing(true);
       setTimeout(() => {
@@ -23,6 +25,7 @@ export default function PurchaseModal({ isOpen, onClose, pkg, onConfirm }) {
   };
 
   const handleCloseAnimation = () => {
+    if (isLoading) return;
     setIsClosing(true);
     setTimeout(() => {
       setIsClosing(false);
@@ -52,9 +55,19 @@ export default function PurchaseModal({ isOpen, onClose, pkg, onConfirm }) {
       }`}
       onClick={handleBackdropClick}
     >
-      <div className={`modal-content bg-gradient-to-br from-[var(--color-bg)] to-[var(--color-bg-secondary)] rounded-2xl shadow-2xl w-full max-w-5xl overflow-hidden transition-all duration-300 transform ${
+      <div className={`modal-content relative bg-gradient-to-br from-[var(--color-bg)] to-[var(--color-bg-secondary)] rounded-2xl shadow-2xl w-full max-w-5xl overflow-hidden transition-all duration-300 transform ${
         isClosing ? "scale-95 opacity-0" : "scale-100 opacity-100"
       }`}>
+
+        {/* Overlay de carga mientras se redirige a Stripe */}
+        {isLoading && (
+          <div className="absolute inset-0 bg-black/70 backdrop-blur-sm rounded-2xl flex flex-col items-center justify-center z-20">
+            <div className="animate-spin rounded-full h-14 w-14 border-4 border-[var(--color-primary)] border-t-transparent mb-5"></div>
+            <p className="text-white font-bold text-lg sm:text-xl mb-1">{t('common.stripe')}</p>
+            <p className="text-white/60 text-sm">{t('common.noClose')}</p>
+          </div>
+        )}
+
         <div className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr]">
           {/* Sección de Imagen */}
           <div className="hidden md:flex items-center justify-center bg-gradient-to-br from-[var(--color-text-button)] to-[var(--color-header)] p-6 sm:p-8">
@@ -104,7 +117,7 @@ export default function PurchaseModal({ isOpen, onClose, pkg, onConfirm }) {
                   onChange={(e) => setName(e.target.value)}
                   required
                   className="w-full bg-white text-[var(--color-text)] border-2 border-[#e0e0e0] rounded-lg p-3 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent transition-all"
-                  placeholder="Tu nombre completo"
+                  placeholder={t("purchase.name_placeholder")}
                 />
               </div>
 

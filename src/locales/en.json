@@ -10,7 +10,9 @@
         "save": "Save",
         "delete": "Delete",
         "edit": "Edit",
-        "close": "Close"
+        "close": "Close",
+        "stripe": "Redirecting to Stripe...",
+        "noClose": "Please do not close this window"
     },
     "header": {
         "login": "Sign In",
@@ -164,7 +166,9 @@
         "ultimate_description":"Total freedom in-person to practice without constraints for 3 months.",
         "freedom_description":"Complete in-person experience for an active lifestyle over 6 months.",
         "terms": "Packages are nominal, personal, and non-transferable. No refunds will be issued, in whole or in part. Packages must be used within the stated validity period; unused sessions after expiration are forfeited, with no extension or refund. By purchasing, you agree to our terms and conditions.",
-        "close_hint": "Click outside the modal to close"
+        "close_hint": "Click outside the modal to close",
+        "month": "month",
+        "name_placeholder": "Your full name"
     },
     "footer": {
         "resources": "Resources",
@@ -193,7 +197,8 @@
         "noClasses": "No classes available at the moment.",
         "classesRemaining": "Classes Remaining",
         "totalClasses": "Total Classes",
-        "totalEnrolled": "Total Enrolled Classes"
+        "totalEnrolled": "Total Enrolled Classes",
+        "enrollmentSuccess": "Enrollment successful"
     },
     "teachers":{
         "title":"Our Professional Teachers",

@@ -10,7 +10,9 @@
         "save": "Guardar",
         "delete": "Eliminar",
         "edit": "Editar",
-        "close": "Cerrar"
+        "close": "Cerrar",
+        "stripe": "Redirigiendo a Stripe...",
+        "noClose": "Por favor, no cierres esta ventana"
     },
     "header": {
         "login": "Iniciar Sesión",
@@ -164,7 +166,9 @@
         "ultimate_description":"Libertad total en modalidad presencial para entrenar sin restricciones durante 3 meses.",
         "freedom_description":"Experiencia completa en modalidad presencial para un estilo de vida activo durante 6 meses.",
         "terms": "Los paquetes son nominales, personales e intransferibles. No son reembolsables, total ni parcialmente. Deben utilizarse dentro del período de vigencia indicado; las clases no usadas al vencimiento se perderán sin derecho a reembolso ni prórroga. Al comprar, aceptas nuestros términos y condiciones.",
-        "close_hint": "Haz clic fuera del modal para cerrar"
+        "close_hint": "Haz clic fuera del modal para cerrar",
+        "month": "mes",
+        "name_placeholder": "Tu Nombre Completo"
     },
     "footer": {
         "resources": "Recursos",
@@ -193,7 +197,8 @@
         "noClasses": "No hay clases disponibles por el momento.",
         "classesRemaining": "Clases restantes",
         "totalClasses": "Total de Clases",
-        "totalEnrolled": "Total de clases inscritas"
+        "totalEnrolled": "Total de clases inscritas",
+        "enrollmentSuccess": "Incripsión Exitosa"
     },
     "teachers":{
         "title":"Nuestros Profesores profesionales",

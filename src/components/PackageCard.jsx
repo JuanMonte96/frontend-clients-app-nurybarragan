@@ -15,6 +15,7 @@ export default function PackageCard({ pkg, onBuy }) {
     if (name.includes("uni")) return "var(--color-pack-1)";
     if (name.includes("ultimate")) return "var(--color-pack-ulti)";
     if (name.includes("freedom")) return "var(--color-pack-free)";
+    if (name.includes("discover")) return "var(--color-pack-discover)";
 
     return "var(--color-primary)";
   };
@@ -32,7 +33,7 @@ export default function PackageCard({ pkg, onBuy }) {
   const isMonthly = (pkg) => {
     const months = pkg.duration_package / 30;
     if (months > 12) return null;
-    return months > 1;
+    return months >= 1;
   }
 
   const packageColor = getPackageColor();
@@ -79,7 +80,7 @@ export default function PackageCard({ pkg, onBuy }) {
                   {isMonthly(pkg) ? `${pkg.duration_package / 30}` : `${pkg.duration_package}`}
                 </p>
                 <p className="text-white font-bold text-xs sm:text-sm leading-none">
-                  {isMonthly(pkg) ? t('purchase.months') : t('purchase.days')}
+                  {isMonthly(pkg) ? (pkg.duration_package / 30 === 1 ? t('purchase.month') : t('purchase.months')) : t('purchase.days')}
                 </p>
               </>
             )}

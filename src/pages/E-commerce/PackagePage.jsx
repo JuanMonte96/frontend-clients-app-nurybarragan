@@ -4,16 +4,19 @@ import PackageCard from "../../components/PackageCard";
 import PurchaseModal from "../../components/PurchaseModal";
 import api from "../../services/api";
 import { useTranslation } from "react-i18next";
+import { useToast } from "../../context/ToastContext";
 
 export default function PackagePage() {
 
   const { t } = useTranslation();
+  const { showToast } = useToast();
   const [packages, setPackages] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const [selectedPackage, setSelectedPackage] = useState(null); // paquete actual
   const [modalOpen, setModalOpen] = useState(false); // abrir/cerrar modal
+  const [isRedirecting, setIsRedirecting] = useState(false); // pantalla de carga mientras redirige a Stripe
   const skeletonItems = Array.from({ length: 6 });
 
   useEffect(() => {
@@ -48,6 +51,8 @@ export default function PackagePage() {
 
   // 👉 Se ejecuta cuando el usuario confirma el modal
   const handleConfirmPurchase = async ({ name, email, telephone }) => {
+    // Activamos la pantalla de carga — el modal permanece abierto mostrando el spinner
+    setIsRedirecting(true);
     try {
       const payload = {
         name,
@@ -64,18 +69,22 @@ export default function PackagePage() {
         payload
       );
 
-      const payment_url = response.data.url; // tu backend debería devolver algo así
-      console.log(response.data.url)
+      const payment_url = response.data.url;
+      console.log(response.data.url);
       if (payment_url) {
-        window.location.href = payment_url; // redirige a Stripe
+        // La navegación a Stripe destruye esta página completa,
+        // por eso el loader desaparece solo — no necesitamos código extra.
+        window.location.href = payment_url;
       } else {
-        alert("No se pudo obtener la URL de pago.");
+        showToast(t('common.error'), 'error');
+        setIsRedirecting(false);
+        setModalOpen(false);
       }
     } catch (error) {
-      console.error("❌ Error al iniciar pago:", error);
-      alert("Error al iniciar el pago. Intenta nuevamente.");
-    } finally {
-      setModalOpen(false);
+      console.error('❌ Error al iniciar pago:', error);
+      showToast(t('common.error'), 'error');
+      // En caso de error, quitamos el loader y dejamos el modal abierto para reintentar
+      setIsRedirecting(false);
     }
   };
 
@@ -115,9 +124,9 @@ export default function PackagePage() {
   if (error) return <div className="p-6 sm:p-8 md:p-10 text-center text-red-600 text-xs sm:text-sm md:text-base">{t("common.error")} : {error}</div>;
 
   // 👉 Organizar paquetes en 3 grupos
-  const premiumPackages = packages.filter((pkg) => pkg.class_limit === null);
-  const midPackages = packages.filter((pkg) => pkg.class_limit > 1);
-  const otherPackages = packages.filter((pkg) => pkg.class_limit !== null && pkg.class_limit <= 1);
+  const premiumPackages = packages.filter((pkg) => pkg.category === 'premium');
+  const standardPackages = packages.filter((pkg) => pkg.category=='standard') ;
+  const basicPackages = packages.filter((pkg) => pkg.category == 'basics');
 
   return (
     <main id="packages" className="min-h-screen bg-gradient-to-br from-[var(--color-bg)] to-[var(--color-primary)] scroll-mt-24 p-3 sm:p-6 md:p-8">
@@ -131,7 +140,7 @@ export default function PackagePage() {
         {t("packages.title")}
       </motion.h1>
 
-      {otherPackages.length > 0 && (
+      {basicPackages.length > 0 && (
         <motion.section
           className="mb-10 sm:mb-12 md:mb-14"
           initial={{ opacity: 0, y: 30 }}
@@ -141,7 +150,7 @@ export default function PackagePage() {
         >
           <h2 className="text-center sm:text-2xl md:text-3xl lg:text-4xl font-semibold mb-4 sm:mb-6 text-[var(--color-text)]">{t("packages.other") || "Other"}</h2>
           <div className="grid gap-2 sm:gap-3 md:gap-4 grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 justify-items-center w-full max-w-7xl mx-auto">
-            {otherPackages.map((pkg, index) => (
+            {basicPackages.map((pkg, index) => (
               <motion.div
                 key={pkg.id_package}
                 initial={{ opacity: 0, y: 30 }}
@@ -157,7 +166,7 @@ export default function PackagePage() {
       )}
 
      
-      {midPackages.length > 0 && (
+      {standardPackages.length > 0 && (
         <motion.section
           className="mb-10 sm:mb-12 md:mb-14"
           initial={{ opacity: 0, y: 30 }}
@@ -167,7 +176,7 @@ export default function PackagePage() {
         >
           <h2 className="text-center sm:text-2xl md:text-3xl lg:text-4xl font-semibold mb-4 sm:mb-6 text-[var(--color-text)]">{t("packages.popular") || "Popular"}</h2>
           <div className="grid gap-2 sm:gap-3 md:gap-4 grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center w-full max-w-7xl mx-auto">
-              {midPackages.map((pkg, index) => (
+              {standardPackages.map((pkg, index) => (
                 <motion.div
                   key={pkg.id_package}
                   initial={{ opacity: 0, y: 30 }}
@@ -214,6 +223,7 @@ export default function PackagePage() {
         onClose={() => setModalOpen(false)}
         pkg={selectedPackage}
         onConfirm={handleConfirmPurchase}
+        isLoading={isRedirecting}
       />
     </main>
   );
