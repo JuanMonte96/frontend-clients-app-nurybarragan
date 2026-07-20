@@ -4,7 +4,7 @@ import HeroSection from './components/HeroSection';
 import PackagePage from './pages/E-commerce/PackagePage';
 import Footer from './components/Footer';
 import LoginPage from './pages/Login/LoginPage';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import AboutUs from './components/AboutUs';
 import { ContactUS } from './components/ContactUs';
 import { ChangePassword } from './pages/Login/ChangePassword';
@@ -13,9 +13,13 @@ import { ProfileUser } from './pages/Users/ProfileUser';
 import {ClassesUser} from './pages/Users/ClassesUser';
 import { EnrolmentUser } from './pages/Users/EnrolmentUser';
 import { ConfigurationUser } from './pages/Users/ConfigurationUser';
+import AdminLayout from './pages/Admin/AdminLayout';
+import AdminUsersPage from './pages/Admin/AdminUsersPage';
+import AdminAttendancePage from './pages/Admin/AdminAttendancePage';
 import { useTranslation } from 'react-i18next';
 import  TeacherProfile  from './components/TeachersProfile';
 import Information from './components/Information';
+import QrAttendancePage from './pages/Attendance/QrAttendancePage';
 function App() {
 
   const { t } = useTranslation();
@@ -45,6 +49,14 @@ function App() {
             } />
             <Route path="/login" element={<LoginPage />} />
             <Route path='/changePassword' element={<ChangePassword />} />
+
+            <Route path="/admin" element={<AdminLayout />}>
+              <Route index element={<Navigate to="users" replace />} />
+              <Route path="users" element={<AdminUsersPage />} />
+              <Route path="attendance" element={<AdminAttendancePage />} />
+            </Route>
+
+            <Route path="/attendance/scan/:scheduleId" element={<QrAttendancePage />} />
 
             {/* Privado */}
             <Route path="/user" element={

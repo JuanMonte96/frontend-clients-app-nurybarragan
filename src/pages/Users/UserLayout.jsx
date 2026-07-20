@@ -14,6 +14,7 @@ export default function UserLayout() {
     }
 
     if (!authLoading && !profile) return <Navigate to="/login" replace />;
+    if (profile?.user?.role === "admin") return <Navigate to="/admin/users" replace />;
 
     return (
         <div className="flex min-h-screen bg-[var(--color-bg)]">

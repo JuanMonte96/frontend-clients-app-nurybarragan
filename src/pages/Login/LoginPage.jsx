@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useState, useEffect, useRef, useMemo } from "react";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import logo from '../../assets/final-logo-nb.webp';
 import { loginService } from "../../services/authServices";
@@ -13,6 +13,7 @@ export default function LoginPage() {
   const [error, setError] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
   const { t } = useTranslation();
   const hasCheckedAuth = useRef(false);
   const renderCount = useRef(0);
@@ -24,15 +25,33 @@ export default function LoginPage() {
     console.log(`LoginPage render #${renderCount.current} - error:`, error);
   }
 
-  // Si el usuario ya está autenticado, redirigir a /user
+  const redirectTo = useMemo(() => {
+    const params = new URLSearchParams(location.search);
+    const target = params.get("redirectTo");
+    return target && target.startsWith("/") ? target : "";
+  }, [location.search]);
+
+  const redirectByRole = (role) => {
+    if (redirectTo) {
+      navigate(redirectTo, { replace: true });
+      return;
+    }
+
+    if (role === "admin") {
+      navigate("/admin/users");
+      return;
+    }
+    navigate("/user");
+  };
+
+  // Si el usuario ya está autenticado, redirigir según rol
   useEffect(() => {
-    console.log("LoginPage useEffect: checking auth, profile:", profile?.id);
+    console.log("LoginPage useEffect: checking auth, profile:", profile?.user?.id_user);
     if (hasCheckedAuth.current) return;
     hasCheckedAuth.current = true;
     
-    if(profile?.id){
-      console.log("LoginPage: redirecting to /user");
-      navigate("/user");
+    if (profile?.user?.id_user) {
+      redirectByRole(profile?.user?.role);
     }
   }, []); // Array vacío - ejecutar solo una vez
 
@@ -46,7 +65,7 @@ export default function LoginPage() {
       console.log(data.user.id);
       setError(null);
       await refreshProfile(data.user.id); 
-      navigate("/user");
+      redirectByRole(data?.user?.role);
     } catch (err) {
       // console.log("Error en login:", err);
       // console.log("Error response:", err.response);
