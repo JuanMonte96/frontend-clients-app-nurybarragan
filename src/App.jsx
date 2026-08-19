@@ -16,6 +16,9 @@ import { ConfigurationUser } from './pages/Users/ConfigurationUser';
 import AdminLayout from './pages/Admin/AdminLayout';
 import AdminUsersPage from './pages/Admin/AdminUsersPage';
 import AdminAttendancePage from './pages/Admin/AdminAttendancePage';
+import AdminPackagesHubPage from './pages/Admin/AdminPackagesHubPage';
+import AdminClassesPage from './pages/Admin/AdminClassesPage';
+import AdminPromotionsPage from './pages/Admin/AdminPromotionsPage';
 import { useTranslation } from 'react-i18next';
 import  TeacherProfile  from './components/TeachersProfile';
 import Information from './components/Information';
@@ -54,6 +57,10 @@ function App() {
               <Route index element={<Navigate to="users" replace />} />
               <Route path="users" element={<AdminUsersPage />} />
               <Route path="attendance" element={<AdminAttendancePage />} />
+              <Route path="classes" element={<AdminClassesPage />} />
+              <Route path="promotions" element={<AdminPromotionsPage />} />
+              <Route path="package-categories" element={<Navigate to="packages" replace />} />
+              <Route path="packages" element={<AdminPackagesHubPage />} />
             </Route>
 
             <Route path="/attendance/scan/:scheduleId" element={<QrAttendancePage />} />

@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { ArrowLeftRight, CalendarRange, CreditCard, Search, ShieldCheck, Users } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
 import {
   getAdminUserDetail,
@@ -32,30 +33,41 @@ const formatCurrency = (value) => {
 };
 
 const EmptyState = ({ text }) => (
-  <div className="rounded-lg border border-[var(--color-primary)] bg-[var(--color-bg)] px-4 py-6 text-center text-sm text-[var(--color-text)]">
+  <div className="rounded-2xl border border-[var(--color-primary)]/20 bg-[var(--color-bg)] px-4 py-6 text-center text-sm text-[var(--color-text)] shadow-sm">
     {text}
   </div>
 );
 
 const DataError = ({ message }) => (
-  <div className="rounded-lg border border-red-400 bg-red-100 px-4 py-3 text-sm text-red-700">
+  <div className="rounded-2xl border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-700 shadow-sm">
     {message}
   </div>
 );
 
 const AccordionSection = ({ title, children, isOpen, onToggle }) => (
-  <section className="rounded-lg border border-[var(--color-primary)] bg-[var(--color-bg)]">
+  <section className="overflow-hidden rounded-3xl border border-[var(--color-primary)]/20 bg-[var(--color-bg)] shadow-sm">
     <button
       type="button"
       onClick={onToggle}
-      className="flex w-full items-center justify-between px-4 py-3 text-left"
+      className="flex w-full items-center justify-between px-5 py-4 text-left transition hover:bg-[var(--color-primary)]/5"
     >
       <h3 className="text-base font-bold text-[var(--color-text)]">{title}</h3>
-      <span className="text-sm font-semibold text-[var(--color-text)]">{isOpen ? "Ocultar" : "Mostrar"}</span>
+      <span className="rounded-full border border-[var(--color-primary)]/20 bg-[var(--color-bg-secondary)] px-3 py-1 text-xs font-semibold text-[var(--color-text)]">
+        {isOpen ? "Ocultar" : "Mostrar"}
+      </span>
     </button>
-    {isOpen && <div className="border-t border-[var(--color-primary)]/40 p-4">{children}</div>}
+    {isOpen && <div className="border-t border-[var(--color-primary)]/10 p-4 sm:p-5">{children}</div>}
   </section>
 );
+
+const sectionCardClass = "rounded-3xl border border-[var(--color-primary)]/20 bg-[var(--color-bg-secondary)]/95 shadow-[0_10px_30px_rgba(0,0,0,0.08)]";
+const primaryButtonClass = "inline-flex items-center justify-center gap-2 rounded-full border border-[var(--color-primary)] bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-gradient-button)] px-4 py-2.5 text-sm font-semibold text-[var(--color-text)] shadow-sm transition-all duration-300 hover:scale-[1.02] hover:shadow-md active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:scale-100";
+const clearFiltersButtonClass = "inline-flex items-center justify-center gap-2 rounded-full border border-rose-300 bg-gradient-to-r from-amber-500 to-rose-500 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 hover:scale-[1.02] hover:shadow-md active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:scale-100";
+const compactPrimaryButtonClass = "inline-flex items-center justify-center gap-2 rounded-full border border-[var(--color-primary)] bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-gradient-button)] px-3 py-1.5 text-xs font-semibold text-[var(--color-text)] shadow-sm transition-all duration-300 hover:scale-[1.02] hover:shadow-md active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:scale-100";
+const ghostButtonClass = "inline-flex items-center justify-center gap-2 rounded-full border border-[var(--color-primary)]/20 bg-[var(--color-bg)] px-4 py-2.5 text-sm font-semibold text-[var(--color-text)] transition-all duration-300 hover:border-[var(--color-primary)] hover:bg-[var(--color-primary)]/10 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50";
+const inputClass = "w-full rounded-2xl border border-[var(--color-primary)]/20 bg-[var(--color-bg)] px-4 py-3 text-sm text-[var(--color-text)] outline-none transition focus:border-[var(--color-primary)] focus:ring-2 focus:ring-[var(--color-primary)]/20";
+const selectClass = "rounded-2xl border border-[var(--color-primary)]/20 bg-[var(--color-bg)] px-3 py-2 text-sm text-[var(--color-text)] outline-none transition focus:border-[var(--color-primary)] focus:ring-2 focus:ring-[var(--color-primary)]/20";
+const pageTagClass = "inline-flex items-center gap-2 rounded-full border border-[var(--color-primary)]/20 bg-[var(--color-bg)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-text)]";
 
 export const AdminUsersPage = () => {
   const { profile } = useAuth();
@@ -167,20 +179,37 @@ export const AdminUsersPage = () => {
   return (
     <section className="space-y-6">
       <div className="space-y-6">
-        <header className="rounded-xl border border-[var(--color-primary)] bg-[var(--color-bg-secondary)] p-4 sm:p-6">
-          <h1 className="text-2xl font-bold text-[var(--color-text)] sm:text-3xl">Administracion de usuarios</h1>
-          <p className="mt-2 text-sm text-[var(--color-text)]">
-            Consulta general y detalle completo de usuarios, pagos, suscripciones y certificados medicos.
-          </p>
+        <header className={`${sectionCardClass} overflow-hidden`}>
+          <div className="flex flex-col gap-4 border-b border-[var(--color-primary)]/20 p-5 sm:flex-row sm:items-end sm:justify-between">
+            <div className="space-y-3">
+              <div className={pageTagClass}>
+                <Users size={14} />
+                Usuarios
+              </div>
+              <div>
+                <h1 className="text-3xl font-black tracking-tight text-[var(--color-text)] sm:text-4xl">Administracion de usuarios</h1>
+                <p className="mt-2 max-w-3xl text-sm leading-6 text-[var(--color-text)]">
+                  Consulta general y detalle completo de usuarios, pagos, suscripciones y certificados medicos.
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-wrap gap-2 text-xs font-semibold text-[var(--color-text)]">
+              <span className="rounded-full border border-[var(--color-primary)]/20 bg-[var(--color-bg)] px-3 py-1">Responsive</span>
+              <span className="rounded-full border border-[var(--color-primary)]/20 bg-[var(--color-bg)] px-3 py-1">Detalle completo</span>
+            </div>
+          </div>
         </header>
 
-        <section className="rounded-xl border border-[var(--color-primary)] bg-[var(--color-bg-secondary)] p-4 sm:p-6">
-          <h2 className="mb-4 text-lg font-bold text-[var(--color-text)]">Filtros</h2>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <section className={sectionCardClass}>
+          <div className="border-b border-[var(--color-primary)]/20 p-5">
+            <h2 className="text-xl font-bold text-[var(--color-text)]">Filtros</h2>
+            <p className="mt-1 text-sm text-[var(--color-text)]">Busca por nombre y rango de fechas sin salir de la vista principal.</p>
+          </div>
+          <div className="grid gap-3 p-5 sm:grid-cols-2 lg:grid-cols-3">
             <label className="flex flex-col gap-1 text-sm font-semibold text-[var(--color-text)]">
               Nombre del usuario
               <input
-                className="rounded-lg border border-[var(--color-primary)] bg-[var(--color-bg)] px-3 py-2 text-sm"
+                className={inputClass}
                 placeholder="Escribe o selecciona un nombre"
                 type="text"
                 list="admin-user-names"
@@ -201,7 +230,7 @@ export const AdminUsersPage = () => {
               Fecha inicio
               <input
                 type="date"
-                className="rounded-lg border border-[var(--color-primary)] bg-[var(--color-bg)] px-3 py-2 text-sm"
+                className={inputClass}
                 value={filters.registered_from}
                 onChange={(e) => setFilters((prev) => ({ ...prev, registered_from: e.target.value }))}
               />
@@ -210,21 +239,22 @@ export const AdminUsersPage = () => {
               Fecha fin
               <input
                 type="date"
-                className="rounded-lg border border-[var(--color-primary)] bg-[var(--color-bg)] px-3 py-2 text-sm"
+                className={inputClass}
                 value={filters.registered_to}
                 onChange={(e) => setFilters((prev) => ({ ...prev, registered_to: e.target.value }))}
               />
             </label>
           </div>
-          <div className="mt-4 flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2 px-5 pb-5">
             <button
-              className="rounded-lg bg-[var(--color-primary)] px-4 py-2 text-sm font-semibold text-[var(--color-text)]"
+              className={primaryButtonClass}
               onClick={() => setPagination((prev) => ({ ...prev, page: 1 }))}
             >
+              <Search size={16} />
               Aplicar filtros
             </button>
             <button
-              className="rounded-lg border border-[var(--color-primary)] bg-[var(--color-bg)] px-4 py-2 text-sm"
+              className={clearFiltersButtonClass}
               onClick={() => {
                 setFilters({
                   name: "",
@@ -239,14 +269,14 @@ export const AdminUsersPage = () => {
           </div>
         </section>
 
-        <section className="rounded-xl border border-[var(--color-primary)] bg-[var(--color-bg-secondary)] p-4 sm:p-6">
-          <div className="mb-3 flex items-center justify-between">
+        <section className={sectionCardClass}>
+          <div className="flex flex-col gap-3 border-b border-[var(--color-primary)]/20 p-5 sm:flex-row sm:items-center sm:justify-between">
             <h2 className="text-lg font-bold text-[var(--color-text)]">Usuarios</h2>
             <div className="flex items-center gap-2 text-xs sm:text-sm">
-              <label htmlFor="sort_by">Ordenar por</label>
+              <label className="font-semibold" htmlFor="sort_by">Ordenar por</label>
               <select
                 id="sort_by"
-                className="rounded-lg border border-[var(--color-primary)] bg-[var(--color-bg)] px-2 py-1"
+                className={selectClass}
                 value={pagination.sort_by}
                 onChange={(e) => setPagination((prev) => ({ ...prev, sort_by: e.target.value }))}
               >
@@ -266,6 +296,7 @@ export const AdminUsersPage = () => {
             </div>
           </div>
 
+          <div className="p-5">
           {usersLoading ? (
             <LoadingSpinner message="Cargando usuarios..." />
           ) : usersError ? (
@@ -273,10 +304,10 @@ export const AdminUsersPage = () => {
           ) : users.length === 0 ? (
             <EmptyState text="No existen usuarios para los filtros seleccionados." />
           ) : (
-            <div className="overflow-x-auto rounded-lg border border-[var(--color-primary)] bg-[var(--color-bg)]">
+            <div className="overflow-x-auto rounded-3xl border border-[var(--color-primary)]/20 bg-[var(--color-bg)] shadow-sm">
               <table className="min-w-full text-xs sm:text-sm">
                 <thead>
-                  <tr className="bg-[var(--color-table-header)] text-[var(--color-text)]">
+                  <tr className="bg-[var(--color-bg-secondary)] text-[var(--color-text)]">
                     <th className="px-3 py-2 text-left">Nombre</th>
                     <th className="px-3 py-2 text-left">Correo</th>
                     <th className="px-3 py-2 text-left">Telefono</th>
@@ -303,7 +334,7 @@ export const AdminUsersPage = () => {
                       <td className="px-3 py-2 font-semibold">{formatDate(user.last_payment?.created_at)}</td>
                       <td className="px-3 py-2">
                         <button
-                          className="rounded-md bg-[var(--color-primary)] px-3 py-1 text-xs font-semibold"
+                          className={compactPrimaryButtonClass}
                           onClick={() => openDetail(user.id_user)}
                         >
                           Ver detalle
@@ -316,29 +347,35 @@ export const AdminUsersPage = () => {
             </div>
           )}
 
-          <div className="mt-4 flex items-center justify-between text-sm">
+          <div className="mt-5 flex items-center justify-between gap-3 text-sm">
             <button
-              className="rounded-md border border-[var(--color-primary)] px-3 py-1 disabled:opacity-50"
+              className={ghostButtonClass}
               disabled={pagination.page <= 1}
               onClick={() => setPagination((prev) => ({ ...prev, page: prev.page - 1 }))}
             >
+              <ArrowLeftRight size={16} className="rotate-180" />
               Anterior
             </button>
             <span>
               Pagina {pagination.page} de {totalPages}
             </span>
             <button
-              className="rounded-md border border-[var(--color-primary)] px-3 py-1 disabled:opacity-50"
+              className={ghostButtonClass}
               disabled={pagination.page >= totalPages}
               onClick={() => setPagination((prev) => ({ ...prev, page: prev.page + 1 }))}
             >
               Siguiente
+              <ArrowLeftRight size={16} />
             </button>
+          </div>
           </div>
         </section>
 
-        <section className="rounded-xl border border-[var(--color-primary)] bg-[var(--color-bg-secondary)] p-4 sm:p-6">
-          <h2 className="mb-3 text-lg font-bold text-[var(--color-text)]">Detalle de usuario</h2>
+        <section className={sectionCardClass}>
+          <div className="border-b border-[var(--color-primary)]/20 p-5">
+            <h2 className="text-xl font-bold text-[var(--color-text)]">Detalle de usuario</h2>
+          </div>
+          <div className="p-5">
 
           {!selectedUserId ? (
             <EmptyState text="Selecciona un usuario para ver el detalle." />
@@ -350,7 +387,7 @@ export const AdminUsersPage = () => {
             <EmptyState text="No fue posible cargar el detalle." />
           ) : (
             <div className="space-y-6">
-              <section className="rounded-lg border border-[var(--color-primary)] bg-[var(--color-bg)] p-4">
+              <section className="rounded-3xl border border-[var(--color-primary)]/20 bg-[var(--color-bg)] p-4 shadow-sm">
                 <h3 className="mb-3 text-lg font-bold text-[var(--color-text)]">Informacion general</h3>
                 <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 text-sm">
                   <p><span className="font-semibold">Nombre:</span> {detail.user?.name_user || "-"}</p>
@@ -371,10 +408,10 @@ export const AdminUsersPage = () => {
                 {(detail.subscriptions?.rows || []).length === 0 ? (
                   <EmptyState text="Este usuario no tiene suscripciones registradas." />
                 ) : (
-                  <div className="overflow-x-auto rounded-lg border border-[var(--color-primary)] bg-[var(--color-bg)]">
+                  <div className="overflow-x-auto rounded-3xl border border-[var(--color-primary)]/20 bg-[var(--color-bg)] shadow-sm">
                     <table className="min-w-full text-xs sm:text-sm">
                       <thead>
-                        <tr className="bg-[var(--color-table-header)] text-[var(--color-text)]">
+                        <tr className="bg-[var(--color-bg-secondary)] text-[var(--color-text)]">
                           <th className="px-3 py-2 text-left font-semibold">Plan</th>
                           <th className="px-3 py-2 text-left font-semibold">Estado</th>
                           <th className="px-3 py-2 text-left font-semibold">Valor</th>
@@ -410,10 +447,10 @@ export const AdminUsersPage = () => {
                 {(detail.payments?.rows || []).length === 0 ? (
                   <EmptyState text="Este usuario no tiene pagos registrados." />
                 ) : (
-                  <div className="overflow-x-auto rounded-lg border border-[var(--color-primary)] bg-[var(--color-bg)]">
+                  <div className="overflow-x-auto rounded-3xl border border-[var(--color-primary)]/20 bg-[var(--color-bg)] shadow-sm">
                     <table className="min-w-full text-xs sm:text-sm">
                       <thead>
-                        <tr className="bg-[var(--color-table-header)] text-[var(--color-text)]">
+                        <tr className="bg-[var(--color-bg-secondary)] text-[var(--color-text)]">
                           <th className="px-3 py-2 text-left font-semibold">Valor pagado</th>
                           <th className="px-3 py-2 text-left font-semibold">Fecha pago</th>
                           <th className="px-3 py-2 text-left font-semibold">Estado</th>
@@ -437,7 +474,7 @@ export const AdminUsersPage = () => {
                 )}
               </AccordionSection>
 
-              <section className="rounded-lg border border-[var(--color-primary)] bg-[var(--color-bg)] p-4">
+              <section className="rounded-3xl border border-[var(--color-primary)]/20 bg-[var(--color-bg)] p-4 shadow-sm">
                 <h3 className="mb-3 text-lg font-bold text-[var(--color-text)]">Certificado medico</h3>
                 <div className="grid gap-3 text-sm sm:grid-cols-2">
                   <p><span className="font-semibold">Nombre:</span> {detail.medicalCertificate?.fileName || "-"}</p>
@@ -452,16 +489,16 @@ export const AdminUsersPage = () => {
                   <p className="mt-3 text-sm text-[var(--color-text)]">Este usuario no tiene certificado medico registrado.</p>
                 )}
 
-                <div className="mt-4 flex gap-2">
+                <div className="mt-4 flex flex-wrap gap-2">
                   <button
-                    className="rounded-md bg-[var(--color-primary)] px-3 py-2 text-xs font-semibold disabled:opacity-50"
+                    className={primaryButtonClass}
                     disabled={!detail.medicalCertificate?.existsInStorage || openingCertificate}
                     onClick={() => handleOpenCertificate(detail.user?.id_user)}
                   >
                     {openingCertificate ? "Abriendo..." : "Visualizar"}
                   </button>
                   <button
-                    className="rounded-md border border-[var(--color-primary)] px-3 py-2 text-xs disabled:opacity-50"
+                    className={ghostButtonClass}
                     disabled={!detail.medicalCertificate?.existsInStorage || openingCertificate}
                     onClick={() => handleOpenCertificate(detail.user?.id_user)}
                   >
@@ -471,6 +508,7 @@ export const AdminUsersPage = () => {
               </section>
             </div>
           )}
+          </div>
         </section>
       </div>
     </section>

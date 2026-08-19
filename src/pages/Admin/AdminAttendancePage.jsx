@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { CalendarDays, CheckCheck, QrCode, RefreshCw, Search, School } from "lucide-react";
 import { getAllClasses } from "../../services/classesService";
 import { getAllScheduleByClass } from "../../services/scheduleService";
 import {
@@ -8,6 +9,7 @@ import {
 } from "../../services/attendanceService";
 import LoadingSpinner from "../../components/ui/LoadingSpinner";
 import { useToast } from "../../context/ToastContext";
+import { useSearchParams } from "react-router-dom";
 
 const formatDateTime = (value) => {
   if (!value) return "-";
@@ -34,13 +36,13 @@ const formatDateOnly = (value) => {
 };
 
 const EmptyState = ({ text }) => (
-  <div className="rounded-lg border border-[var(--color-primary)] bg-[var(--color-bg)] px-4 py-6 text-center text-sm text-[var(--color-text)]">
+  <div className="rounded-2xl border border-[var(--color-primary)]/20 bg-[var(--color-bg)] px-4 py-6 text-center text-sm text-[var(--color-text)] shadow-sm">
     {text}
   </div>
 );
 
 const DataError = ({ message }) => (
-  <div className="rounded-lg border border-red-400 bg-red-100 px-4 py-3 text-sm text-red-700">
+  <div className="rounded-2xl border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-700 shadow-sm">
     {message}
   </div>
 );
@@ -63,8 +65,19 @@ const StatusBadge = ({ value }) => {
   );
 };
 
+const sectionCardClass = "rounded-3xl border border-[var(--color-primary)]/20 bg-[var(--color-bg-secondary)]/95 shadow-[0_10px_30px_rgba(0,0,0,0.08)]";
+const primaryButtonClass = "inline-flex items-center justify-center gap-2 rounded-full border border-[var(--color-primary)] bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-gradient-button)] px-4 py-2.5 text-sm font-semibold text-[var(--color-text)] shadow-sm transition-all duration-300 hover:scale-[1.02] hover:shadow-md active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:scale-100";
+const compactPrimaryButtonClass = "inline-flex items-center justify-center gap-2 rounded-full border border-[var(--color-primary)] bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-gradient-button)] px-3 py-1.5 text-xs font-semibold text-[var(--color-text)] shadow-sm transition-all duration-300 hover:scale-[1.02] hover:shadow-md active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:scale-100";
+const clearFiltersButtonClass = "inline-flex items-center justify-center gap-2 rounded-full border border-rose-300 bg-gradient-to-r from-amber-500 to-rose-500 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 hover:scale-[1.02] hover:shadow-md active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:scale-100";
+const outlineButtonClass = "inline-flex items-center justify-center gap-2 rounded-full border border-[var(--color-primary)]/20 bg-[var(--color-bg)] px-4 py-2.5 text-sm font-semibold text-[var(--color-text)] transition-all duration-300 hover:border-[var(--color-primary)] hover:bg-[var(--color-primary)]/10 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50";
+const inputClass = "w-full rounded-2xl border border-[var(--color-primary)]/20 bg-[var(--color-bg)] px-4 py-3 text-sm text-[var(--color-text)] outline-none transition focus:border-[var(--color-primary)] focus:ring-2 focus:ring-[var(--color-primary)]/20";
+const selectClass = inputClass;
+
 export default function AdminAttendancePage() {
   const { showToast } = useToast();
+  const [searchParams] = useSearchParams();
+  const initialClassId = searchParams.get("classId") || "";
+  const initialScheduleId = searchParams.get("scheduleId") || "";
 
   const [classes, setClasses] = useState([]);
   const [schedules, setSchedules] = useState([]);
@@ -100,23 +113,21 @@ export default function AdminAttendancePage() {
 
   const pollingRef = useRef(false);
 
-  const selectedSchedule = useMemo(
-    () => schedules.find((item) => item.id_schedule === selectedScheduleId) || null,
-    [schedules, selectedScheduleId]
-  );
-
   const loadClasses = useCallback(async () => {
     setLoadingClasses(true);
     setClassesError("");
     try {
       const data = await getAllClasses();
       setClasses(Array.isArray(data) ? data : []);
+      if (initialClassId) {
+        setSelectedClassId(initialClassId);
+      }
     } catch (error) {
       setClassesError(error.response?.data?.message || "No fue posible cargar las clases.");
     } finally {
       setLoadingClasses(false);
     }
-  }, []);
+  }, [initialClassId]);
 
   const loadSchedules = useCallback(async () => {
     if (!selectedClassId) {
@@ -237,6 +248,14 @@ export default function AdminAttendancePage() {
   }, [loadSchedules]);
 
   useEffect(() => {
+    if (!initialScheduleId || schedules.length === 0) return;
+    const found = schedules.find((item) => item.id_schedule === initialScheduleId);
+    if (found) {
+      setSelectedScheduleId(initialScheduleId);
+    }
+  }, [initialScheduleId, schedules]);
+
+  useEffect(() => {
     setPagination((prev) => ({ ...prev, page: 1 }));
   }, [selectedScheduleId]);
 
@@ -261,21 +280,39 @@ export default function AdminAttendancePage() {
 
   return (
     <section className="space-y-6">
-      <header className="rounded-xl border border-[var(--color-primary)] bg-[var(--color-bg-secondary)] p-4 sm:p-6">
-        <h1 className="text-2xl font-bold text-[var(--color-text)] sm:text-3xl">Control de asistencias</h1>
-        <p className="mt-2 text-sm text-[var(--color-text)]">
-          Consulta las personas inscritas en cada clase, verifica su asistencia y administra el registro manual o mediante codigo QR.
-        </p>
+      <header className={`${sectionCardClass} overflow-hidden`}>
+        <div className="flex flex-col gap-4 border-b border-[var(--color-primary)]/20 p-5 sm:flex-row sm:items-end sm:justify-between">
+          <div className="space-y-3">
+            <div className="inline-flex items-center gap-2 rounded-full border border-[var(--color-primary)]/20 bg-[var(--color-bg)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-text)]">
+              <CheckCheck size={14} />
+              Asistencias
+            </div>
+            <div>
+              <h1 className="text-3xl font-black tracking-tight text-[var(--color-text)] sm:text-4xl">Control de asistencias</h1>
+              <p className="mt-2 max-w-3xl text-sm leading-6 text-[var(--color-text)]">
+                Consulta las personas inscritas en cada clase, verifica su asistencia y administra el registro manual o mediante codigo QR.
+              </p>
+            </div>
+          </div>
+          <div className="flex flex-wrap gap-2 text-xs font-semibold text-[var(--color-text)]">
+            <span className="rounded-full border border-[var(--color-primary)]/20 bg-[var(--color-bg)] px-3 py-1">QR</span>
+            <span className="rounded-full border border-[var(--color-primary)]/20 bg-[var(--color-bg)] px-3 py-1">Manual</span>
+            <span className="rounded-full border border-[var(--color-primary)]/20 bg-[var(--color-bg)] px-3 py-1">Responsive</span>
+          </div>
+        </div>
       </header>
 
-      <section className="rounded-xl border border-[var(--color-primary)] bg-[var(--color-bg-secondary)] p-4 sm:p-6 space-y-4">
-        <h2 className="text-lg font-bold text-[var(--color-text)]">Filtros</h2>
+      <section className={`${sectionCardClass} space-y-0 overflow-hidden`}>
+        <div className="border-b border-[var(--color-primary)]/20 p-5">
+          <h2 className="text-xl font-bold text-[var(--color-text)]">Filtros</h2>
+          <p className="mt-1 text-sm text-[var(--color-text)]">Selecciona clase, horario y filtros de registro para controlar la asistencia.</p>
+        </div>
 
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-3 p-5 sm:grid-cols-2 lg:grid-cols-4">
           <label className="flex flex-col gap-1 text-sm font-semibold text-[var(--color-text)]">
             Clase
             <select
-              className="rounded-lg border border-[var(--color-primary)] bg-[var(--color-bg)] px-3 py-2 text-sm"
+              className={selectClass}
               value={selectedClassId}
               onChange={(e) => {
                 setSelectedClassId(e.target.value);
@@ -295,7 +332,7 @@ export default function AdminAttendancePage() {
             Fecha
             <input
               type="date"
-              className="rounded-lg border border-[var(--color-primary)] bg-[var(--color-bg)] px-3 py-2 text-sm"
+              className={inputClass}
               value={filters.date}
               onChange={(e) => setFilters((prev) => ({ ...prev, date: e.target.value }))}
             />
@@ -304,7 +341,7 @@ export default function AdminAttendancePage() {
           <label className="flex flex-col gap-1 text-sm font-semibold text-[var(--color-text)]">
             Estado horario
             <select
-              className="rounded-lg border border-[var(--color-primary)] bg-[var(--color-bg)] px-3 py-2 text-sm"
+              className={selectClass}
               value={filters.schedule_status}
               onChange={(e) => setFilters((prev) => ({ ...prev, schedule_status: e.target.value }))}
             >
@@ -317,7 +354,7 @@ export default function AdminAttendancePage() {
           <label className="flex flex-col gap-1 text-sm font-semibold text-[var(--color-text)]">
             Horario
             <select
-              className="rounded-lg border border-[var(--color-primary)] bg-[var(--color-bg)] px-3 py-2 text-sm"
+              className={selectClass}
               value={selectedScheduleId}
               onChange={(e) => setSelectedScheduleId(e.target.value)}
               disabled={!selectedClassId || loadingSchedules}
@@ -332,11 +369,11 @@ export default function AdminAttendancePage() {
           </label>
         </div>
 
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-3 p-5 pt-0 sm:grid-cols-2 lg:grid-cols-4">
           <label className="flex flex-col gap-1 text-sm font-semibold text-[var(--color-text)]">
             Estado inscripcion
             <select
-              className="rounded-lg border border-[var(--color-primary)] bg-[var(--color-bg)] px-3 py-2 text-sm"
+              className={selectClass}
               value={filters.enrollment_status}
               onChange={(e) => setFilters((prev) => ({ ...prev, enrollment_status: e.target.value }))}
             >
@@ -349,7 +386,7 @@ export default function AdminAttendancePage() {
           <label className="flex flex-col gap-1 text-sm font-semibold text-[var(--color-text)]">
             Estado asistencia
             <select
-              className="rounded-lg border border-[var(--color-primary)] bg-[var(--color-bg)] px-3 py-2 text-sm"
+              className={selectClass}
               value={filters.attendance_status}
               onChange={(e) => setFilters((prev) => ({ ...prev, attendance_status: e.target.value }))}
             >
@@ -364,7 +401,7 @@ export default function AdminAttendancePage() {
           <label className="flex flex-col gap-1 text-sm font-semibold text-[var(--color-text)]">
             Nombre usuario
             <input
-              className="rounded-lg border border-[var(--color-primary)] bg-[var(--color-bg)] px-3 py-2 text-sm"
+              className={inputClass}
               value={filters.name}
               onChange={(e) => setFilters((prev) => ({ ...prev, name: e.target.value }))}
               placeholder="Nombre"
@@ -374,7 +411,7 @@ export default function AdminAttendancePage() {
           <label className="flex flex-col gap-1 text-sm font-semibold text-[var(--color-text)]">
             Correo
             <input
-              className="rounded-lg border border-[var(--color-primary)] bg-[var(--color-bg)] px-3 py-2 text-sm"
+              className={inputClass}
               value={filters.email}
               onChange={(e) => setFilters((prev) => ({ ...prev, email: e.target.value }))}
               placeholder="Correo"
@@ -383,19 +420,20 @@ export default function AdminAttendancePage() {
 
         </div>
 
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2 px-5 pb-5">
           <button
-            className="rounded-lg bg-[var(--color-primary)] px-4 py-2 text-sm font-semibold text-[var(--color-text)]"
+            className={primaryButtonClass}
             onClick={() => {
               setPagination((prev) => ({ ...prev, page: 1 }));
               loadSchedules();
               loadRoster();
             }}
           >
+            <Search size={16} />
             Aplicar filtros
           </button>
           <button
-            className="rounded-lg border border-[var(--color-primary)] bg-[var(--color-bg)] px-4 py-2 text-sm"
+            className={clearFiltersButtonClass}
             onClick={() => {
               setSelectedClassId("");
               setSelectedScheduleId("");
@@ -416,7 +454,7 @@ export default function AdminAttendancePage() {
             Limpiar
           </button>
           <button
-            className="rounded-lg border border-[var(--color-primary)] bg-[var(--color-bg)] px-4 py-2 text-sm"
+            className={outlineButtonClass}
             onClick={() => {
               loadRoster();
               loadQr();
@@ -432,8 +470,11 @@ export default function AdminAttendancePage() {
       </section>
 
       <section className="grid gap-4 lg:grid-cols-5">
-        <article className="rounded-xl border border-[var(--color-primary)] bg-[var(--color-bg-secondary)] p-4 sm:p-6 lg:col-span-2">
-          <h2 className="mb-3 text-lg font-bold text-[var(--color-text)]">Codigo QR del horario</h2>
+        <article className={`${sectionCardClass} lg:col-span-2 overflow-hidden`}>
+          <div className="border-b border-[var(--color-primary)]/20 p-5">
+            <h2 className="text-xl font-bold text-[var(--color-text)]">Codigo QR del horario</h2>
+          </div>
+          <div className="space-y-4 p-5">
 
           {!selectedScheduleId ? (
             <EmptyState text="Selecciona clase y horario para visualizar el QR." />
@@ -453,25 +494,27 @@ export default function AdminAttendancePage() {
                 <p><span className="font-semibold">Estado:</span> {rosterData?.schedule?.is_active ? "Activo" : "Inactivo"}</p>
               </div>
 
-              <div className="rounded-lg border border-[var(--color-primary)] bg-white p-4 flex items-center justify-center">
+              <div className="rounded-3xl border border-[var(--color-primary)]/20 bg-white p-4 flex items-center justify-center shadow-sm">
                 <img src={qrImage} alt="QR asistencia" className="h-52 w-52 object-contain" />
               </div>
 
-              <div className="flex gap-2">
+              <div className="flex flex-wrap gap-2">
                 <button
-                  className="rounded-md bg-[var(--color-primary)] px-3 py-2 text-xs font-semibold text-[var(--color-text)]"
+                  className={primaryButtonClass}
                   onClick={() => setShowQrModal(true)}
                 >
+                  <QrCode size={16} />
                   Ampliar
                 </button>
                 <button
-                  className="rounded-md border border-[var(--color-primary)] px-3 py-2 text-xs"
+                  className={outlineButtonClass}
                   onClick={loadQr}
                 >
+                  <RefreshCw size={16} />
                   Actualizar QR
                 </button>
                 <a
-                  className="rounded-md border border-[var(--color-primary)] px-3 py-2 text-xs"
+                  className={outlineButtonClass}
                   href={qrImage}
                   download={`qr-asistencia-${selectedScheduleId}.png`}
                 >
@@ -480,27 +523,35 @@ export default function AdminAttendancePage() {
               </div>
             </div>
           )}
+          </div>
         </article>
 
-        <article className="rounded-xl border border-[var(--color-primary)] bg-[var(--color-bg-secondary)] p-4 sm:p-6 lg:col-span-3">
-          <h2 className="mb-3 text-lg font-bold text-[var(--color-text)]">Resumen de asistencia</h2>
+        <article className={`${sectionCardClass} lg:col-span-3 overflow-hidden`}>
+          <div className="border-b border-[var(--color-primary)]/20 p-5">
+            <h2 className="text-xl font-bold text-[var(--color-text)]">Resumen de asistencia</h2>
+          </div>
+          <div className="p-5">
           {!summary ? (
             <EmptyState text="Selecciona un horario para visualizar el resumen." />
           ) : (
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 text-sm">
-              <p><span className="font-semibold">Total inscritos:</span> {summary.total_enrolled}</p>
-              <p><span className="font-semibold">Asistieron:</span> {summary.total_attended}</p>
-              <p><span className="font-semibold">Pendientes:</span> {summary.total_pending}</p>
-              <p><span className="font-semibold">No asistieron:</span> {summary.total_no_show}</p>
-              <p><span className="font-semibold">Excusadas:</span> {summary.total_excused}</p>
-              <p><span className="font-semibold">Porcentaje asistencia:</span> {summary.attendance_rate}%</p>
+            <div className="grid gap-3 text-sm sm:grid-cols-2 lg:grid-cols-3">
+              <p className="rounded-2xl bg-[var(--color-bg)] p-3 shadow-sm"><span className="font-semibold">Total inscritos:</span> {summary.total_enrolled}</p>
+              <p className="rounded-2xl bg-[var(--color-bg)] p-3 shadow-sm"><span className="font-semibold">Asistieron:</span> {summary.total_attended}</p>
+              <p className="rounded-2xl bg-[var(--color-bg)] p-3 shadow-sm"><span className="font-semibold">Pendientes:</span> {summary.total_pending}</p>
+              <p className="rounded-2xl bg-[var(--color-bg)] p-3 shadow-sm"><span className="font-semibold">No asistieron:</span> {summary.total_no_show}</p>
+              <p className="rounded-2xl bg-[var(--color-bg)] p-3 shadow-sm"><span className="font-semibold">Excusadas:</span> {summary.total_excused}</p>
+              <p className="rounded-2xl bg-[var(--color-bg)] p-3 shadow-sm"><span className="font-semibold">Porcentaje asistencia:</span> {summary.attendance_rate}%</p>
             </div>
           )}
+          </div>
         </article>
       </section>
 
-      <section className="rounded-xl border border-[var(--color-primary)] bg-[var(--color-bg-secondary)] p-4 sm:p-6">
-        <h2 className="mb-3 text-lg font-bold text-[var(--color-text)]">Listado de inscritos y asistencia</h2>
+      <section className={sectionCardClass}>
+        <div className="border-b border-[var(--color-primary)]/20 p-5">
+          <h2 className="text-xl font-bold text-[var(--color-text)]">Listado de inscritos y asistencia</h2>
+        </div>
+        <div className="p-5">
 
         {loadingSchedules || loadingClasses ? (
           <LoadingSpinner message="Cargando filtros..." />
@@ -516,14 +567,15 @@ export default function AdminAttendancePage() {
           <EmptyState text="No hay inscritos para el horario seleccionado." />
         ) : (
           <>
-            <div className="overflow-x-auto rounded-lg border border-[var(--color-primary)] bg-[var(--color-bg)]">
+            <div className="overflow-x-auto rounded-3xl border border-[var(--color-primary)]/20 bg-[var(--color-bg)] shadow-sm">
               <table className="min-w-full text-xs sm:text-sm">
                 <thead>
-                  <tr className="bg-[var(--color-table-header)] text-[var(--color-text)]">
+                  <tr className="bg-[var(--color-bg-secondary)] text-[var(--color-text)]">
                     <th className="px-3 py-2 text-left">Nombre</th>
                     <th className="px-3 py-2 text-left">Correo</th>
                     <th className="px-3 py-2 text-left">Clase</th>
                     <th className="px-3 py-2 text-left">Fecha</th>
+                    <th className="px-3 py-2 text-left">Fecha inscripcion</th>
                     <th className="px-3 py-2 text-left">Paquete</th>
                     <th className="px-3 py-2 text-left">Inscripcion</th>
                     <th className="px-3 py-2 text-left">Asistencia</th>
@@ -543,6 +595,7 @@ export default function AdminAttendancePage() {
                         <td className="px-3 py-2 font-semibold">{row.user_email || "-"}</td>
                         <td className="px-3 py-2 font-semibold">{rosterData?.schedule?.class_title || "-"}</td>
                         <td className="px-3 py-2 font-semibold">{formatDateOnly(rosterData?.schedule?.date_class)}</td>
+                        <td className="px-3 py-2 font-semibold">{formatDateTime(row.enrolled_at)}</td>
                         <td className="px-3 py-2 font-semibold">{row.package_name || "-"}</td>
                         <td className="px-3 py-2"><StatusBadge value={row.enrollment_status} /></td>
                         <td className="px-3 py-2"><StatusBadge value={row.attendance_status} /></td>
@@ -550,7 +603,7 @@ export default function AdminAttendancePage() {
                         <td className="px-3 py-2 font-semibold">{formatDateTime(row.attendance_registered_at)}</td>
                         <td className="px-3 py-2">
                           <button
-                            className="rounded-md bg-[var(--color-primary)] px-3 py-1 text-xs font-semibold disabled:opacity-50"
+                            className={compactPrimaryButtonClass}
                             disabled={attendanceTaken || loadingAction || row.enrollment_status !== "active"}
                             onClick={() => handleMarkAttendance(row)}
                           >
@@ -564,35 +617,38 @@ export default function AdminAttendancePage() {
               </table>
             </div>
 
-            <div className="mt-4 flex items-center justify-between text-sm">
+            <div className="mt-5 flex items-center justify-between gap-3 text-sm">
               <button
-                className="rounded-md border border-[var(--color-primary)] px-3 py-1 disabled:opacity-50"
+                className={outlineButtonClass}
                 disabled={pagination.page <= 1}
                 onClick={() => setPagination((prev) => ({ ...prev, page: prev.page - 1 }))}
               >
+                <CalendarDays size={16} className="rotate-180" />
                 Anterior
               </button>
               <span>
                 Pagina {pagination.page} de {rosterData?.pages || 1}
               </span>
               <button
-                className="rounded-md border border-[var(--color-primary)] px-3 py-1 disabled:opacity-50"
+                className={outlineButtonClass}
                 disabled={pagination.page >= (rosterData?.pages || 1)}
                 onClick={() => setPagination((prev) => ({ ...prev, page: prev.page + 1 }))}
               >
                 Siguiente
+                <CalendarDays size={16} />
               </button>
             </div>
           </>
         )}
+        </div>
       </section>
 
       {showQrModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4" onClick={() => setShowQrModal(false)}>
-          <div className="max-w-xl rounded-xl bg-white p-4" onClick={(e) => e.stopPropagation()}>
+          <div className="modal-content max-w-xl rounded-3xl border border-[var(--color-primary)]/20 bg-[var(--color-bg-secondary)] p-4 shadow-2xl" onClick={(e) => e.stopPropagation()}>
             <img src={qrImage} alt="QR asistencia ampliado" className="h-[420px] w-[420px] max-w-full object-contain" />
             <button
-              className="mt-3 w-full rounded-md border border-[var(--color-primary)] px-3 py-2 text-sm"
+              className={`${outlineButtonClass} mt-3 w-full`}
               onClick={() => setShowQrModal(false)}
             >
               Cerrar

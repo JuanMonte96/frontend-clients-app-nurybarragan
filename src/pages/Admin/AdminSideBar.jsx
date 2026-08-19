@@ -1,11 +1,17 @@
 import { NavLink } from "react-router-dom";
-import { Users, ClipboardCheck } from "lucide-react";
+import { Users, ClipboardCheck, Boxes, School, Gift } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import logo from "../../assets/final-logo-nb.webp";
 
 export const AdminSideBar = ({ sidebarOpen, setSidebarOpen }) => {
+  const { t } = useTranslation();
+
   const menuItems = [
     { label: "USUARIOS", path: "/admin/users", icon: <Users size={20} /> },
     { label: "ASISTENCIAS", path: "/admin/attendance", icon: <ClipboardCheck size={20} /> },
+    { label: "CLASES", path: "/admin/classes", icon: <School size={20} /> },
+    { label: "PAQUETES", path: "/admin/packages", icon: <Boxes size={20} /> },
+    { label: t("promotions.tag"), path: "/admin/promotions", icon: <Gift size={20} /> },
   ];
 
   return (

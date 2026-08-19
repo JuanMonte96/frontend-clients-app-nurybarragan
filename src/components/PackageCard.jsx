@@ -37,6 +37,17 @@ export default function PackageCard({ pkg, onBuy }) {
   }
 
   const packageColor = getPackageColor();
+  const promotion = pkg.promotion;
+  const nonMonetaryBenefits = (pkg.promotions || []).filter((item) => item.promotion_type === "NON_MONETARY");
+  const promotionDescription = promotion
+    ? ({ es: promotion.description_spanish, en: promotion.description_english, fr: promotion.description_french }[i18n.language] || promotion.description_spanish)
+    : "";
+  const discountedPrice = promotion?.promotion_type === "PERCENTAGE_DISCOUNT"
+    ? Number(pkg.price_package) * (1 - Number(promotion.discount_percentage) / 100)
+    : promotion?.promotion_type === "FIXED_AMOUNT_DISCOUNT"
+      ? Number(pkg.price_package) - Number(promotion.discount_amount_minor || 0) / 100
+      : Number(pkg.price_package);
+  const hasMonetaryPromotion = promotion?.promotion_type === "PERCENTAGE_DISCOUNT" || promotion?.promotion_type === "FIXED_AMOUNT_DISCOUNT";
 
   return (
     <div
@@ -90,9 +101,11 @@ export default function PackageCard({ pkg, onBuy }) {
         {/* PRECIO - Grande y vistoso */}
         <div className="mb-4 p-4 text-center">
           <p className="text-[var(--color-text-secondary)] text-xs sm:text-sm font-semibold mb-1">{t('purchase.price')}</p>
-          <p className="text-3xl sm:text-4xl font-bold text-[var(--color-text-secondary)]">
-            €{pkg.price_package}
-          </p>
+          {hasMonetaryPromotion ? <p className="text-sm font-semibold text-white/70 line-through">€{Number(pkg.price_package).toFixed(2)}</p> : null}
+          <p className="text-3xl sm:text-4xl font-bold text-[var(--color-text-secondary)]">€{discountedPrice.toFixed(2)}</p>
+          {hasMonetaryPromotion ? <span className="mt-2 inline-flex rounded-full bg-emerald-400/90 px-3 py-1 text-xs font-black text-slate-900">{promotion.promotion_type === "PERCENTAGE_DISCOUNT" ? `${promotion.discount_percentage}% ${t("promotions.off")}` : t("promotions.specialPrice")}</span> : null}
+          {promotionDescription ? <p className="mt-2 text-xs font-semibold text-white/80">{promotionDescription}</p> : null}
+          {nonMonetaryBenefits.map((benefit) => <p key={benefit.id_promotion} className="mt-2 text-xs font-bold text-amber-200">{({ es: benefit.name_spanish, en: benefit.name_english, fr: benefit.name_french }[i18n.language] || benefit.name_spanish)}</p>)}
         </div>
 
         {/* BOTÓN COMPRAR */}
