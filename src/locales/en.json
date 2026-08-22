@@ -73,19 +73,95 @@
         "appliesTo": "Available with:",
         "notLinkedToPackage": "Not tied to a specific package",
         "unlimited": "No end date",
-        "stats": { "total": "Total", "active": "Active", "monetary": "Monetary", "benefits": "Benefits" },
-        "filters": { "search": "Search", "searchPlaceholder": "Name or description", "type": "Type", "status": "Status", "all": "All" },
-        "status": { "active": "Active", "inactive": "Inactive" },
+        "stats": {
+            "total": "Total",
+            "active": "Active",
+            "monetary": "Monetary",
+            "benefits": "Benefits"
+        },
+        "filters": {
+            "search": "Search",
+            "searchPlaceholder": "Name or description",
+            "type": "Type",
+            "status": "Status",
+            "all": "All"
+        },
+        "status": {
+            "active": "Active",
+            "inactive": "Inactive"
+        },
         "listTitle": "Promotion list",
         "listSubtitle": "Used promotions are archived so their history remains available.",
         "empty": "There are no promotions for the selected filters.",
-        "types": { "PERCENTAGE_DISCOUNT": "Percentage discount", "FIXED_AMOUNT_DISCOUNT": "Fixed discount", "NON_MONETARY": "Non-monetary benefit" },
-        "fields": { "discount": "Application", "packages": "Packages", "validity": "Validity" },
-        "actions": { "activate": "Activate", "deactivate": "Deactivate", "archive": "Archive", "markUsed": "Mark used" },
-        "messages": { "saved": "Promotion saved successfully.", "status": "Status updated successfully.", "archived": "Promotion archived.", "benefitUsed": "Benefit marked as used." },
-        "errors": { "load": "Unable to load promotions.", "save": "Unable to save the promotion.", "status": "Unable to update the status.", "archive": "Unable to archive the promotion.", "benefitUsed": "Unable to register the benefit use." },
-        "form": { "createTitle": "Create promotion", "editTitle": "Edit promotion", "description": "Complete all three language versions and define the commercial scope.", "nameEs": "Spanish name", "nameEn": "English name", "nameFr": "French name", "descriptionEs": "Spanish description", "descriptionEn": "English description", "descriptionFr": "French description", "type": "Type", "percentage": "Percentage", "amountMinor": "Amount in cents", "currency": "Currency", "benefitCode": "Internal benefit code", "startsAt": "Start date", "endsAt": "End date", "priority": "Priority", "packages": "Applicable packages", "specificPackages": "Specific packages", "included": "Included", "notIncluded": "Not included", "nonMonetaryNoPackages": "This benefit is not tied to packages: it applies regardless of the package purchased.", "firstPurchase": "First purchase of this package only", "active": "Activate now", "saving": "Saving...", "nameHintMonetary": "Internal reference only: the associated package is shown instead, not this name.", "nameHintNonMonetary": "This name is shown to customers in the catalog.", "descriptionHintMonetary": "Internal reference only: it is not published in the promotions view.", "descriptionHintNonMonetary": "This description is shown to customers in the catalog." },
-        "benefitModal": { "title": "Register benefit use", "description": "The use is stored once and requires a paid purchase for the selected user and package.", "user": "User", "package": "Package", "selectUser": "Select a user", "selectPackage": "Select a package", "confirm": "Confirm use" }
+        "types": {
+            "PERCENTAGE_DISCOUNT": "Percentage discount",
+            "FIXED_AMOUNT_DISCOUNT": "Fixed discount",
+            "NON_MONETARY": "Non-monetary benefit"
+        },
+        "fields": {
+            "discount": "Application",
+            "packages": "Packages",
+            "validity": "Validity"
+        },
+        "actions": {
+            "activate": "Activate",
+            "deactivate": "Deactivate",
+            "archive": "Archive",
+            "markUsed": "Mark used"
+        },
+        "messages": {
+            "saved": "Promotion saved successfully.",
+            "status": "Status updated successfully.",
+            "archived": "Promotion archived.",
+            "benefitUsed": "Benefit marked as used."
+        },
+        "errors": {
+            "load": "Unable to load promotions.",
+            "save": "Unable to save the promotion.",
+            "status": "Unable to update the status.",
+            "archive": "Unable to archive the promotion.",
+            "benefitUsed": "Unable to register the benefit use."
+        },
+        "form": {
+            "createTitle": "Create promotion",
+            "editTitle": "Edit promotion",
+            "description": "Complete all three language versions and define the commercial scope.",
+            "nameEs": "Spanish name",
+            "nameEn": "English name",
+            "nameFr": "French name",
+            "descriptionEs": "Spanish description",
+            "descriptionEn": "English description",
+            "descriptionFr": "French description",
+            "type": "Type",
+            "percentage": "Percentage",
+            "amountMinor": "Amount in cents",
+            "currency": "Currency",
+            "benefitCode": "Internal benefit code",
+            "startsAt": "Start date",
+            "endsAt": "End date",
+            "priority": "Priority",
+            "packages": "Applicable packages",
+            "specificPackages": "Specific packages",
+            "included": "Included",
+            "notIncluded": "Not included",
+            "nonMonetaryNoPackages": "This benefit is not tied to packages: it applies regardless of the package purchased.",
+            "firstPurchase": "First purchase of this package only",
+            "active": "Activate now",
+            "saving": "Saving...",
+            "nameHintMonetary": "Internal reference only: the associated package is shown instead, not this name.",
+            "nameHintNonMonetary": "This name is shown to customers in the catalog.",
+            "descriptionHintMonetary": "Internal reference only: it is not published in the promotions view.",
+            "descriptionHintNonMonetary": "This description is shown to customers in the catalog."
+        },
+        "benefitModal": {
+            "title": "Register benefit use",
+            "description": "The use is stored once and requires a paid purchase for the selected user and package.",
+            "user": "User",
+            "package": "Package",
+            "selectUser": "Select a user",
+            "selectPackage": "Select a package",
+            "confirm": "Confirm use"
+        }
     },
     "contact": {
         "title": "Contact Us",
@@ -160,7 +236,7 @@
         "uploadCertificate": "Upload Certificate",
         "errorLoading": "Error: Profile could not be loaded",
         "loadingProfile": "Loading profile...",
-        "maxSize":"Max size"
+        "maxSize": "Max size"
     },
     "enrollment": {
         "class": "Class",
@@ -181,23 +257,29 @@
         "price": "Price",
         "duration": "Duration",
         "days": "days",
-        "months": "months",    
+        "months": "months",
         "limit": "Classes",
         "name": "Full Name",
         "email": "Email Address",
         "phone": "Phone",
         "cancel": "Cancel",
-        "limit_description":"Unlimited",
+        "limit_description": "Unlimited",
         "starter_description": "Ideal for starting with in-person sessions and building a progressive workout routine.",
-        "booster_description":"To strengthen your consistency and progress with in-person classes.",
-        "power_description":"Intensive commitment in-person for visible and lasting results.",
-        "uni_description":"A la carte in-person class to discover or complement your practice.",
-        "ultimate_description":"Total freedom in-person to practice without constraints for 3 months.",
-        "freedom_description":"Complete in-person experience for an active lifestyle over 6 months.",
+        "booster_description": "To strengthen your consistency and progress with in-person classes.",
+        "power_description": "Intensive commitment in-person for visible and lasting results.",
+        "uni_description": "A la carte in-person class to discover or complement your practice.",
+        "ultimate_description": "Total freedom in-person to practice without constraints for 3 months.",
+        "freedom_description": "Complete in-person experience for an active lifestyle over 6 months.",
         "terms": "Packages are nominal, personal, and non-transferable. No refunds will be issued, in whole or in part. Packages must be used within the stated validity period; unused sessions after expiration are forfeited, with no extension or refund. By purchasing, you agree to our terms and conditions.",
         "close_hint": "Click outside the modal to close",
         "month": "month",
-        "name_placeholder": "Your full name"
+        "name_placeholder": "Your full name",
+        "paymentMode": "Payment method",
+        "payFull": "One-time payment",
+        "payFullHint": "card or SEPA",
+        "payInstallments": "{{count}} monthly installments",
+        "perMonth": "/ month (SEPA)",
+        "sepaHint": "Installments are collected automatically via SEPA Direct Debit. The exact amount of each installment is confirmed before the first charge."
     },
     "footer": {
         "resources": "Resources",
@@ -229,9 +311,247 @@
         "totalEnrolled": "Total Enrolled Classes",
         "enrollmentSuccess": "Enrollment successful"
     },
-    "teachers":{
-        "title":"Our Professional Teachers",
-        "experience":"Nury Barragán is a dancer and instructor with an extensive international career. Trained in artistic gymnastics, yoga, and multiple dance disciplines, she was a member of renowned companies such as the National Ballet of Colombia and performed as a soloist on stages worldwide. A three-time champion in sports aerobics, she blends art, fitness, and well-being in her teaching for all ages.",
-        "profesional":"Teacher"
+    "teachers": {
+        "title": "Our Professional Teachers",
+        "experience": "Nury Barragán is a dancer and instructor with an extensive international career. Trained in artistic gymnastics, yoga, and multiple dance disciplines, she was a member of renowned companies such as the National Ballet of Colombia and performed as a soloist on stages worldwide. A three-time champion in sports aerobics, she blends art, fitness, and well-being in her teaching for all ages.",
+        "profesional": "Teacher"
+    },
+    "termsAndConditions": {
+        "title": "Legal Notices and General Terms and Conditions of Sale",
+        "legalNotices": {
+            "title": "LEGAL NOTICES",
+            "lastUpdated": "Last updated: August 10, 2026",
+            "sections": {
+                "publisher": {
+                    "number": "1",
+                    "title": "Website Publisher",
+                    "paragraphs": [
+                        "This website is published by Edna BARRAGÁN GOMEZ, a sole proprietor operating under the trade name NB DANCE AND FITNESS."
+                    ],
+                    "details": {
+                        "address": "1, rue Carrière Mainguet, 75011 Paris",
+                        "siret": "530 119 957 00021",
+                        "email": "info@nbdanceandfitness.com",
+                        "website": "https://www.nbdanceandfitness.com",
+                        "publicationDirector": "Edna BARRAGÁN GOMEZ"
+                    }
+                },
+                "hosting": {
+                    "number": "2",
+                    "title": "Hosting",
+                    "paragraphs": [
+                        "The website is hosted by GoDaddy.com, LLC — 100 S. Mill Ave, Suite 1600, Tempe, AZ 85281, United States."
+                    ],
+                    "details": {
+                        "website": "https://www.godaddy.com"
+                    }
+                },
+                "websitePurpose": {
+                    "number": "3",
+                    "title": "Purpose of the Website",
+                    "paragraphs": [
+                        "The website www.nbdanceandfitness.com presents the activities, classes, services, workshops, events and other services offered by NB DANCE AND FITNESS. It may also allow users to register, book and pay online for certain services."
+                    ]
+                },
+                "websiteAccess": {
+                    "number": "4",
+                    "title": "Website Access",
+                    "paragraphs": [
+                        "The website is normally accessible 24 hours a day, 7 days a week. Temporary interruptions may occur, particularly for maintenance, updates or security purposes. NB DANCE AND FITNESS cannot be held liable for interruptions resulting from circumstances beyond its control."
+                    ]
+                },
+                "intellectualProperty": {
+                    "number": "5",
+                    "title": "Intellectual Property",
+                    "paragraphs": [
+                        "The texts, photographs, videos, logos, graphics, visual elements, educational content and other materials available on the website are protected by applicable intellectual property laws. Any unauthorized reproduction, representation, adaptation or exploitation is prohibited."
+                    ]
+                },
+                "liability": {
+                    "number": "6",
+                    "title": "Liability",
+                    "paragraphs": [
+                        "NB DANCE AND FITNESS endeavors to maintain accurate and up-to-date information. However, no guarantee is given regarding its completeness or absence of errors. Use of the website is at the user's own responsibility, subject to any applicable mandatory legal provisions."
+                    ]
+                },
+                "hyperlinks": {
+                    "number": "7",
+                    "title": "Hyperlinks",
+                    "paragraphs": [
+                        "The website may contain links to third-party websites. NB DANCE AND FITNESS has no control over these websites and cannot be held responsible for their content or practices."
+                    ]
+                },
+                "personalData": {
+                    "number": "8",
+                    "title": "Personal Data",
+                    "paragraphs": [
+                        "The processing of personal data is described in the Privacy Policy available on the website. Individuals' rights and the procedures for exercising those rights are also specified therein."
+                    ]
+                },
+                "cookies": {
+                    "number": "9",
+                    "title": "Cookies and Trackers",
+                    "paragraphs": [
+                        "The website may use cookies or other trackers necessary for its operation and, depending on the tools actually used, trackers requiring prior consent. Where consent is required, it is obtained in accordance with applicable regulations."
+                    ]
+                },
+                "applicableLawAndDisputes": {
+                    "number": "10",
+                    "title": "Applicable Law and Disputes",
+                    "paragraphs": [
+                        "These legal notices are governed by French law. The applicable statutory rules regarding jurisdiction shall apply."
+                    ]
+                }
+            }
+        },
+        "generalTermsOfSale": {
+            "title": "GENERAL TERMS AND CONDITIONS OF SALE",
+            "lastUpdated": "Last updated: August 10, 2026",
+            "articles": {
+                "purpose": {
+                    "number": "1",
+                    "title": "Purpose",
+                    "paragraphs": [
+                        "These General Terms and Conditions of Sale (« CGV ») govern the sale of classes, activities, services, subscriptions, workshops, events and other services offered by NB DANCE AND FITNESS to its customers.",
+                        "Any order or booking implies acceptance of these CGV."
+                    ]
+                },
+                "providerIdentification": {
+                    "number": "2",
+                    "title": "Service Provider Identification",
+                    "paragraphs": [
+                        "Edna BARRAGÁN GOMEZ, a sole proprietor operating under the trade name NB DANCE AND FITNESS."
+                    ],
+                    "details": {
+                        "address": "1, rue Carrière Mainguet, 75011 Paris",
+                        "siret": "530 119 957 00021",
+                        "email": "info@nbdanceandfitness.com",
+                        "website": "https://www.nbdanceandfitness.com"
+                    }
+                },
+                "services": {
+                    "number": "3",
+                    "title": "Services",
+                    "paragraphs": [
+                        "The services offered include, in particular, dance and fitness classes, individual or group classes, workshops, training sessions and events. Schedules, locations, durations, prices and specific conditions are indicated at the time of booking.",
+                        "NB DANCE AND FITNESS does not own any of the venues where classes are held. Services may be provided in rooms or premises that are rented, made available or used as part of partnerships."
+                    ]
+                },
+                "orderAndBooking": {
+                    "number": "4",
+                    "title": "Orders and Bookings",
+                    "paragraphs": [
+                        "The customer must verify the information relating to their order before confirming it. The order becomes final after confirmation and, where payment is required, after payment has been confirmed."
+                    ]
+                },
+                "prices": {
+                    "number": "5",
+                    "title": "Prices",
+                    "paragraphs": [
+                        "Prices are stated in euros. NB DANCE AND FITNESS benefits from the French VAT exemption scheme for small businesses. VAT is therefore not applicable.",
+                        "Invoices include the following statement: « TVA non applicable, art. 293 B du CGI »."
+                    ]
+                },
+                "payment": {
+                    "number": "6",
+                    "title": "Payment",
+                    "paragraphs": [
+                        "Online payments may be made by bank card through the payment service provider offered on the website. Payment must be successfully validated for the booking to be confirmed where this condition applies."
+                    ]
+                },
+                "cancellationAndAbsence": {
+                    "number": "7",
+                    "title": "Cancellation and Absence",
+                    "paragraphs": [
+                        "The cancellation, rescheduling or make-up conditions are those indicated at the time of booking or in the specific conditions applicable to the relevant package. Failure to attend a booked class does not automatically entitle the customer to a refund."
+                    ]
+                },
+                "rightOfWithdrawal": {
+                    "number": "8",
+                    "title": "Right of Withdrawal",
+                    "paragraphs": [
+                        "Where the right of withdrawal applies to a service concluded at a distance, the consumer customer is entitled to the statutory fourteen-day withdrawal period, subject to the exceptions provided for under the French Consumer Code.",
+                        "In particular, the right of withdrawal does not apply to leisure activity services provided on a specific date or during a specific period, under the conditions set out in Article L.221-28 of the French Consumer Code."
+                    ]
+                },
+                "cancellationByNbDance": {
+                    "number": "9",
+                    "title": "Cancellation or Modification by NB DANCE AND FITNESS",
+                    "paragraphs": [
+                        "In the event of an exceptional cancellation or modification of a class, particularly due to the unavailability of the instructor, unavailability of the venue, safety requirements or force majeure, the affected customers will be informed as soon as possible.",
+                        "Rescheduling or refund solutions will be determined in accordance with the conditions applicable to the service and applicable regulations."
+                    ]
+                },
+                "safetyAndParticipation": {
+                    "number": "10",
+                    "title": "Safety and Participation",
+                    "paragraphs": [
+                        "The customer agrees to comply with safety instructions and the rules of the venue. It is the customer's responsibility to ensure that their health and physical condition are compatible with the chosen activity and to consult a healthcare professional in case of doubt."
+                    ]
+                },
+                "personalBelongings": {
+                    "number": "11",
+                    "title": "Personal Belongings",
+                    "paragraphs": [
+                        "The customer remains responsible for their personal belongings. NB DANCE AND FITNESS cannot be held liable for their loss, theft or damage, except where fault is legally attributable to the service provider."
+                    ]
+                },
+                "images": {
+                    "number": "12",
+                    "title": "Images",
+                    "paragraphs": [
+                        "Photographs or videos may be taken during activities or events. Any use of the image of an identifiable person for communication purposes will be carried out in accordance with the applicable authorizations and rules."
+                    ]
+                },
+                "personalData": {
+                    "number": "13",
+                    "title": "Personal Data",
+                    "paragraphs": [
+                        "Data collected during orders, bookings and requests is processed in accordance with the Privacy Policy published on the website."
+                    ]
+                },
+                "complaints": {
+                    "number": "14",
+                    "title": "Complaints",
+                    "paragraphs": [
+                        "Any complaint should first be sent to info@nbdanceandfitness.com.",
+                        "NB DANCE AND FITNESS will endeavor to find an amicable solution."
+                    ]
+                },
+                "consumerMediation": {
+                    "number": "15",
+                    "title": "Consumer Mediation",
+                    "paragraphs": [
+                        "Following a prior written complaint submitted to NB DANCE AND FITNESS and where the statutory conditions are met, the consumer customer may use, free of charge, the consumer mediator responsible for the professional."
+                    ],
+                    "details": {
+                        "mediator": "CM2C",
+                        "address": "49 Rue de Ponthieu, 75008 Paris",
+                        "email": "declarer-un-litige@cm2c.net"
+                    }
+                },
+                "forceMajeure": {
+                    "number": "16",
+                    "title": "Force Majeure",
+                    "paragraphs": [
+                        "NB DANCE AND FITNESS cannot be held liable for any delay or failure to perform resulting from an event that meets the conditions of force majeure under French law."
+                    ]
+                },
+                "termsModification": {
+                    "number": "17",
+                    "title": "Modification of the CGV",
+                    "paragraphs": [
+                        "These CGV may be amended to reflect changes in the business or applicable regulations. The conditions applicable to an order are those accepted at the time the order is concluded, subject to applicable legal provisions."
+                    ]
+                },
+                "applicableLaw": {
+                    "number": "18",
+                    "title": "Applicable Law",
+                    "paragraphs": [
+                        "These CGV are governed by French law. In the event of a dispute, the parties will first seek an amicable solution. The applicable statutory rules regarding jurisdiction shall apply."
+                    ]
+                }
+            }
+        }
     }
 }

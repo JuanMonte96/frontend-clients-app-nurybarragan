@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import poster from '../assets/bg-poster.webp';
+import { getMaxInstallmentsForPackage } from '../utils/packageInstallments';
 
 export default function PackageCard({ pkg, onBuy }) {
   const { t, i18n } = useTranslation();
@@ -48,6 +49,8 @@ export default function PackageCard({ pkg, onBuy }) {
       ? Number(pkg.price_package) - Number(promotion.discount_amount_minor || 0) / 100
       : Number(pkg.price_package);
   const hasMonetaryPromotion = promotion?.promotion_type === "PERCENTAGE_DISCOUNT" || promotion?.promotion_type === "FIXED_AMOUNT_DISCOUNT";
+  const maxInstallments = getMaxInstallmentsForPackage(pkg);
+  const showInstallmentLabel = maxInstallments > 1;
 
   return (
     <div
@@ -104,8 +107,7 @@ export default function PackageCard({ pkg, onBuy }) {
           {hasMonetaryPromotion ? <p className="text-sm font-semibold text-white/70 line-through">€{Number(pkg.price_package).toFixed(2)}</p> : null}
           <p className="text-3xl sm:text-4xl font-bold text-[var(--color-text-secondary)]">€{discountedPrice.toFixed(2)}</p>
           {hasMonetaryPromotion ? <span className="mt-2 inline-flex rounded-full bg-emerald-400/90 px-3 py-1 text-xs font-black text-slate-900">{promotion.promotion_type === "PERCENTAGE_DISCOUNT" ? `${promotion.discount_percentage}% ${t("promotions.off")}` : t("promotions.specialPrice")}</span> : null}
-          {promotionDescription ? <p className="mt-2 text-xs font-semibold text-white/80">{promotionDescription}</p> : null}
-          {nonMonetaryBenefits.map((benefit) => <p key={benefit.id_promotion} className="mt-2 text-xs font-bold text-amber-200">{({ es: benefit.name_spanish, en: benefit.name_english, fr: benefit.name_french }[i18n.language] || benefit.name_spanish)}</p>)}
+          {promotionDescription ? <p className="mt-2 text-xs font-semibold text-white/80">{promotionDescription}</p> : null}          {showInstallmentLabel ? <p className="mt-3 text-xs font-bold text-amber-200">{t("purchase.payInstallments", { count: maxInstallments })}</p> : <p className="mt-3 text-xs font-bold text-amber-200">{t("purchase.payFull")}</p>}          {nonMonetaryBenefits.map((benefit) => <p key={benefit.id_promotion} className="mt-2 text-xs font-bold text-amber-200">{({ es: benefit.name_spanish, en: benefit.name_english, fr: benefit.name_french }[i18n.language] || benefit.name_spanish)}</p>)}
         </div>
 
         {/* BOTÓN COMPRAR */}

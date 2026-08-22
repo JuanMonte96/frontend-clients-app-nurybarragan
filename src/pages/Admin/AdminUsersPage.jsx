@@ -1,10 +1,12 @@
 import { useEffect, useMemo, useState } from "react";
 import { ArrowLeftRight, CalendarRange, CreditCard, Search, ShieldCheck, Users } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
+import { useToast } from "../../context/ToastContext";
 import {
   getAdminUserDetail,
   getAdminUsersList,
   getMedicalCertificateViewUrl,
+  setAdminUserBlockStatus,
 } from "../../services/adminUsersService";
 import LoadingSpinner from "../../components/ui/LoadingSpinner";
 
@@ -71,6 +73,7 @@ const pageTagClass = "inline-flex items-center gap-2 rounded-full border border-
 
 export const AdminUsersPage = () => {
   const { profile } = useAuth();
+  const { showToast } = useToast();
   const [usersResponse, setUsersResponse] = useState(null);
   const [usersLoading, setUsersLoading] = useState(true);
   const [usersError, setUsersError] = useState("");
@@ -79,8 +82,10 @@ export const AdminUsersPage = () => {
   const [detailLoading, setDetailLoading] = useState(false);
   const [detailError, setDetailError] = useState("");
   const [openingCertificate, setOpeningCertificate] = useState(false);
+  const [blockActionLoading, setBlockActionLoading] = useState(false);
   const [showSubscriptions, setShowSubscriptions] = useState(true);
   const [showPayments, setShowPayments] = useState(true);
+  const [showPaymentPlans, setShowPaymentPlans] = useState(true);
 
   const [filters, setFilters] = useState({
     name: "",
@@ -163,6 +168,20 @@ export const AdminUsersPage = () => {
       setDetailError(message);
     } finally {
       setOpeningCertificate(false);
+    }
+  };
+
+  const handleToggleBlock = async (id_user, nextIsBlocked) => {
+    setBlockActionLoading(true);
+    try {
+      await setAdminUserBlockStatus(id_user, nextIsBlocked);
+      showToast(nextIsBlocked ? "Usuario bloqueado" : "Acceso restaurado", "success");
+      await openDetail(id_user);
+      await loadUsers();
+    } catch (error) {
+      showToast(error.response?.data?.message || "No fue posible actualizar el estado del usuario.", "error");
+    } finally {
+      setBlockActionLoading(false);
     }
   };
 
@@ -398,6 +417,27 @@ export const AdminUsersPage = () => {
                   <p><span className="font-semibold">Registro:</span> {formatDate(detail.user?.created_at)}</p>
                   <p><span className="font-semibold">Actualizacion:</span> {formatDate(detail.user?.update_at)}</p>
                 </div>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {detail.user?.is_blocked ? (
+                    <button
+                      className={primaryButtonClass}
+                      disabled={blockActionLoading}
+                      onClick={() => handleToggleBlock(detail.user.id_user, false)}
+                    >
+                      <ShieldCheck size={16} />
+                      Revocar bloqueo (restaurar acceso)
+                    </button>
+                  ) : (
+                    <button
+                      className={clearFiltersButtonClass}
+                      disabled={blockActionLoading}
+                      onClick={() => handleToggleBlock(detail.user.id_user, true)}
+                    >
+                      <ShieldCheck size={16} />
+                      Bloquear acceso manualmente
+                    </button>
+                  )}
+                </div>
               </section>
 
               <AccordionSection
@@ -470,6 +510,84 @@ export const AdminUsersPage = () => {
                         ))}
                       </tbody>
                     </table>
+                  </div>
+                )}
+              </AccordionSection>
+
+              <AccordionSection
+                title="Planes de pago (SEPA en cuotas)"
+                isOpen={showPaymentPlans}
+                onToggle={() => setShowPaymentPlans((prev) => !prev)}
+              >
+                {(detail.paymentPlans || []).length === 0 ? (
+                  <EmptyState text="Este usuario no tiene planes de pago a cuotas." />
+                ) : (
+                  <div className="space-y-4">
+                    {(detail.paymentPlans || []).map((plan) => {
+                      const hasFailedInstallment = (plan.PaymentPlanInstallments || []).some((item) => item.status === "FAILED");
+                      return (
+                        <div key={plan.id_payment_plan} className="rounded-3xl border border-[var(--color-primary)]/20 bg-[var(--color-bg)] p-4 shadow-sm">
+                          <div className="flex flex-wrap items-center justify-between gap-2">
+                            <div>
+                              <p className="font-bold text-[var(--color-text)]">{plan.Package?.name_package || "-"}</p>
+                              <p className="text-xs text-[var(--color-text)]">
+                                {plan.installment_count} cuotas &middot; Total {formatCurrency(Number(plan.contractual_total_minor) / 100)}
+                              </p>
+                            </div>
+                            <span
+                              className={`rounded-full px-3 py-1 text-xs font-semibold ${
+                                plan.status === "PAST_DUE" || plan.status === "PAYMENT_FAILED"
+                                  ? "bg-rose-500/10 text-rose-700"
+                                  : plan.status === "COMPLETED"
+                                    ? "bg-emerald-500/10 text-emerald-700"
+                                    : "bg-amber-500/10 text-amber-700"
+                              }`}
+                            >
+                              {plan.status}
+                            </span>
+                          </div>
+
+                          {hasFailedInstallment && !detail.user?.is_blocked && (
+                            <p className="mt-2 text-xs font-semibold text-rose-700">
+                              Este plan tiene cuotas fallidas pero el usuario no esta bloqueado actualmente.
+                            </p>
+                          )}
+
+                          <div className="mt-3 overflow-x-auto rounded-2xl border border-[var(--color-primary)]/10">
+                            <table className="min-w-full text-xs">
+                              <thead>
+                                <tr className="bg-[var(--color-bg-secondary)] text-[var(--color-text)]">
+                                  <th className="px-2 py-1.5 text-left font-semibold">Cuota</th>
+                                  <th className="px-2 py-1.5 text-left font-semibold">Monto esperado</th>
+                                  <th className="px-2 py-1.5 text-left font-semibold">Monto pagado</th>
+                                  <th className="px-2 py-1.5 text-left font-semibold">Estado</th>
+                                  <th className="px-2 py-1.5 text-left font-semibold">Fecha esperada</th>
+                                  <th className="px-2 py-1.5 text-left font-semibold">Fecha pago</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {(plan.PaymentPlanInstallments || [])
+                                  .sort((a, b) => a.installment_number - b.installment_number)
+                                  .map((installment) => (
+                                    <tr key={installment.id_installment} className="border-t border-[var(--color-primary)]/10">
+                                      <td className="px-2 py-1.5 font-semibold">{installment.installment_number}/{plan.installment_count}</td>
+                                      <td className="px-2 py-1.5 font-semibold">{formatCurrency(Number(installment.expected_amount_minor) / 100)}</td>
+                                      <td className="px-2 py-1.5 font-semibold">{formatCurrency(Number(installment.paid_amount_minor) / 100)}</td>
+                                      <td className="px-2 py-1.5 font-semibold">
+                                        <span className={installment.status === "FAILED" ? "text-rose-700" : installment.status === "PAID" ? "text-emerald-700" : ""}>
+                                          {installment.status}
+                                        </span>
+                                      </td>
+                                      <td className="px-2 py-1.5 font-semibold">{formatDate(installment.expected_at)}</td>
+                                      <td className="px-2 py-1.5 font-semibold">{formatDate(installment.paid_at)}</td>
+                                    </tr>
+                                  ))}
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
                 )}
               </AccordionSection>

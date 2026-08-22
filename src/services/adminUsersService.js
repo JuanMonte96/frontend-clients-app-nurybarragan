@@ -24,3 +24,8 @@ export const getMedicalCertificateViewUrl = async (id_user) => {
   const { data } = await api.get(`/api/users/${id_user}/medical-certificate/url`);
   return data;
 };
+
+export const setAdminUserBlockStatus = async (id_user, is_blocked) => {
+  const { data } = await api.patch(`/api/users/${id_user}/block-status`, { is_blocked });
+  return data;
+};

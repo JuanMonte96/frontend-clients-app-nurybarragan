@@ -61,21 +61,24 @@ export default function PackagePage() {
   };
 
   // 👉 Se ejecuta cuando el usuario confirma el modal
-  const handleConfirmPurchase = async ({ name, email, telephone }) => {
+  const handleConfirmPurchase = async ({ name, email, telephone, payment_method = 'card', installment_count }) => {
     // Activamos la pantalla de carga — el modal permanece abierto mostrando el spinner
     setIsRedirecting(true);
     try {
+      const safeInstallmentCount = Number(installment_count) > 1 ? Number(installment_count) : null;
       const payload = {
         name,
         email,
         telephone,
         id_package: selectedPackage.id_package,
+        payment_method,
+        ...(safeInstallmentCount ? { installment_count: safeInstallmentCount } : {}),
       };
 
       console.log("📦 Enviando datos a backend:", payload);
 
       const response = await api.post(
-        "/api/payments/start-payment",
+        safeInstallmentCount ? "/api/payments/start-payment-plan" : "/api/payments/start-payment",
         payload
       );
 
