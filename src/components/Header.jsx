@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./LanguageSwitcher";
 
-export default function Header({ logo, links = [] }) {
+export default function Header({ logo, links = [], minimal = false }) {
   const [open, setOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();
@@ -23,6 +23,19 @@ export default function Header({ logo, links = [] }) {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  if (minimal) {
+    return (
+      <header className="fixed top-0 z-50 w-full bg-[var(--color-header)] shadow-md">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-3 py-1 sm:px-4 sm:py-2 md:px-6">
+          <Link to="/" className="flex flex-shrink-0 items-center gap-2" aria-label="NB Dance & Fitness">
+            {logo && <img src={logo} alt="NB Dance & Fitness" className="h-12 w-auto max-w-[220px] object-contain sm:h-16" />}
+          </Link>
+          <LanguageSwitcher />
+        </div>
+      </header>
+    );
+  }
 
   return (
     <header className={`fixed top-0 w-full z-50 transition-all duration-600 ${
@@ -82,7 +95,7 @@ export default function Header({ logo, links = [] }) {
                   <NavLink
                     to={link.to}
                     className={({ isActive }) =>
-                      `block px-3 py-2 rounded-full bg-[var(--color-header)] font-semibold text-base sm:text-lg md:text-xl lg:text-xl text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition ${
+                      `block px-3 py-2 rounded-full bg-gradient-to-br from-[var(--color-header)] to-[var(--color-text)] font-semibold text-base sm:text-lg md:text-xl lg:text-xl text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition ${
                         isActive ? "font-bold text-[var(--color-accent)]" : ""
                       }`
                     }

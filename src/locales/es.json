@@ -553,5 +553,172 @@
                 }
             }
         }
+    },
+    "privacyPolicy": {
+        "title": "POLÍTICA DE PRIVACIDAD",
+        "lastUpdated": "Última actualización: 10 de agosto de 2026",
+        "sections": {
+            "dataController": {
+                "number": "1",
+                "title": "Responsable del tratamiento",
+                "paragraphs": [
+                    "La responsable del tratamiento de los datos es Edna BARRAGÁN GOMEZ, empresaria individual que ejerce su actividad bajo el nombre comercial NB DANCE AND FITNESS."
+                ],
+                "details": {
+                    "address": "1, rue Carrière Mainguet, 75011 Paris",
+                    "siret": "530 119 957 00021",
+                    "email": "info@nbdanceandfitness.com"
+                }
+            },
+            "dataCollected": {
+                "number": "2",
+                "title": "Datos que pueden ser recopilados",
+                "items": [
+                    "Nombre y apellidos",
+                    "Dirección de correo electrónico",
+                    "Número de teléfono",
+                    "Dirección postal cuando sea necesario",
+                    "Información relacionada con inscripciones, reservas y pedidos",
+                    "Información necesaria para el pago y la facturación",
+                    "Contenido de los mensajes enviados a través de los formularios",
+                    "Datos técnicos necesarios para el funcionamiento y la seguridad del sitio web"
+                ]
+            },
+            "purposes": {
+                "number": "3",
+                "title": "Finalidades",
+                "items": [
+                    "Responder a las solicitudes",
+                    "Gestionar las inscripciones y reservas",
+                    "Procesar los pedidos y pagos",
+                    "Gestionar la relación con los clientes",
+                    "Realizar el seguimiento administrativo y contable",
+                    "Garantizar la seguridad y el correcto funcionamiento del sitio web",
+                    "Cumplir las obligaciones legales",
+                    "Enviar comunicaciones comerciales cuando la normativa lo permita"
+                ]
+            },
+            "legalBases": {
+                "number": "4",
+                "title": "Bases jurídicas",
+                "paragraphs": [
+                    "Según el contexto, el tratamiento de los datos se basa en la ejecución de un contrato o de medidas precontractuales, el cumplimiento de una obligación legal, el consentimiento de la persona o el interés legítimo de NB DANCE AND FITNESS, cuando este sea aplicable."
+                ]
+            },
+            "mandatoryData": {
+                "number": "5",
+                "title": "Datos obligatorios",
+                "paragraphs": [
+                    "Cuando determinados datos sean necesarios para una reserva, un pedido o una solicitud, su carácter obligatorio se indicará en el momento de la recopilación cuando sea posible. La ausencia de los datos necesarios puede impedir el tratamiento de la solicitud."
+                ]
+            },
+            "recipients": {
+                "number": "6",
+                "title": "Destinatarios",
+                "paragraphs": [
+                    "Los datos están destinados a NB DANCE AND FITNESS y, cuando sea necesario, a proveedores de servicios técnicos, alojamiento web, pagos, reservas, mantenimiento, contabilidad o a las autoridades cuando la ley así lo exija.",
+                    "NB DANCE AND FITNESS no vende los datos personales de sus usuarios."
+                ]
+            },
+            "onlinePayment": {
+                "number": "7",
+                "title": "Pago en línea",
+                "paragraphs": [
+                    "Los pagos mediante tarjeta bancaria son procesados por el proveedor de servicios de pago propuesto durante el pedido. NB DANCE AND FITNESS no solicita al cliente que envíe los datos completos de su tarjeta bancaria por correo electrónico ni mediante un formulario de contacto."
+                ]
+            },
+            "retention": {
+                "number": "8",
+                "title": "Conservación",
+                "paragraphs": [
+                    "Los datos se conservan durante el tiempo necesario para las finalidades previstas, sin perjuicio de los plazos legales de conservación aplicables, especialmente en materia contable, fiscal o probatoria."
+                ]
+            },
+            "security": {
+                "number": "9",
+                "title": "Seguridad",
+                "paragraphs": [
+                    "NB DANCE AND FITNESS implementa medidas técnicas y organizativas razonables y apropiadas para proteger los datos personales contra accesos no autorizados, pérdida, destrucción, alteración o cualquier tratamiento ilícito."
+                ]
+            },
+            "cookies": {
+                "number": "10",
+                "title": "Cookies y rastreadores",
+                "paragraphs": [
+                    "El sitio web puede utilizar cookies necesarias para su funcionamiento y, dependiendo de las herramientas efectivamente instaladas, rastreadores sujetos a consentimiento. Cuando se requiera consentimiento, este se obtiene antes de almacenar o leer los rastreadores correspondientes. El usuario puede modificar o retirar su consentimiento mediante las herramientas disponibles en el sitio web."
+                ]
+            },
+            "dataSubjectRights": {
+                "number": "11",
+                "title": "Derechos de las personas",
+                "paragraphs": [
+                    "De conformidad con el RGPD y la normativa aplicable, las personas interesadas pueden, según las condiciones previstas por la ley, solicitar el acceso, la rectificación, la supresión y la limitación del tratamiento, oponerse a determinados tratamientos, ejercer su derecho a la portabilidad cuando sea aplicable y retirar su consentimiento cuando el tratamiento se base en este."
+                ]
+            },
+            "rightsExercise": {
+                "number": "12",
+                "title": "Ejercicio de los derechos",
+                "paragraphs": [
+                    "Las solicitudes pueden enviarse a: info@nbdanceandfitness.com o por correo postal a: 1, rue Carrière Mainguet, 75011 Paris. Podrá solicitarse una verificación de identidad cuando sea necesaria para la protección de los datos."
+                ],
+                "details": {
+                    "email": "info@nbdanceandfitness.com",
+                    "address": "1, rue Carrière Mainguet, 75011 Paris"
+                }
+            },
+            "cnilComplaint": {
+                "number": "13",
+                "title": "Reclamación ante la CNIL",
+                "paragraphs": [
+                    "Cualquier persona puede, después de haber contactado con NB DANCE AND FITNESS, presentar una reclamación ante la Comisión Nacional de Informática y Libertades (Commission Nationale de l’Informatique et des Libertés - CNIL) en las condiciones previstas por la normativa."
+                ]
+            },
+            "thirdPartyLinks": {
+                "number": "14",
+                "title": "Enlaces a sitios de terceros",
+                "paragraphs": [
+                    "El sitio web puede contener enlaces a servicios de terceros. NB DANCE AND FITNESS no es responsable de sus prácticas de privacidad. Corresponde al usuario consultar las políticas respectivas de dichos servicios."
+                ]
+            },
+            "internationalTransfers": {
+                "number": "15",
+                "title": "Transferencias fuera de la Unión Europea",
+                "paragraphs": [
+                    "Cuando la utilización de proveedores implique una transferencia de datos fuera de la Unión Europea o del Espacio Económico Europeo, dicha transferencia deberá estar regulada de conformidad con los requisitos del RGPD."
+                ]
+            },
+            "policyModification": {
+                "number": "16",
+                "title": "Modificación de la política",
+                "paragraphs": [
+                    "La presente Política de privacidad podrá actualizarse para tener en cuenta los cambios en la normativa, los servicios o las herramientas utilizadas en el sitio web."
+                ]
+            }
+        }
+    },
+    "biography": {
+        "name": "Nury Barragán",
+        "title": "Biografía",
+        "paragraphs": [
+            "Nury Barragán nace en Colombia, en Santafé de Bogotá. Sus padres descubren en ella sus capacidades artísticas y deportivas a muy temprana edad, cuando apenas tenía 5 años.",
+            "Después de más de siete años de entrenamiento riguroso de gimnasia olímpica y yoga, Nury Barragán es atraída por la danza y comienza a perfeccionarse en ballet clásico, jazz, folclore colombiano e internacional y, por último, en danza contemporánea.",
+            "Nury Barragán integra muy rápidamente el BALLET NACIONAL DE COLOMBIA, embajador de Colombia en el mundo entero, el BALLET TIERRA COLOMBIANA y el BALLET FOLKLORICO COLOMBIANO.",
+            "Estas prestigiosas e importantes compañías de danza le permitieron participar como solista en innumerables espectáculos producidos en algunos de los escenarios más reconocidos y destacados del mundo.",
+            "Esta vasta experiencia profesional, tan rica y variada, lleva a Nury Barragán a transmitir sus conocimientos a niños, adultos, personas de la tercera edad y personas con discapacidad.",
+            "Paralelamente, Nury Barragán crea su propia compañía de danza en Colombia durante los años 1990.",
+            "Años más tarde, trabaja para cadenas nacionales de la televisión colombiana, café conciertos, comedias musicales, eventos deportivos e invitaciones de honor.",
+            "Siempre con su espíritu deportivo y competitivo, Nury Barragán siente una gran motivación por las competiciones, las acrobacias y la gimnasia olímpica.",
+            "En 1994 se consagra como tricampeona nacional e internacional de aeróbicos deportivos, danza deportiva y maratones de aeróbicos, entre más de 2.500 participantes.",
+            "Nury Barragán obtiene posteriormente certificaciones y diplomas en Fitness, Medicina del Deporte, Aqua Gym Fitness, Técnicas de Stretching y Relajación, Juez de Competiciones de Aeróbicos Deportivos, Gimnasia Olímpica, Pilates, Les Mills y Yoga Vinyasa.",
+            "Se desempeña como instructora de Fitness, instructora de Zumba Fitness y conferencista en Congresos Internacionales de Aeróbicos y Maratones de Aeróbicos.",
+            "También es autora, creadora y exponente del proyecto «El Folclore aplicado a los Aeróbicos», juez en Campeonatos de Gimnasia Olímpica e instructora de Técnicas de Relajación para la Tercera Edad.",
+            "Además, participa como preparadora y educadora de alumnos de último año universitario de Gerontología en la Universidad de San Buenaventura, con el tema de investigación «Gimnasia Correctiva y Preventiva para la Tercera Edad».",
+            "En 1997, Nury Barragán decide partir de Colombia, su tierra natal, para instalarse en Europa.",
+            "En primera instancia llega a Milán, Italia, donde se instala durante un cierto tiempo. Posteriormente, un contrato de trabajo la lleva a París.",
+            "Siempre con ese lado humano que la caracteriza como persona, Nury Barragán trabaja como voluntaria en importantes asociaciones y centros de rehabilitación para personas con discapacidad.",
+            "Transmite todo su conocimiento como profesora de danza y profesora de Zumba Fitness tanto en Colombia como en Francia.",
+            "Hoy en día, con más de 35 años de experiencia, su sueño finalmente se hace realidad con la creación de su propia escuela de danza.",
+            "Una escuela cien por ciento latina y auténtica, donde desarrolla todos los estilos de danzas latinas, las danzas folclóricas de su país, Colombia, y las diferentes especialidades de Zumba."
+        ]
     }
 }

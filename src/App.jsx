@@ -23,13 +23,16 @@ import { useTranslation } from 'react-i18next';
 import  TeacherProfile  from './components/TeachersProfile';
 import Information from './components/Information';
 import QrAttendancePage from './pages/Attendance/QrAttendancePage';
+import TermsAndConditionsPage from './pages/TermsAndConditionsPage';
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
+import BiographyPage from './pages/BiographyPage';
 function App() {
 
   const { t } = useTranslation();
   const links = [
     { label: t("header.home"), to: "#hero" },
     { label: t("header.packages"), to: "#packages" },
-    { label: t("header.about"), to: "#about" },
+    { label: t("header.about"), to: "/about" },
     { label: t("header.contact"), to: "#contact" },
   ];
 
@@ -52,6 +55,9 @@ function App() {
             } />
             <Route path="/login" element={<LoginPage />} />
             <Route path='/changePassword' element={<ChangePassword />} />
+            <Route path="/terms-and-conditions" element={<TermsAndConditionsPage />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+            <Route path="/about" element={<BiographyPage />} />
 
             <Route path="/admin" element={<AdminLayout />}>
               <Route index element={<Navigate to="users" replace />} />
