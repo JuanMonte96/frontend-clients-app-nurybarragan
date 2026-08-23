@@ -148,6 +148,11 @@ export default function PackagePage() {
 
   const hasPromotions = promotedPackages.length > 0 || nonMonetaryPromotions.length > 0;
   const promotedPackagesGridColumns = promotedPackages.length <= 2 ? "lg:grid-cols-2" : "lg:grid-cols-3";
+  const nonMonetaryGridColumns = nonMonetaryPromotions.length === 1
+    ? "lg:grid-cols-1"
+    : nonMonetaryPromotions.length === 2
+      ? "lg:grid-cols-2"
+      : "lg:grid-cols-3";
 
   return (
     <main id="packages" className="min-h-screen bg-gradient-to-br from-[var(--color-bg)] to-[var(--color-primary)] scroll-mt-24 p-3 sm:p-6 md:p-8">
@@ -176,7 +181,7 @@ export default function PackagePage() {
 
           {nonMonetaryPromotions.length > 0 ? (
             // A diferencia de los paquetes, estas ocupan todo el ancho disponible en vez de quedar centradas.
-            <div className="mb-6 grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div className={`mx-auto mb-6 grid w-full max-w-7xl grid-cols-1 gap-4 sm:grid-cols-2 ${nonMonetaryGridColumns}`}>
               {nonMonetaryPromotions.map((promotion) => {
                 const name = { es: promotion.name_spanish, en: promotion.name_english, fr: promotion.name_french }[i18n.language] || promotion.name_spanish;
                 const description = { es: promotion.description_spanish, en: promotion.description_english, fr: promotion.description_french }[i18n.language] || promotion.description_spanish;
