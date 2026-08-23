@@ -121,7 +121,7 @@ export default function Footer() {
                     <div className="flex gap-4 sm:gap-6">
                         {/* Facebook */}
                         <a
-                            href=": https://web.facebook.com/people/NB-DANCE-Fitness/61593441149740/?mibextid=wwXIfr&rdid=AnvCaQBK5nl5wMdc&share_url=https%3A%2F%2Fweb.facebook.com%2Fshare%2F19BaGYqJ3K%2F%3Fmibextid%3DwwXIfr%26_rdc%3D1%26_rdr"
+                            href="https://web.facebook.com/people/NB-DANCE-Fitness/61593441149740/?mibextid=wwXIfr&rdid=AnvCaQBK5nl5wMdc&share_url=https%3A%2F%2Fweb.facebook.com%2Fshare%2F19BaGYqJ3K%2F%3Fmibextid%3DwwXIfr%26_rdc%3D1%26_rdr"
                             className="text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors"
                         >
                             <svg

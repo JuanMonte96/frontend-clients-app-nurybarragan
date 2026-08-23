@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { updateStateEnrollment } from "../services/enrollmentService";
 import { useClasses } from "../context/ClassesContext";
 import { useTranslation } from "react-i18next";
@@ -9,11 +9,23 @@ export const EnrolTable = ({ enrollments }) => {
     const [errorMsg, setErrorMsg] = useState(null);
     const { updateEnrollmentStatus } = useClasses();
     const [enrollmentsList, setEnrollmentsList] = useState(enrollments);
+    const [currentPage, setCurrentPage] = useState(1);
+    const pageSize = 5;
 
     // Sincroniza la lista cuando cambian los enrollments del prop
     useEffect(() => {
         setEnrollmentsList(enrollments);
+        setCurrentPage(1);
     }, [enrollments]);
+
+    const orderedEnrollments = useMemo(() => [...enrollmentsList].sort((first, second) => {
+        const firstDate = new Date(first.enrolled_at || 0).getTime();
+        const secondDate = new Date(second.enrolled_at || 0).getTime();
+        return secondDate - firstDate;
+    }), [enrollmentsList]);
+
+    const totalPages = Math.max(1, Math.ceil(orderedEnrollments.length / pageSize));
+    const visibleEnrollments = orderedEnrollments.slice((currentPage - 1) * pageSize, currentPage * pageSize);
 
     // Maneja la actualización del estado del enrollment
     const handleStatusChange = async (enrollmentId, newStatus) => {
@@ -40,16 +52,6 @@ export const EnrolTable = ({ enrollments }) => {
     };
 
     // Maneja el toggle de asistencia - usa el estado real del enrollment
-    const handleAttendanceToggle = async (enrollmentId, currentStatus) => {
-        const newStatus = currentStatus === "active" ? "removed" : "active";
-        await handleStatusChange(enrollmentId, newStatus);
-    };
-
-    // Maneja la eliminación (cambio a cancelled)
-    const handleDelete = (enrollmentId) => {
-        handleStatusChange(enrollmentId, "cancelled");
-    };
-
     // Función para obtener el color según el estado
     const getStatusColor = (status) => {
         switch (status?.toLowerCase()) {
@@ -57,6 +59,10 @@ export const EnrolTable = ({ enrollments }) => {
                 return "bg-green-100 text-green-800";
             case "removed":
                 return "bg-gray-100 text-gray-800";
+            case "completed":
+                return "bg-blue-100 text-blue-800";
+            case "cancelled":
+                return "bg-orange-100 text-orange-800";
             case "blocked":
                 return "bg-red-100 text-red-800";
             default:
@@ -66,12 +72,15 @@ export const EnrolTable = ({ enrollments }) => {
 
     // Función para obtener el nombre del estado en español
     const getStatusLabel = (status) => {
+        const normalizedStatus = String(status || "").trim().toLowerCase();
         const statusMap = {
-            active: "Activa",
-            removed: "Desactivada",
-            Blocked: "Bloqueada",
+            active: t("enrollment.states.active"),
+            completed: t("enrollment.states.completed"),
+            cancelled: t("enrollment.states.cancelled"),
+            removed: t("enrollment.states.removed"),
+            blocked: "Bloqueada",
         };
-        return statusMap[status?.toLowerCase()] || status || "Desconocido";
+        return statusMap[normalizedStatus] || status || t("enrollment.states.unknown");
     };
 
     return (
@@ -106,7 +115,7 @@ export const EnrolTable = ({ enrollments }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {enrollmentsList.map((enrollment) => {
+                    {visibleEnrollments.map((enrollment) => {
                         const classData = enrollment.ClassSchedule?.Class;
                         const scheduleData = enrollment.ClassSchedule;
                         const descriptionMap = {
@@ -152,7 +161,7 @@ export const EnrolTable = ({ enrollments }) => {
                                         {scheduleData?.start_local || "N/A"} - {scheduleData?.end_local || ""}
                                     </p>
                                     <p className="text-sm text-[var(--color-table-header)] truncate">
-                                        {scheduleData?.date_class || "N/A"}
+                                        {scheduleData?.date_local || scheduleData?.date_class || "N/A"}
                                     </p>
                                 </td>
 
@@ -167,22 +176,13 @@ export const EnrolTable = ({ enrollments }) => {
                                 <td className="px-2 sm:px-4 md:px-6 py-2 sm:py-4">
                                     <div className="flex items-center justify-center gap-1 sm:gap-3 flex-wrap">
                                         <button
-                                            onClick={() => handleAttendanceToggle(enrollment.id_enrollment, enrollment.status)}
-                                            disabled={loadingId === enrollment.id_enrollment}
-                                            className={`relative inline-flex items-center h-6 sm:h-8 w-12 sm:w-14 rounded-full transition-colors flex-shrink-0 ${enrollment.status === "active"
-                                                    ? "bg-green-500 hover:bg-green-600"
-                                                    : "bg-red-500 hover:bg-red-600"
-                                                } disabled:opacity-50 disabled:cursor-not-allowed`}
-                                            title={enrollment.status === "active" ? t("enrollment.attendance") : t("enrollment.noAttendance")}
+                                            onClick={() => handleStatusChange(enrollment.id_enrollment, "cancelled")}
+                                            disabled={loadingId === enrollment.id_enrollment || enrollment.status !== "active"}
+                                            className="rounded-lg bg-red-500 px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-red-600 disabled:cursor-not-allowed disabled:opacity-50"
+                                            title="Cancelar inscripción"
                                         >
-                                            <span
-                                                className={`inline-block h-5 sm:h-6 w-5 sm:w-6 transform rounded-full bg-white transition-transform ${enrollment.status === "active" ? "translate-x-6 sm:translate-x-7" : "translate-x-0.5 sm:translate-x-1"
-                                                    }`}
-                                            />
+                                            Cancelar inscripción
                                         </button>
-                                        <span className="text-xs font-semibold text-[var(--color-text)] hidden sm:inline">
-                                            {enrollment.status === "active" ? t("enrollment.attendance") : t("enrollment.noAttendance")}
-                                        </span>
                                     </div>
                                 </td>
                             </tr>
@@ -190,6 +190,27 @@ export const EnrolTable = ({ enrollments }) => {
                     })}
                 </tbody>
             </table>
+            <div className="flex items-center justify-between gap-3 border-t border-[var(--color-primary)]/20 bg-[var(--color-bg-secondary)] px-3 py-3 text-xs sm:px-4 sm:text-sm">
+                <button
+                    type="button"
+                    disabled={currentPage === 1}
+                    onClick={() => setCurrentPage((page) => Math.max(1, page - 1))}
+                    className="rounded-lg border border-[var(--color-primary)] px-3 py-2 font-semibold text-[var(--color-text)] disabled:cursor-not-allowed disabled:opacity-40"
+                >
+                    {t("enrollment.pagination.previous")}
+                </button>
+                <span className="font-semibold text-[var(--color-text)]">
+                    {t("enrollment.pagination.page", { current: currentPage, total: totalPages })}
+                </span>
+                <button
+                    type="button"
+                    disabled={currentPage === totalPages}
+                    onClick={() => setCurrentPage((page) => Math.min(totalPages, page + 1))}
+                    className="rounded-lg border border-[var(--color-primary)] px-3 py-2 font-semibold text-[var(--color-text)] disabled:cursor-not-allowed disabled:opacity-40"
+                >
+                    {t("enrollment.pagination.next")}
+                </button>
+            </div>
         </div>
     );
 };

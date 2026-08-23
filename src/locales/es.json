@@ -248,7 +248,19 @@
         "status": "Estado",
         "noEnrollments": "No hay Inscripciones para mostrar",
         "noClasses": "No hay Clases para mostrar",
-        "noAttendance": "No Asistir"
+        "noAttendance": "No Asistir",
+        "states": {
+            "active": "Inscrita",
+            "completed": "Completada",
+            "cancelled": "Cancelada",
+            "removed": "Removida",
+            "unknown": "Desconocida"
+        },
+        "pagination": {
+            "previous": "Anterior",
+            "next": "Siguiente",
+            "page": "Página {{current}} de {{total}}"
+        }
     },
     "purchase": {
         "title": "Comprar",
@@ -698,6 +710,7 @@
     },
     "biography": {
         "name": "Nury Barragán",
+        "experience":"Profesora de danza con 35 años de experiencia, destacada por su trayectoria en reconocidos escenarios y espacios artísticos.",
         "title": "Biografía",
         "paragraphs": [
             "Nury Barragán nace en Colombia, en Santafé de Bogotá. Sus padres descubren en ella sus capacidades artísticas y deportivas a muy temprana edad, cuando apenas tenía 5 años.",
@@ -719,6 +732,31 @@
             "Transmite todo su conocimiento como profesora de danza y profesora de Zumba Fitness tanto en Colombia como en Francia.",
             "Hoy en día, con más de 35 años de experiencia, su sueño finalmente se hace realidad con la creación de su propia escuela de danza.",
             "Una escuela cien por ciento latina y auténtica, donde desarrolla todos los estilos de danzas latinas, las danzas folclóricas de su país, Colombia, y las diferentes especialidades de Zumba."
+        ]
+    },
+    "testimonials": {
+        "title": "Testimonios",
+        "items": [
+            {
+                "name": "Mathieu Morel",
+                "text": "Nury es un verdadero rayo de sol. Su energía desbordante y su alegría de vivir contagiosa convierten sus clases, tanto de Zumba como de Body Pump y Pilates, en auténticos momentos de disfrute, ejercicio y convivencia.\n\nNury es una excelente profesora, muy dedicada a sus alumnos. Es muy pedagógica, realiza todos los ejercicios y corrige las posturas para ayudar a prevenir lesiones.\n\nAmable y siempre atenta, también sabe adaptarse al estado físico y a las necesidades de cada uno de sus alumnos."
+            },
+            {
+                "name": "Marchal Yannick",
+                "text": "Nury es una entrenadora muy dinámica.\n\nSus clases son muy apreciadas y tienen un nivel muy alto, además de que siempre se imparten con muy buen humor y una excelente energía."
+            },
+            {
+                "name": "Elodie Violté",
+                "text": "Muchísimas gracias a Nury por toda la energía, la alegría y la pasión que nos transmite en cada clase de Zumba.\n\nEs una profesora maravillosa, siempre sonriente y realmente comprometida.\n\n¡Muchas gracias por todos estos momentos que compartimos!"
+            },
+            {
+                "name": "Laura Toucinho",
+                "text": "¡Es un verdadero placer participar en las clases de Zumba de Nury!\n\nSiempre está sonriente, llena de energía y de buen humor. Es genial poder liberar tensiones, bailar al ritmo de la música y disfrutar. ¡Gracias, Nury, por este descubrimiento!"
+            },
+            {
+                "name": "Loubna Boudaouch",
+                "text": "¡Me encantan las clases de Zumba! Me gusta mucho el ambiente, que siempre es agradable, cercano y dinámico. Los pasos son variados, divertidos y muy agradables de seguir.\n\nNury es súper motivadora y transmite muchísima energía durante las clases. ¡Siempre es un placer venir a bailar y hacer ejercicio en un ambiente así!"
+            }
         ]
     }
 }

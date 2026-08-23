@@ -32,6 +32,7 @@ import {
   updateAdminSchedule,
 } from "../../services/adminClassesSchedulesService";
 import { useNavigate } from "react-router-dom";
+import { formatCalendarDate } from "../../services/timezone";
 
 const sectionCardClass = "rounded-3xl border border-[var(--color-primary)]/20 bg-[var(--color-bg-secondary)]/95 shadow-[0_10px_30px_rgba(0,0,0,0.08)]";
 const primaryButtonClass = "inline-flex items-center justify-center gap-2 rounded-full border border-[var(--color-primary)] bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-gradient-button)] px-4 py-2.5 text-sm font-semibold text-[var(--color-text)] shadow-sm transition-all duration-300 hover:scale-[1.02] hover:shadow-md active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:scale-100";
@@ -51,10 +52,7 @@ const statusClasses = {
 const normalize = (value) => String(value ?? "").toLowerCase();
 
 const formatDate = (value) => {
-  if (!value) return "-";
-  const date = new Date(value);
-  if (Number.isNaN(date.getTime())) return "-";
-  return new Intl.DateTimeFormat("es-CO", { dateStyle: "medium" }).format(date);
+  return formatCalendarDate(value);
 };
 
 const formatDateTime = (value) => {
@@ -143,6 +141,13 @@ const initialScheduleForm = {
   scope: "single",
 };
 
+const sortSchedulesByStart = (list) =>
+  [...list].sort((a, b) => {
+    const aTime = new Date(a.start_timestamp || a.date_class || 0).getTime();
+    const bTime = new Date(b.start_timestamp || b.date_class || 0).getTime();
+    return aTime - bTime;
+  });
+
 export default function AdminClassesPage() {
   const { showToast } = useToast();
   const navigate = useNavigate();
@@ -168,6 +173,9 @@ export default function AdminClassesPage() {
     classStatus: "all",
     instructor: "all",
     scheduleStatus: "all",
+    scheduleDate: "",
+    scheduleSearch: "",
+    recurrence: "all",
   });
 
   const [classModal, setClassModal] = useState({ open: false, mode: "create", data: initialClassForm });
@@ -300,8 +308,8 @@ export default function AdminClassesPage() {
     });
   };
 
-  const openScheduleCreate = () => {
-    if (!selectedClassId) {
+  const openScheduleCreate = (classId = selectedClassId) => {
+    if (!classId) {
       showToast("Selecciona una clase primero.", "error");
       return;
     }
@@ -309,7 +317,7 @@ export default function AdminClassesPage() {
     setScheduleModal({
       open: true,
       mode: "create",
-      data: { ...initialScheduleForm, idClass: selectedClassId },
+      data: { ...initialScheduleForm, idClass: classId, timeZone: "Europe/Paris" },
     });
   };
 
@@ -323,12 +331,12 @@ export default function AdminClassesPage() {
         dateClass: item.date_class ? String(item.date_class).slice(0, 10) : "",
         startHour: item.start_time || "",
         endHour: item.end_time || "",
-        timeZone: item.time_zone || "Europe/Paris",
+        timeZone: "Europe/Paris",
         isRecurring: Boolean(item.id_template),
-        intervaleDays: 7,
-        isEnable: Boolean(item.is_active),
+        intervaleDays: Number(item?.recurrence_template?.interval_days || 7),
+        isEnable: Boolean(item?.recurrence_template?.is_enabled ?? true),
         isActive: Boolean(item.is_active),
-        scope: item.id_template ? "single" : "single",
+        scope: "single",
       },
     });
   };
@@ -358,7 +366,7 @@ export default function AdminClassesPage() {
   };
 
   const submitSchedule = async (payload) => {
-    if (!payload.idClass || !payload.startHour || !payload.endHour || !payload.timeZone) {
+    if (!payload.idClass || !payload.dateClass || !payload.startHour || !payload.endHour) {
       showToast("Completa la información básica del horario.", "error");
       return;
     }
@@ -372,7 +380,7 @@ export default function AdminClassesPage() {
             startDate: payload.dateClass,
             startHour: payload.startHour,
             endHour: payload.endHour,
-            timeZone: payload.timeZone,
+            timeZone: "Europe/Paris",
             intervaleDays: Number(payload.intervaleDays || 7),
             isEnable: Boolean(payload.isEnable),
           });
@@ -382,7 +390,7 @@ export default function AdminClassesPage() {
             dateClass: payload.dateClass,
             startHour: payload.startHour,
             endHour: payload.endHour,
-            timeZone: payload.timeZone,
+            timeZone: "Europe/Paris",
           });
         }
         showToast("Horario creado correctamente.", "success");
@@ -392,9 +400,11 @@ export default function AdminClassesPage() {
           dateClass: payload.dateClass,
           startHour: payload.startHour,
           endHour: payload.endHour,
-          timeZone: payload.timeZone,
+          timeZone: "Europe/Paris",
           isActive: Boolean(payload.isActive),
           scope: payload.scope || "single",
+          intervaleDays: Number(payload.intervaleDays || 7),
+          isEnable: Boolean(payload.isEnable),
         });
         showToast("Horario actualizado correctamente.", "success");
       }
@@ -406,6 +416,19 @@ export default function AdminClassesPage() {
       setSaving(false);
     }
   };
+
+  const visibleSchedules = useMemo(() => {
+    const source = sortSchedulesByStart(schedules);
+    return source.filter((item) => {
+      const recurrenceType = item.id_template ? "recurrent" : "single";
+      const className = selectedClass?.title_class || "";
+      const textSource = `${item.start_time || ""} ${item.end_time || ""} ${className}`.toLowerCase();
+      const matchesSearch = !filters.scheduleSearch || textSource.includes(filters.scheduleSearch.toLowerCase());
+      const matchesDate = !filters.scheduleDate || String(item.date_class || "").slice(0, 10) === filters.scheduleDate;
+      const matchesRecurrence = filters.recurrence === "all" || recurrenceType === filters.recurrence;
+      return matchesSearch && matchesDate && matchesRecurrence;
+    });
+  }, [filters.recurrence, filters.scheduleDate, filters.scheduleSearch, schedules, selectedClass?.title_class]);
 
   const handleClassToggle = async (item) => {
     setSaving(true);
@@ -583,7 +606,7 @@ export default function AdminClassesPage() {
                           {item.is_blocked ? <CheckCheck size={16} /> : <CircleOff size={16} />}
                           {item.is_blocked ? "Activar" : "Inactivar"}
                         </button>
-                        <button type="button" className={primaryButtonClass} onClick={openScheduleCreate}>
+                        <button type="button" className={primaryButtonClass} onClick={() => openScheduleCreate(item.id_class)}>
                           <CalendarPlus size={16} />
                           Crear horario
                         </button>
@@ -626,14 +649,26 @@ export default function AdminClassesPage() {
               </select>
             </Field>
             <Field label="Fecha">
-              <input type="date" className={inputClass} onChange={() => {}} disabled value="" />
+              <input
+                type="date"
+                className={inputClass}
+                value={filters.scheduleDate}
+                onChange={(event) => setFilters((prev) => ({ ...prev, scheduleDate: event.target.value }))}
+              />
             </Field>
             <Field label="Búsqueda rápida">
-              <input className={inputClass} placeholder="Filtra visualmente desde la tabla" onChange={() => {}} value="" disabled />
+              <input
+                className={inputClass}
+                placeholder="Ej. 08:00, 10:00"
+                value={filters.scheduleSearch}
+                onChange={(event) => setFilters((prev) => ({ ...prev, scheduleSearch: event.target.value }))}
+              />
             </Field>
             <Field label="Recurrencia">
-              <select className={selectClass} value={selectedClass ? "selected" : ""} onChange={() => {}} disabled>
-                <option value="selected">Serie de la clase seleccionada</option>
+              <select className={selectClass} value={filters.recurrence} onChange={(event) => setFilters((prev) => ({ ...prev, recurrence: event.target.value }))}>
+                <option value="all">Todos</option>
+                <option value="single">Solo únicos</option>
+                <option value="recurrent">Solo recurrentes</option>
               </select>
             </Field>
           </div>
@@ -642,7 +677,7 @@ export default function AdminClassesPage() {
               <LoadingSpinner message="Cargando horarios..." />
             ) : errorDetail || errorSchedules ? (
               <div className="rounded-2xl border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-700">{errorDetail || errorSchedules}</div>
-            ) : schedules.length === 0 ? (
+            ) : visibleSchedules.length === 0 ? (
               <div className="rounded-2xl border border-[var(--color-primary)]/20 bg-[var(--color-bg)] px-4 py-6 text-center text-sm text-[var(--color-text)]">
                 Esta clase todavía no tiene horarios publicados.
               </div>
@@ -660,7 +695,7 @@ export default function AdminClassesPage() {
                     </tr>
                   </thead>
                   <tbody>
-                    {schedules.map((item) => (
+                    {visibleSchedules.map((item) => (
                       <tr key={item.id_schedule} className="border-t border-[var(--color-primary)]/10">
                         <td className="px-4 py-3 text-[var(--color-text)]">{formatDate(item.date_class)}</td>
                         <td className="px-4 py-3 text-[var(--color-text)]">{item.start_time}</td>
@@ -869,9 +904,6 @@ function ScheduleModal({ open, mode, data, classes, selectedClassId, saving, onC
               </option>
             ))}
           </select>
-        </Field>
-        <Field label="Zona horaria">
-          <input className={inputClass} value={data.timeZone} disabled={isView} onChange={(event) => onChange({ ...data, timeZone: event.target.value })} />
         </Field>
         <Field label="Fecha">
           <input type="date" className={inputClass} value={data.dateClass} disabled={isView} onChange={(event) => onChange({ ...data, dateClass: event.target.value })} />

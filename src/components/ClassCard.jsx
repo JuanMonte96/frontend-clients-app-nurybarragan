@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { getAllScheduleByClass } from "../services/scheduleService";
 import { enrollClass } from "../services/enrollmentService";
-import { formatDateInTimezone, getUserTimezone } from "../services/timezone";
+import { formatCalendarDate } from "../services/timezone";
 import { useTranslation } from "react-i18next";
 import { useToast } from "../context/ToastContext";
 import LoadingSpinner from "./ui/LoadingSpinner";
@@ -119,7 +119,7 @@ export const ClassCard = ({ classData }) => {
                                     {/* Fecha y horario */}
                                     <div className="mb-3">
                                         <p className="text-xs sm:text-sm font-semibold text-[var(--color-text)]">
-                                            📅 {formatDateInTimezone(schedule.date_class, schedule.time_zone_user || "Europe/Paris", getUserTimezone()).split('-').reverse().join('/')}
+                                            📅 {formatCalendarDate(schedule.date_class)}
                                         </p>
                                         <p className="text-xs text-[var(--color-text)] mt-1">
                                             🕐 {schedule.start_time} - {schedule.end_time}

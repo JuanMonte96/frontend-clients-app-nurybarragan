@@ -2,6 +2,26 @@ export const getUserTimezone = () => {
   return Intl.DateTimeFormat().resolvedOptions().timeZone;
 };
 
+export const formatCalendarDate = (value, locale = "es-CO") => {
+  if (!value) return "-";
+  const match = String(value).match(/^(\d{4})-(\d{2})-(\d{2})/);
+  if (match) {
+    const [, year, month, day] = match;
+    return new Intl.DateTimeFormat(locale, {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    }).format(new Date(Number(year), Number(month) - 1, Number(day)));
+  }
+
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? "-" : new Intl.DateTimeFormat(locale, {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(date);
+};
+
 export const getTimezoneInfo = () => {
   return {
     timezone: getUserTimezone(),
@@ -16,7 +36,7 @@ export const getTimezoneInfo = () => {
  * @param {string} toTimezone - Zona horaria destino (ej: "America/Bogota")
  * @returns {Date} - La fecha convertida
  */
-export const convertDateBetweenTimezones = (date, fromTimezone, toTimezone) => {
+export const convertDateBetweenTimezones = (date, fromTimezone) => {
   const dateObj = typeof date === "string" ? new Date(date) : date;
 
   // Obtener la fecha en formato ISO (UTC)
@@ -41,18 +61,6 @@ export const convertDateBetweenTimezones = (date, fromTimezone, toTimezone) => {
   const utcDate = new Date(
     `${dateMap.year}-${dateMap.month}-${dateMap.day}T${dateMap.hour}:${dateMap.minute}:${dateMap.second}Z`
   );
-
-  // Convertir a la zona horaria destino
-  const finalFormatter = new Intl.DateTimeFormat("en-US", {
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-    hour12: false,
-    timeZone: toTimezone,
-  });
 
   return utcDate;
 };

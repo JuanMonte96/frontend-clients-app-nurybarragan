@@ -60,7 +60,7 @@ export const ContactUS = () => {
     };
 
     return (
-        <section ref={sectionRef} id="contact" className="bg-gradient-to-br from-[var(--color-bg)] to-[var(--color-primary)] scroll-mt-24 py-8 sm:py-12 md:py-16 lg:py-20 px-3 sm:px-4">
+        <section ref={sectionRef} id="contact" className="bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-bg)] scroll-mt-24 py-8 sm:py-12 md:py-16 lg:py-20 px-3 sm:px-4">
             <div className="mx-auto max-w-screen-md">
                 <motion.h2 
                     initial={{ opacity: 0, y: 30 }}

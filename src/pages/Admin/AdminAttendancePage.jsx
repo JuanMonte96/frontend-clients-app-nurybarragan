@@ -10,6 +10,7 @@ import {
 import LoadingSpinner from "../../components/ui/LoadingSpinner";
 import { useToast } from "../../context/ToastContext";
 import { useSearchParams } from "react-router-dom";
+import { formatCalendarDate } from "../../services/timezone";
 
 const formatDateTime = (value) => {
   if (!value) return "-";
@@ -25,14 +26,7 @@ const formatDateTime = (value) => {
 };
 
 const formatDateOnly = (value) => {
-  if (!value) return "-";
-  const date = new Date(value);
-  if (Number.isNaN(date.getTime())) return "-";
-  return date.toLocaleDateString("es-CO", {
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-  });
+  return formatCalendarDate(value);
 };
 
 const EmptyState = ({ text }) => (
@@ -54,13 +48,22 @@ const statusClassMap = {
   pending: "bg-gray-100 text-gray-700",
   active: "bg-green-100 text-green-700",
   removed: "bg-gray-100 text-gray-700",
+  completed: "bg-blue-100 text-blue-700",
+  cancelled: "bg-orange-100 text-orange-700",
+};
+
+const statusLabelMap = {
+  active: "Inscrito",
+  completed: "Completado",
+  cancelled: "Cancelado",
+  removed: "Removido",
 };
 
 const StatusBadge = ({ value }) => {
   const normalized = String(value || "-").toLowerCase();
   return (
     <span className={`rounded-full px-2 py-1 text-xs font-semibold ${statusClassMap[normalized] || "bg-slate-100 text-slate-700"}`}>
-      {value || "-"}
+      {statusLabelMap[normalized] || value || "-"}
     </span>
   );
 };
@@ -379,6 +382,8 @@ export default function AdminAttendancePage() {
             >
               <option value="">Todos</option>
               <option value="active">Activa</option>
+              <option value="completed">Completada</option>
+              <option value="cancelled">Cancelada</option>
               <option value="removed">Removida</option>
             </select>
           </label>
@@ -488,7 +493,7 @@ export default function AdminAttendancePage() {
             <div className="space-y-4">
               <div className="grid gap-2 text-sm">
                 <p><span className="font-semibold">Clase:</span> {rosterData?.schedule?.class_title || "-"}</p>
-                <p><span className="font-semibold">Fecha:</span> {formatDateOnly(rosterData?.schedule?.date_class)}</p>
+                <p><span className="font-semibold">Fecha:</span> {formatDateOnly(rosterData?.schedule?.date_local || rosterData?.schedule?.date_class)}</p>
                 <p><span className="font-semibold">Inicio:</span> {formatDateTime(rosterData?.schedule?.start_timestamp)}</p>
                 <p><span className="font-semibold">Fin:</span> {formatDateTime(rosterData?.schedule?.end_timestamp)}</p>
                 <p><span className="font-semibold">Estado:</span> {rosterData?.schedule?.is_active ? "Activo" : "Inactivo"}</p>
@@ -594,7 +599,7 @@ export default function AdminAttendancePage() {
                         <td className="px-3 py-2 font-semibold">{row.user_name || "-"}</td>
                         <td className="px-3 py-2 font-semibold">{row.user_email || "-"}</td>
                         <td className="px-3 py-2 font-semibold">{rosterData?.schedule?.class_title || "-"}</td>
-                        <td className="px-3 py-2 font-semibold">{formatDateOnly(rosterData?.schedule?.date_class)}</td>
+                        <td className="px-3 py-2 font-semibold">{formatDateOnly(rosterData?.schedule?.date_local || rosterData?.schedule?.date_class)}</td>
                         <td className="px-3 py-2 font-semibold">{formatDateTime(row.enrolled_at)}</td>
                         <td className="px-3 py-2 font-semibold">{row.package_name || "-"}</td>
                         <td className="px-3 py-2"><StatusBadge value={row.enrollment_status} /></td>

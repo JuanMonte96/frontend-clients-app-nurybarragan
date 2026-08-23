@@ -26,6 +26,7 @@ import QrAttendancePage from './pages/Attendance/QrAttendancePage';
 import TermsAndConditionsPage from './pages/TermsAndConditionsPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import BiographyPage from './pages/BiographyPage';
+import Testimonials from './components/Testimonials';
 function App() {
 
   const { t } = useTranslation();
@@ -49,6 +50,7 @@ function App() {
                 <Information />
                 <PackagePage />
                 <TeacherProfile/>
+                <Testimonials />
                 <ContactUS />
                 <Footer />
               </>

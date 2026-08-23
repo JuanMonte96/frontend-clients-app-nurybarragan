@@ -19,9 +19,20 @@ const reveal = {
   transition: { duration: 0.65, ease: 'easeOut' },
 };
 
+const renderExperienceHighlight = (text) => {
+  const experiencePattern = /(35\s+(?:años\s+de\s+experiencia|years\s+of\s+experience|ans\s+d[’']expérience))/iu;
+  const parts = String(text || '').split(experiencePattern);
+
+  return parts.map((part, index) => experiencePattern.test(part) ? (
+    <strong key={`${part}-${index}`} className="font-extrabold text-[var(--color-gradient-button)]">
+      {part}
+    </strong>
+  ) : part);
+};
+
 const BiographyParagraphs = ({ paragraphs, className = '' }) => (
   <div className={`space-y-5 text-base leading-8 text-[var(--color-text)] sm:text-lg sm:leading-9 ${className}`}>
-    {paragraphs.map((paragraph, index) => <p key={`${index}-${paragraph.slice(0, 24)}`}>{paragraph}</p>)}
+    {paragraphs.map((paragraph, index) => <p key={`${index}-${paragraph.slice(0, 24)}`}>{renderExperienceHighlight(paragraph)}</p>)}
   </div>
 );
 
@@ -59,6 +70,9 @@ export default function BiographyPage() {
             <motion.div {...reveal} className="order-2 md:order-1">
               <p className="text-2xl font-bold text-[var(--color-primary)] sm:text-3xl">{biography.name}</p>
               <h1 className="mt-2 text-4xl font-extrabold leading-tight text-[var(--color-text-secondary)] sm:text-5xl lg:text-6xl">{biography.title}</h1>
+              <p className="mt-5 max-w-2xl text-lg font-semibold leading-8 text-[var(--color-text-secondary)] sm:text-xl">
+                {renderExperienceHighlight(biography.experience)}
+              </p>
               <BiographyParagraphs paragraphs={paragraphs.slice(0, 2)} className="mt-8 text-[var(--color-text-secondary)]" />
             </motion.div>
 
