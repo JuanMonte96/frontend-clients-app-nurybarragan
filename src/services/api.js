@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getErrorMessage } from "../utils/errorMessages";
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
@@ -17,6 +18,12 @@ api.interceptors.response.use(
   (error) => {
     const status = error.response?.status;
     const data = error.response?.data;
+    const userMessage = getErrorMessage(error);
+    error.userMessage = userMessage;
+    error.message = userMessage;
+    if (data && typeof data === "object" && !Array.isArray(data)) {
+      data.message = userMessage;
+    }
     const currentPath = window.location.pathname;
     
     // Evitar redirecciones si ya estamos en url protegidas

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { getErrorMessage } from "../../utils/errorMessages";
 import logo from '../../assets/final-logo-nb.webp';
 import api from "../../services/api";
 
@@ -69,10 +70,7 @@ export const ChangePassword = () => {
                 }, 1500);
             }
         } catch (err) {
-            setError(
-                err.response?.data?.message ||
-                "Hubo un error al actualizar tu contraseña. Intenta nuevamente."
-            );
+            setError(getErrorMessage(err, "Hubo un error al actualizar tu contraseña. Intenta nuevamente."));
         }
     };
 

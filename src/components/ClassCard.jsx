@@ -5,6 +5,7 @@ import { formatCalendarDate } from "../services/timezone";
 import { useTranslation } from "react-i18next";
 import { useToast } from "../context/ToastContext";
 import LoadingSpinner from "./ui/LoadingSpinner";
+import { getErrorMessage } from "../utils/errorMessages";
 
 export const ClassCard = ({ classData }) => {   
     const { t, i18n } = useTranslation();
@@ -39,7 +40,7 @@ export const ClassCard = ({ classData }) => {
             setSchedules(list);
         } catch (error) {
             console.error(`Error fetching schedules from the class: ${error}`)
-            setError(`Error fetching schedules: ${error.message}`);
+            setError(getErrorMessage(error, "No fue posible cargar los horarios."));
 
         } finally {
             setLoadingSchedules(false);
@@ -51,10 +52,9 @@ export const ClassCard = ({ classData }) => {
         try {
             const response = await enrollClass(id_schedule);
             console.log(response);
-            showToast(response?.data?.message || t('classes.enrollmentSuccess'), 'success');
+            showToast(t('classes.enrollmentSuccess'), 'success');
         } catch (error) {
-            const { response } = error;
-            showToast(response?.data?.message || error.message, 'error');
+            showToast(getErrorMessage(error), 'error');
         }
     }
 

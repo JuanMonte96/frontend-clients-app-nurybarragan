@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import { updateStateEnrollment } from "../services/enrollmentService";
 import { useClasses } from "../context/ClassesContext";
 import { useTranslation } from "react-i18next";
+import { getErrorMessage } from "../utils/errorMessages";
 
 export const EnrolTable = ({ enrollments }) => {
     const { t, i18n } = useTranslation();
@@ -44,7 +45,7 @@ export const EnrolTable = ({ enrollments }) => {
             );
             updateEnrollmentStatus(enrollmentId, newStatus);
         } catch (error) {
-            setErrorMsg(`Error: ${error.message}`);
+            setErrorMsg(getErrorMessage(error));
             console.error(`Error updating enrollment: ${error}`);
         } finally {
             setLoadingId(null);

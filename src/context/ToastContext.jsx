@@ -116,7 +116,7 @@ function ToastItem({ toast, onClose }) {
       <span className="ml-2 mt-0.5">{s.icon}</span>
 
       {/* mensaje */}
-      <p className="flex-1 leading-snug">{toast.message}</p>
+      <p className="flex-1 whitespace-pre-line leading-snug">{toast.message}</p>
 
       {/* botón cerrar */}
       <button

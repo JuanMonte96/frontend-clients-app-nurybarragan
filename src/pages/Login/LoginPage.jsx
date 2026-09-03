@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import logo from '../../assets/final-logo-nb.webp';
 import { loginService } from "../../services/authServices";
 import { useAuth } from "../../context/AuthContext";
+import { getErrorMessages } from "../../utils/errorMessages";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -67,61 +68,7 @@ export default function LoginPage() {
       await refreshProfile(data.user.id); 
       redirectByRole(data?.user?.role);
     } catch (err) {
-      // console.log("Error en login:", err);
-      // console.log("Error response:", err.response);
-      // console.log("Error response data:", err.response?.data);
-      // console.log("Error message:", err.message);
-      
-      // Normalizar errores a un array de strings
-      let errorArray = [];
-      
-      const errorData = err.response?.data;
-      
-      // console.log("Tipo de errorData:", typeof errorData);
-      // console.log("errorData completo:", JSON.stringify(errorData));
-      
-      // Si viene como message string directo
-      if (typeof errorData?.message === "string") {
-        // console.log("Caso 1: message string");
-        errorArray = [errorData.message];
-      }
-      // Si viene como un array de strings
-      else if (Array.isArray(errorData?.message)) {
-        // console.log("Caso 2: message array");
-        errorArray = errorData.message;
-      }
-      // Si viene como un array de objetos {field, message}
-      else if (Array.isArray(errorData?.errors)) {
-        // console.log("Caso 3: errors array");
-        errorArray = errorData.errors.map(err => {
-          if (typeof err === "string") return err;
-          if (err.message) return err.message;
-          return JSON.stringify(err);
-        });
-      }
-      // Si viene como un objeto de errores {field: message}
-      else if (typeof errorData?.errors === "object" && errorData.errors !== null) {
-        // console.log("Caso 4: errors object");
-        errorArray = Object.values(errorData.errors).flat();
-      }
-      // Si el error viene como propiedad error
-      else if (typeof errorData?.error === "string") {
-        // console.log("Caso 5: error string");
-        errorArray = [errorData.error];
-      }
-      // Último recurso
-      else if (err.message) {
-        // console.log("Caso 6: err.message");
-        errorArray = [err.message];
-      }
-      // Si todo falla
-      else {
-        // console.log("Caso 7: fallback");
-        errorArray = ["Error in login. Please try again."];
-      }
-      
-      // console.log("Errores normalizados:", errorArray);
-      setError(errorArray);
+      setError(getErrorMessages(err));
     } finally {
       setLoading(false);
     }

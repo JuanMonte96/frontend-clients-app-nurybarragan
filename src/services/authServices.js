@@ -1,5 +1,6 @@
 import api from "./api";
 import { getTimezoneInfo } from "./timezone";
+import { getErrorMessage } from "../utils/errorMessages";
 
 export const loginService = async (email, password) => {
   try {
@@ -21,11 +22,9 @@ export const loginService = async (email, password) => {
     return data;
   } catch (error) {
     console.error("Error en loginService:", error.response?.data || error.message);
-    throw {
-      response: error.response,
-      message: error.response?.data?.message || error.response?.data?.error || "Error al iniciar sesión",
-      errors: error.response?.data?.errors || null
-    };
+    error.userMessage = getErrorMessage(error, "No fue posible iniciar sesión.");
+    error.message = error.userMessage;
+    throw error;
   }
 };
 

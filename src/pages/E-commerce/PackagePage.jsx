@@ -8,6 +8,7 @@ import { getPublicPromotions } from "../../services/promotionCatalogService";
 import { useTranslation } from "react-i18next";
 import { useToast } from "../../context/ToastContext";
 import { getCategoryName } from "../../utils/catalogI18n";
+import { getErrorMessage } from "../../utils/errorMessages";
 
 export default function PackagePage() {
 
@@ -95,7 +96,7 @@ export default function PackagePage() {
       }
     } catch (error) {
       console.error('❌ Error al iniciar pago:', error);
-      showToast(t('common.error'), 'error');
+      showToast(getErrorMessage(error, t('common.error')), 'error');
       // En caso de error, quitamos el loader y dejamos el modal abierto para reintentar
       setIsRedirecting(false);
     }

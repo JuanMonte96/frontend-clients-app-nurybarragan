@@ -5,6 +5,7 @@ import { Upload, Save } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import LoadingSpinner from "../../components/ui/LoadingSpinner";
 import { useToast } from "../../context/ToastContext";
+import { getErrorMessage } from "../../utils/errorMessages";
 
 export const ConfigurationUser = () => {
 
@@ -95,7 +96,7 @@ export const ConfigurationUser = () => {
 
             console.log("Profile updated:", response);
         } catch (err) {
-            showToast(`Error al actualizar perfil: ${err.response?.data?.message || err.message}`, 'error');
+            showToast(getErrorMessage(err, 'No fue posible actualizar el perfil.'), 'error');
             console.error("Error updating profile:", err);
         } finally {
             setLoading(false);
@@ -129,7 +130,7 @@ export const ConfigurationUser = () => {
 
             console.log("Certificate uploaded:", response);
         } catch (err) {
-            showToast(`Error al cargar certificado: ${err.response?.data?.message || err.message}`, 'error');
+            showToast(getErrorMessage(err, 'No fue posible cargar el certificado.'), 'error');
             console.error("Error uploading certificate:", err);
         } finally {
             setLoading(false);

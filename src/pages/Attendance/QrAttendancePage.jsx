@@ -3,19 +3,7 @@ import { Link, Navigate, useParams } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import LoadingSpinner from "../../components/ui/LoadingSpinner";
 import { scanQrAttendance } from "../../services/attendanceService";
-
-const messageByStatus = (status, fallback) => {
-  const map = {
-    400: "La asistencia no puede registrarse en este momento para este horario.",
-    401: "Debes iniciar sesion para registrar la asistencia.",
-    403: "No tienes permiso para registrar asistencia en este horario.",
-    404: "No se encontro el horario asociado al codigo QR.",
-    409: "La asistencia ya habia sido registrada previamente.",
-    500: "Ocurrio un error inesperado al registrar la asistencia.",
-  };
-
-  return map[status] || fallback || "No fue posible registrar la asistencia.";
-};
+import { getErrorMessage } from "../../utils/errorMessages";
 
 export default function QrAttendancePage() {
   const { scheduleId } = useParams();
@@ -38,11 +26,9 @@ export default function QrAttendancePage() {
           message: "Asistencia registrada correctamente. Ya puedes regresar a la aplicacion.",
         });
       } catch (error) {
-        const status = error.response?.status;
-        const backendMessage = error.response?.data?.message;
         setResult({
           type: "error",
-          message: messageByStatus(status, backendMessage),
+          message: getErrorMessage(error),
         });
       } finally {
         setLoading(false);

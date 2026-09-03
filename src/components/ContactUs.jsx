@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { sendContactMessage } from "../services/contacService.js";
+import { getErrorMessage } from "../utils/errorMessages";
 
 export const ContactUS = () => {
     const { t } = useTranslation();
@@ -55,7 +56,7 @@ export const ContactUS = () => {
             console.log("Respuesta del servidor:", response);
         } catch (error) {
             console.error("Error al enviar el mensaje de contacto:", error);
-            alert(t('contact.errorMessage'));
+            alert(getErrorMessage(error, t('contact.errorMessage')));
         }   
     };
 
